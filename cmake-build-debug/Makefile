@@ -238,6 +238,54 @@ gtest_main/fast:
 	$(MAKE) $(MAKESILENT) -f Google_tests\lib\googletest\CMakeFiles\gtest_main.dir\build.make Google_tests/lib/googletest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+Domain/Car_Domain/Car.obj: Domain/Car_Domain/Car.cpp.obj
+.PHONY : Domain/Car_Domain/Car.obj
+
+# target to build an object file
+Domain/Car_Domain/Car.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proiect_Colectiv.dir\build.make CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj
+.PHONY : Domain/Car_Domain/Car.cpp.obj
+
+Domain/Car_Domain/Car.i: Domain/Car_Domain/Car.cpp.i
+.PHONY : Domain/Car_Domain/Car.i
+
+# target to preprocess a source file
+Domain/Car_Domain/Car.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proiect_Colectiv.dir\build.make CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.i
+.PHONY : Domain/Car_Domain/Car.cpp.i
+
+Domain/Car_Domain/Car.s: Domain/Car_Domain/Car.cpp.s
+.PHONY : Domain/Car_Domain/Car.s
+
+# target to generate assembly for a file
+Domain/Car_Domain/Car.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proiect_Colectiv.dir\build.make CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.s
+.PHONY : Domain/Car_Domain/Car.cpp.s
+
+Domain/Order_Domain/Order.obj: Domain/Order_Domain/Order.cpp.obj
+.PHONY : Domain/Order_Domain/Order.obj
+
+# target to build an object file
+Domain/Order_Domain/Order.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proiect_Colectiv.dir\build.make CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj
+.PHONY : Domain/Order_Domain/Order.cpp.obj
+
+Domain/Order_Domain/Order.i: Domain/Order_Domain/Order.cpp.i
+.PHONY : Domain/Order_Domain/Order.i
+
+# target to preprocess a source file
+Domain/Order_Domain/Order.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proiect_Colectiv.dir\build.make CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.i
+.PHONY : Domain/Order_Domain/Order.cpp.i
+
+Domain/Order_Domain/Order.s: Domain/Order_Domain/Order.cpp.s
+.PHONY : Domain/Order_Domain/Order.s
+
+# target to generate assembly for a file
+Domain/Order_Domain/Order.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proiect_Colectiv.dir\build.make CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.s
+.PHONY : Domain/Order_Domain/Order.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -280,6 +328,12 @@ help:
 	@echo ... gmock_main
 	@echo ... gtest
 	@echo ... gtest_main
+	@echo ... Domain/Car_Domain/Car.obj
+	@echo ... Domain/Car_Domain/Car.i
+	@echo ... Domain/Car_Domain/Car.s
+	@echo ... Domain/Order_Domain/Order.obj
+	@echo ... Domain/Order_Domain/Order.i
+	@echo ... Domain/Order_Domain/Order.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

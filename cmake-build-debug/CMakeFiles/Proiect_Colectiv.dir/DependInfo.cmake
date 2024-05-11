@@ -8,6 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Facultate/OOP/OOP Proiect Colectiv/Domain/Car_Domain/Car.cpp" "CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj" "gcc" "CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj.d"
+  "C:/Facultate/OOP/OOP Proiect Colectiv/Domain/Order_Domain/Order.cpp" "CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj" "gcc" "CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj.d"
   "C:/Facultate/OOP/OOP Proiect Colectiv/main.cpp" "CMakeFiles/Proiect_Colectiv.dir/main.cpp.obj" "gcc" "CMakeFiles/Proiect_Colectiv.dir/main.cpp.obj.d"
   )
 

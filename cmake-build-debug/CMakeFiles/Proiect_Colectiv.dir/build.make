@@ -82,19 +82,51 @@ CMakeFiles/Proiect_Colectiv.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Proiect_Colectiv.dir/main.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Facultate\OOP\OOP Proiect Colectiv\main.cpp" -o CMakeFiles\Proiect_Colectiv.dir\main.cpp.s
 
+CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj: CMakeFiles/Proiect_Colectiv.dir/flags.make
+CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj: C:/Facultate/OOP/OOP\ Proiect\ Colectiv/Domain/Car_Domain/Car.cpp
+CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj: CMakeFiles/Proiect_Colectiv.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Facultate\OOP\OOP Proiect Colectiv\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj -MF CMakeFiles\Proiect_Colectiv.dir\Domain\Car_Domain\Car.cpp.obj.d -o CMakeFiles\Proiect_Colectiv.dir\Domain\Car_Domain\Car.cpp.obj -c "C:\Facultate\OOP\OOP Proiect Colectiv\Domain\Car_Domain\Car.cpp"
+
+CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Facultate\OOP\OOP Proiect Colectiv\Domain\Car_Domain\Car.cpp" > CMakeFiles\Proiect_Colectiv.dir\Domain\Car_Domain\Car.cpp.i
+
+CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Facultate\OOP\OOP Proiect Colectiv\Domain\Car_Domain\Car.cpp" -o CMakeFiles\Proiect_Colectiv.dir\Domain\Car_Domain\Car.cpp.s
+
+CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj: CMakeFiles/Proiect_Colectiv.dir/flags.make
+CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj: C:/Facultate/OOP/OOP\ Proiect\ Colectiv/Domain/Order_Domain/Order.cpp
+CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj: CMakeFiles/Proiect_Colectiv.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Facultate\OOP\OOP Proiect Colectiv\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj -MF CMakeFiles\Proiect_Colectiv.dir\Domain\Order_Domain\Order.cpp.obj.d -o CMakeFiles\Proiect_Colectiv.dir\Domain\Order_Domain\Order.cpp.obj -c "C:\Facultate\OOP\OOP Proiect Colectiv\Domain\Order_Domain\Order.cpp"
+
+CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Facultate\OOP\OOP Proiect Colectiv\Domain\Order_Domain\Order.cpp" > CMakeFiles\Proiect_Colectiv.dir\Domain\Order_Domain\Order.cpp.i
+
+CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Facultate\OOP\OOP Proiect Colectiv\Domain\Order_Domain\Order.cpp" -o CMakeFiles\Proiect_Colectiv.dir\Domain\Order_Domain\Order.cpp.s
+
 # Object files for target Proiect_Colectiv
 Proiect_Colectiv_OBJECTS = \
-"CMakeFiles/Proiect_Colectiv.dir/main.cpp.obj"
+"CMakeFiles/Proiect_Colectiv.dir/main.cpp.obj" \
+"CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj" \
+"CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj"
 
 # External object files for target Proiect_Colectiv
 Proiect_Colectiv_EXTERNAL_OBJECTS =
 
 Proiect_Colectiv.exe: CMakeFiles/Proiect_Colectiv.dir/main.cpp.obj
+Proiect_Colectiv.exe: CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj
+Proiect_Colectiv.exe: CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj
 Proiect_Colectiv.exe: CMakeFiles/Proiect_Colectiv.dir/build.make
 Proiect_Colectiv.exe: CMakeFiles/Proiect_Colectiv.dir/linkLibs.rsp
 Proiect_Colectiv.exe: CMakeFiles/Proiect_Colectiv.dir/objects1.rsp
 Proiect_Colectiv.exe: CMakeFiles/Proiect_Colectiv.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Facultate\OOP\OOP Proiect Colectiv\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Proiect_Colectiv.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Facultate\OOP\OOP Proiect Colectiv\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Proiect_Colectiv.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Proiect_Colectiv.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

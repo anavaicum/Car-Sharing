@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj"
+  "CMakeFiles/Proiect_Colectiv.dir/Domain/Car_Domain/Car.cpp.obj.d"
+  "CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj"
+  "CMakeFiles/Proiect_Colectiv.dir/Domain/Order_Domain/Order.cpp.obj.d"
   "CMakeFiles/Proiect_Colectiv.dir/main.cpp.obj"
   "CMakeFiles/Proiect_Colectiv.dir/main.cpp.obj.d"
   "Proiect_Colectiv.exe"

@@ -370,6 +370,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Facultate/OOP/OOP Proiect Colectiv/Domain/Car_Domain/Car.cpp">
+			<Option target="Proiect_Colectiv"/>
+		</Unit>
+		<Unit filename="C:/Facultate/OOP/OOP Proiect Colectiv/Domain/Car_Domain/Car.h">
+			<Option target="Proiect_Colectiv"/>
+		</Unit>
+		<Unit filename="C:/Facultate/OOP/OOP Proiect Colectiv/Domain/Order_Domain/Order.cpp">
+			<Option target="Proiect_Colectiv"/>
+		</Unit>
+		<Unit filename="C:/Facultate/OOP/OOP Proiect Colectiv/Domain/Order_Domain/Order.h">
+			<Option target="Proiect_Colectiv"/>
+		</Unit>
 		<Unit filename="C:/Facultate/OOP/OOP Proiect Colectiv/Google_tests/Tests.cpp">
 			<Option target="Google_Tests_run"/>
 		</Unit>
