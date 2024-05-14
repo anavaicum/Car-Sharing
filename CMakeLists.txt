@@ -9,4 +9,9 @@ add_executable(Proiect_Colectiv main.cpp
         Domain/User_Domain/User.cpp
         Domain/Customer_Domain/Customer.cpp
         Domain/Coworker_Domain/Coworker.cpp)
+        Controller/Car_Controller/CarController.h
+        Controller/Order_Controller/OrderController.h
+        Controller/Car_Controller/CarController.cpp
+        Controller/Order_Controller/OrderController.cpp
+        Domain/Order_Domain/Order.h)
 add_subdirectory(Google_tests)
