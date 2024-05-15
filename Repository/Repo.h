@@ -87,7 +87,7 @@ public:
 
     void update(int id, T& new_entity) {
         bool found = false;
-        for (auto& entity : entities) {
+        for (auto &entity: entities) {
             if (entity.get_Id() == id) {
                 entity = new_entity;
                 found = true;
