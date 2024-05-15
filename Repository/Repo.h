@@ -10,6 +10,7 @@
 #include <vector>
 #include <sstream>
 
+
 using namespace std;
 
 // each class T should provide the methods:
@@ -83,6 +84,22 @@ public:
         readFile.close();
         entities = data;
     }
+
+    void update(int id, T& new_entity) {
+        bool found = false;
+        for (auto& entity : entities) {
+            if (entity.get_Id() == id) {
+                entity = new_entity;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            throw exception(); // or handle the case where the entity is not found
+        }
+        save_to_CSV(this->filename); // Save the updated list to the file
+    }
+
 
 };
 
