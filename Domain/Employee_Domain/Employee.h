@@ -12,7 +12,7 @@ using namespace std;
 class Employee : public User {
 private:
     string position;
-    string birthday; // Assuming timestamp is stored as a string
+    string birthday; // asdf
     string initials;
     float salary;
     bool is_admin;
