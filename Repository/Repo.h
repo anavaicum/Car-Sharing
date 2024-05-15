@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -60,6 +61,27 @@ public:
 
         this->entities.push_back(t);
         save_to_CSV(this->filename);
+    }
+
+    void read(){
+        vector<T> data;
+        ifstream readFile(filename);
+
+
+        //Ignore the header
+        string header;
+        getline(readFile, header);
+
+        string line;
+        while(getline(readFile, line)){
+
+            stringstream ss(line);
+            T object;
+            //object = To_Object(line);
+            data.push_back(object);
+        }
+        readFile.close();
+        entities = data;
     }
 
 };
