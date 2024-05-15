@@ -10,5 +10,6 @@ add_executable(Proiect_Colectiv main.cpp
         Domain/Customer_Domain/Customer.cpp
         Domain/Order_Domain/Order.cpp
         Domain/User_Domain/User.cpp
-        Domain/Employee_Domain/Employee.cpp)
+        Domain/Employee_Domain/Employee.cpp
+        Repository/Repo.h)
 add_subdirectory(Google_tests)
