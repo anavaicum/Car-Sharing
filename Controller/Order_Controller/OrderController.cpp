@@ -47,3 +47,22 @@ bool Order_Controller::take_over_order(Order& order) {
 void Order_Controller::setStatus(const string& status) {
     this->status = status;
 }
+
+Order OrderController::get_by_id(int id) const {
+    for (const auto& order : orders) {
+        if (order.getOrderId() == id) {
+            return order;
+        }
+    }
+    throw std::runtime_error("Order not found");
+}
+
+float OrderController::get_total_price(int year, int month, const Car& car, const Customer& customer, const Employee& employee) const {
+    float total_price = 0.0;
+    for (const auto& order : orders) {
+        if (order.getCar()->getLicensePlate() == car.getLicensePlate()) {
+            total_price += order.getTotalPrice();
+        }
+    }
+    return total_price;
+}
