@@ -1,6 +1,8 @@
 #ifndef PROIECT_COLECTIV_ORDER_H
 #define PROIECT_COLECTIV_ORDER_H
 #include "../Car_Domain/Car.h"
+#include "../Employee_Domain//Employee.h"
+#include "../Customer_Domain/Customer.h"
 #include <string>
 #include <vector>
 using namespace std;

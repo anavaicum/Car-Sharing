@@ -9,7 +9,7 @@ using namespace std;
 #include <string>
 #include "../User_Domain/User.h"
 
-class CoWorker : public User {
+class Employee : public User {
 private:
     string position;
     string birthday; // Assuming timestamp is stored as a string
@@ -18,7 +18,7 @@ private:
     bool is_admin;
 
 public:
-    CoWorker(int _id, const string& _email, const string& _password, const string& _first_name, const string& _last_name);
+    Employee(int _id, const string& _email, const string& _password, const string& _first_name, const string& _last_name);
 
     const string& get_position() const;
     void set_position(const string& _position);

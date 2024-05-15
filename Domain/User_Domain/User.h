@@ -20,6 +20,8 @@ private:
 public:
     User(int _id, const string& _email, const string& _password, const string& _first_name, const string& _last_name);
 
+    User();
+
     int get_id() const;
     void set_id(int _id);
 

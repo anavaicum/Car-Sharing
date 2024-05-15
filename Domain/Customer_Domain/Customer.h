@@ -9,8 +9,8 @@ using namespace std;
 #include <string>
 #include <vector>
 #include "../User_Domain/User.h"
-class Car{//masina
-};
+#include "../Car_Domain/Car.h"
+
 
 class Customer : public User {
 private:
