@@ -12,7 +12,7 @@ using namespace std;
 class Employee : public User {
 private:
     string position;
-    string birthday; // asdf
+    string birthday; //TODO: asdf @cosmin refactor to separate date structure
     string initials;
     float salary;
     bool is_admin;
