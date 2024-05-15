@@ -9,3 +9,41 @@
 //    orders.push_back(order);
 //    return true;
 //}
+
+// Function to update an existing order
+bool Order_Controller::update_order(const Order& existing_order, const Order& new_order) {
+    for (auto& order : orders) {
+        if (order.getOrderId() == existing_order.getOrderId()) {
+            order = new_order;
+            return true; // Return true if order is updated successfully
+        }
+    }
+    return false; // Return false if order with the given order number is not found
+}
+
+// Function to mark an order as completed
+bool Order_Controller::complete_order(Order& order) {
+    for (auto& o : orders) {
+        if (o.getOrderId() == order.getOrderId()) {
+            o.setStatus("Completed");
+            return true; // Return true if order is marked as completed successfully
+        }
+    }
+    return false; // Return false if order with the given order number is not found
+}
+
+// Function to mark an order as taken over
+bool Order_Controller::take_over_order(Order& order) {
+    for (auto& o : orders) {
+        if (o.getOrderId() == order.getOrderId()) {
+            o.setStatus("Taken Over");
+            o.status = 'Reserved';
+            return true; // Return true if order is marked as taken over successfully
+        }
+    }
+    return false; // Return false if order with the given order number is not found
+}
+
+void Order_Controller::setStatus(const string& status) {
+    this->status = status;
+}

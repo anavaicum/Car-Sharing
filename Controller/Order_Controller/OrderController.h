@@ -44,6 +44,9 @@ public:
 
     // Function to calculate the total price of orders for a specific criteria
     float get_total_price(int year, int month, const Car& car, const Customer& customer, const Employee& coworker) const;
+
+    // Method to set the status of the order
+    void setStatus(const std::string& status);
 };
 
 
