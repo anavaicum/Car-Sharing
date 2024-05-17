@@ -8,11 +8,12 @@
 using namespace std;
 #include <string>
 #include "../User_Domain/User.h"
+#include "../Date.h"
 
 class Employee : public User {
 private:
     string position;
-    string birthday; //TODO: asdf @cosmin refactor to separate date structure
+    Date birthday;
     string initials;
     float salary;
     bool is_admin;
