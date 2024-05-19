@@ -1,43 +1,11 @@
 #ifndef PROIECT_COLECTIV_ORDER_H
 #define PROIECT_COLECTIV_ORDER_H
 #include "../Car_Domain/Car.h"
+#include "../Employee_Domain//Employee.h"
+#include "../Customer_Domain/Customer.h"
 #include <string>
 #include <vector>
 using namespace std;
-
-class Date {
-private:
-
-    int day;
-    int month;
-    int year;
-
-public:
-
-    Date(int day, int month, int year);
-
-    int getDay() const;
-
-    int getMonth() const;
-
-    int getYear() const;
-
-    void setDay(int day);
-
-    void setMonth(int month);
-
-    void setYear(int year);
-
-    bool operator<(const Date &rhs) const;
-
-    bool operator>(const Date &rhs) const;
-
-    bool operator<=(const Date &rhs) const;
-
-    bool operator>=(const Date &rhs) const;
-
-
-};
 
 class Order {
 private:
