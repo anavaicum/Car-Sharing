@@ -1,6 +1,7 @@
 #include "Car.h"
 
 #include <utility>
+#include <unordered_map>
 
 Car::Car(string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
          float pricePerDay, fuel_type fuel, transmission trans, string color, const vector<string> &remarks) : license_plate(std::move(licensePlate)),
@@ -90,7 +91,7 @@ void Car::setTrans(Car::transmission Trans) {
     Car::trans = Trans;
 }
 
-void Car::save_to_CSV(const vector<Car>& data, const string& filename) {
+void Car::save_to_CSV(const string &filename) {
     ofstream file(filename);
     //file.open(filename, ios::app);
 
@@ -105,18 +106,18 @@ void Car::save_to_CSV(const vector<Car>& data, const string& filename) {
 
     file << "License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
 
-    for(const auto& obj : data) {
-        file << obj.license_plate << ","
-             << obj.model << ","
-             << obj.brand << ","
-             << obj.year_of_first_reg << ","
-             << obj.mileage << ","
-             << obj.price_per_day << ","
-             << fuelTypeToString(obj.fuel) << ","
-             << transmissionToString(obj.trans) << ","
-             << obj.color << ","
-             << vectorToString(obj.remarks) << "\n";
-    }
+
+        file << license_plate << ","
+             << model << ","
+             << brand << ","
+             << year_of_first_reg << ","
+             << mileage << ","
+             << price_per_day << ","
+             << fuelTypeToString(fuel) << ","
+             << transmissionToString(trans) << ","
+             << color << ","
+             << vectorToString(remarks) << "\n";
+
     file.close();
 }
 
@@ -134,7 +135,7 @@ string Car::transmissionToString(Car::transmission t) {
     switch (t) {
         case Automatic: return "Automatic";
         case Manual: return "Manual";
-        default: return "Unknown";
+        default: return "UnknownTrans";
     }
 }
 
@@ -143,8 +144,64 @@ string Car::vectorToString(const vector<string> &vec) {
     for (size_t i = 0; i < vec.size(); ++i) {
         ss << vec[i];
         if (i != vec.size() - 1) {
-            ss << "; "; // Use semicolon and space as separator for readability for vector
+            ss << ";"; // Use semicolon and space as separator for readability for vector
         }
     }
     return ss.str();
+}
+
+Car Car::From_String_To_Object(const string &string_of_obj) {
+    stringstream ss(string_of_obj);
+    string license, mod, br, year_of_rg, ml, ppd, fu, tra, col, rm;
+    vector<string> rm_vec;
+    int year;
+    float mil, price;
+
+    getline(ss, license, ',');
+    getline(ss, mod, ',');
+    getline(ss, br, ',');
+    getline(ss, year_of_rg, ',');
+    getline(ss, ml, ',');
+    getline(ss, ppd, ',');
+    getline(ss, fu, ',');
+    getline(ss, tra, ',');
+    getline(ss, col, ',');
+    getline(ss, rm, ',');
+
+    year = stoi(year_of_rg);
+    mil = stof(ml);
+    price = stof(ppd);
+
+
+    stringstream remarksStream(rm);
+    string remark;
+    while(getline(remarksStream, remark, ';'))
+    {
+        rm_vec.push_back(remark);
+    }
+    fuel_type ft = stringToFuelTypeEnum(fu);
+    transmission tr = stringToTransmissionEnum(tra);
+
+    Car obj(license, mod, br, year, mil, price, ft, tr, col, rm_vec);
+    return obj;
+}
+
+Car::Car() {
+
+}
+
+Car::fuel_type Car::stringToFuelTypeEnum(string fuelStr) {
+    auto it = stringToFuelType.find(fuelStr);
+    if (it != stringToFuelType.end()) {
+        return it->second;
+    }
+    return Unknown;
+}
+
+Car::transmission Car::stringToTransmissionEnum(string transStr) {
+    auto it = stringToTransmission.find(transStr);
+    if (it != stringToTransmission.end()) {
+        return it->second;
+    }
+    return UnknownTrans;
 }
