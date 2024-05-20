@@ -150,23 +150,23 @@ string Car::vectorToString(const vector<string> &vec) {
     return ss.str();
 }
 
-Car Car::From_String_To_Object(const string &string_of_obj) {
+Car Car::From_String_To_Object(const string &string_of_obj, char delim) {
     stringstream ss(string_of_obj);
     string license, mod, br, year_of_rg, ml, ppd, fu, tra, col, rm;
     vector<string> rm_vec;
     int year;
     float mil, price;
 
-    getline(ss, license, ',');
-    getline(ss, mod, ',');
-    getline(ss, br, ',');
-    getline(ss, year_of_rg, ',');
-    getline(ss, ml, ',');
-    getline(ss, ppd, ',');
-    getline(ss, fu, ',');
-    getline(ss, tra, ',');
-    getline(ss, col, ',');
-    getline(ss, rm, ',');
+    getline(ss, license, delim);
+    getline(ss, mod, delim);
+    getline(ss, br, delim);
+    getline(ss, year_of_rg, delim);
+    getline(ss, ml, delim);
+    getline(ss, ppd, delim);
+    getline(ss, fu, delim);
+    getline(ss, tra, delim);
+    getline(ss, col, delim);
+    getline(ss, rm, delim);
 
     year = stoi(year_of_rg);
     mil = stof(ml);
@@ -186,9 +186,7 @@ Car Car::From_String_To_Object(const string &string_of_obj) {
     return obj;
 }
 
-Car::Car() {
 
-}
 
 Car::fuel_type Car::stringToFuelTypeEnum(string fuelStr) {
     auto it = stringToFuelType.find(fuelStr);

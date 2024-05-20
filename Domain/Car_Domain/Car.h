@@ -99,7 +99,7 @@ public:
 
     void save_to_CSV(const string &filename);
 
-    Car From_String_To_Object(const string &string_of_obj);
+    Car From_String_To_Object(const string &string_of_obj, char delim = ',');
 
 };
 
