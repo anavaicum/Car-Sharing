@@ -5,6 +5,8 @@
 #include <vector>
 using namespace std;
 #include "AdminUI.h"
+
+
 void AdminUI::create_worker() {
     int id;
     string first_name, last_name, email, password, position, initials;
@@ -39,6 +41,9 @@ void AdminUI::create_worker() {
     Employee newWorker(id, email, password, first_name, last_name, position, birthday, initials, salary, is_Admin);
     workers.push_back(newWorker);
 }
+
+void AdminUI::update_worker() {}
+
 void AdminUI::activate_worker() {
     string email;
     cout << "Worker's email to activate: ";
@@ -46,7 +51,7 @@ void AdminUI::activate_worker() {
 
     for (auto& worker: workers) {
         if (worker.get_email() == email){
-            worker.setActive(true);
+            worker.activate(true);
             cout << "Worker activated!" << endl;
             break;
         } else {
@@ -54,24 +59,26 @@ void AdminUI::activate_worker() {
         }
     }
 }
+
 void AdminUI::deactivate_worker() {
     string email;
-    cout << "Worker's email to activate: ";
+    cout << "Worker's email to deactivate: ";
     cin >> email;
 
     for (auto& worker: workers) {
         if (worker.get_email() == email){
-            worker.setActive(false);
-            cout << "Worker activated!" << endl;
+            worker.deactivate(false);
+            cout << "Worker deactivated!" << endl;
             break;
         } else {
             cout << "Worker with given email not found!" << endl;
         }
     }
 }
+
 void AdminUI::delete_worker() {
     string email;
-    cout << "Worker's email to activate: ";
+    cout << "Worker's email to delete: ";
     cin >> email;
     for (auto worker = workers.begin(); worker != workers.end(); worker++){
         if (worker->get_email() == email) {
@@ -83,6 +90,53 @@ void AdminUI::delete_worker() {
         }
     }
 }
-void AdminUI::give_admin_rights() {}
-void AdminUI::worker_salary() {}
-void AdminUI::change_worker_salary() {}
+
+void AdminUI::give_admin_rights() {
+    string email;
+    cout << "Worker's email to give admin rights to: ";
+    cin >> email;
+
+    for (auto& worker: workers) {
+        if (worker.get_email() == email){
+            worker.set_admin(true);
+            cout << "Worker is now admin!" << endl;
+            break;
+        } else {
+            cout << "Worker with given email not found!" << endl;
+        }
+    }
+}
+
+void AdminUI::worker_salary() {
+    string email;
+    cout << "Worker's email to view salary: ";
+    cin >> email;
+
+    for (auto& worker: workers) {
+        if (worker.get_email() == email){
+            cout << "Worker's salary: " << worker.get_salary() << endl;
+            break;
+        } else {
+            cout << "Worker with given email not found!" << endl;
+        }
+    }
+}
+
+void AdminUI::change_worker_salary() {
+    string email;
+    cout << "Worker's email to change salary: ";
+    cin >> email;
+    float new_salary;
+
+    for (auto& worker: workers) {
+        if (worker.get_email() == email){
+            cout << "Enter new salary: ";
+            cin >> new_salary;
+            worker.set_salary(new_salary);
+            cout << "Worker's salary has been updated!" << endl;
+            break;
+        } else {
+            cout << "Worker with given email not found!" << endl;
+        }
+    }
+}
