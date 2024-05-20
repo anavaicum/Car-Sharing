@@ -2,6 +2,7 @@
 // Created by Alexia on 5/20/2024.
 //
 #include <iostream>
+#include <vector>
 using namespace std;
 #include "AdminUI.h"
 void AdminUI::create_worker() {
@@ -37,9 +38,37 @@ void AdminUI::create_worker() {
     cin >> is_Admin;
 
 }
-void activateWorker() {}
-void deactivateWorker() {}
-void deleteWorker() {}
-void giveAdminRights() {}
-void workerSalary() {}
-void changeWorkerSalary() {}
+void AdminUI::activate_worker() {
+    string email;
+    cout << "Worker's email to activate: ";
+    cin >> email;
+
+    for (auto& worker: workers) {
+        if (worker.get_email() == email){
+            worker.setActive(true);
+            cout << "Worker activated!" << endl;
+            break;
+        } else {
+            cout << "Worker with given email not found!" << endl;
+        }
+    }
+}
+void AdminUI::deactivate_worker() {
+    string email;
+    cout << "Worker's email to activate: ";
+    cin >> email;
+
+    for (auto& worker: workers) {
+        if (worker.get_email() == email){
+            worker.setActive(false);
+            cout << "Worker activated!" << endl;
+            break;
+        } else {
+            cout << "Worker with given email not found!" << endl;
+        }
+    }
+}
+void AdminUI::deleteWorker() {}
+void AdminUI::giveAdminRights() {}
+void AdminUI::workerSalary() {}
+void AdminUI::changeWorkerSalary() {}
