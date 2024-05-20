@@ -5,13 +5,15 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
+#include <unordered_map>
+
 using namespace std;
 
 class Car {
 public:
 
-    enum fuel_type { Gas, Diesel, Electric, Petrol };
-    enum transmission { Automatic, Manual };
+    enum fuel_type { Gas, Diesel, Electric, Petrol, Unknown };
+    enum transmission { Automatic, Manual, UnknownTrans };
 
 private:
 
@@ -26,10 +28,28 @@ private:
     string color;
     vector <string> remarks;
 
+    unordered_map<string, fuel_type> stringToFuelType = {
+            {"Gas", Gas},
+            {"Diesel", Diesel},
+            {"Electric", Electric},
+            {"Petrol", Petrol}
+    };
+
+    unordered_map<string, transmission> stringToTransmission = {
+            {"Automatic", Automatic},
+            {"Manual", Manual}
+    };
+
+    fuel_type stringToFuelTypeEnum(string fuelStr);
+
+    transmission stringToTransmissionEnum(string transStr);
+
 public:
 
     Car(string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
         float pricePerDay, fuel_type fuel, transmission trans, string color, const vector<string> &remarks);
+
+    Car();
 
     const string &getLicensePlate() const;
 
@@ -77,7 +97,9 @@ public:
 
     static string vectorToString(const vector<string>& vec);
 
-    void save_to_CSV(const vector<Car>& data, const string& filename);
+    void save_to_CSV(const string &filename);
+
+    Car From_String_To_Object(const string &string_of_obj);
 
 };
 
