@@ -7,6 +7,9 @@
 using namespace std;
 #include <string>
 #include <vector>
+#include <fstream>
+#include <sstream>
+#include <filesystem>
 
 class User {
 private:
@@ -22,7 +25,7 @@ public:
 
     User();
 
-    int get_id() const;
+    const int get_id() const;
     void set_id(int _id);
 
     const string& get_email() const;

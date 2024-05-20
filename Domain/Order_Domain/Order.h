@@ -8,11 +8,15 @@
 using namespace std;
 
 class Order {
+public:
+
+    enum status { Reserved, Ordered, Completed, Canceled};
+
 private:
 
     int order_id;
     Date order_date;
-    enum status { Reserved, Ordered, Completed, Canceled};
+    status stat;
     Date begin_date;
     Date end_date;
     float total_price;
@@ -24,7 +28,7 @@ private:
 
 public:
 
-    Order(int orderId, const Date &orderDate, const Date &beginDate, const Date &endDate, float totalPrice,
+    Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate, float totalPrice,
           const vector<string> &remarks, bool isReserved, Car *car, Customer *customer, Employee *employee);
 
     Car *getCar() const;
@@ -66,6 +70,16 @@ public:
     Employee *getEmployee() const;
 
     void setEmployee(Employee *employee);
+
+    status getStat() const;
+
+    void setStat(status stat);
+
+    void save_to_CSV(const vector<Order>& data, const string& filename) const;
+
+    static string statusToString(status s);
+
+    static string vectorToString(const vector<string>& vec);
 
 };
 
