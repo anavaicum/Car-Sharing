@@ -36,7 +36,8 @@ void AdminUI::create_worker() {
     //birthday(day, month, year);
     cout <<"Is Worker Admin?: ";
     cin >> is_Admin;
-
+    Employee newWorker(id, email, password, first_name, last_name, position, birthday, initials, salary, is_Admin);
+    workers.push_back(newWorker);
 }
 void AdminUI::activate_worker() {
     string email;
@@ -68,7 +69,20 @@ void AdminUI::deactivate_worker() {
         }
     }
 }
-void AdminUI::deleteWorker() {}
-void AdminUI::giveAdminRights() {}
-void AdminUI::workerSalary() {}
-void AdminUI::changeWorkerSalary() {}
+void AdminUI::delete_worker() {
+    string email;
+    cout << "Worker's email to activate: ";
+    cin >> email;
+    for (auto worker = workers.begin(); worker != workers.end(); worker++){
+        if (worker->get_email() == email) {
+            workers.erase(worker);
+            cout << "Worker deleted!" << endl;
+            break;
+        } else {
+            cout << "Worker with given email not found!" << endl;
+        }
+    }
+}
+void AdminUI::give_admin_rights() {}
+void AdminUI::worker_salary() {}
+void AdminUI::change_worker_salary() {}
