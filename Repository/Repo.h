@@ -9,8 +9,11 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-
-
+#include "../Domain/Order_Domain/Order.h"
+#include "../Domain/User_Domain/User.h"
+#include "../Domain/Customer_Domain/Customer.h"
+#include "../Domain/Employee_Domain/Employee.h"
+#include "../Domain/Car_Domain/Car.h"
 using namespace std;
 
 // each class T should provide the methods:
@@ -100,7 +103,24 @@ public:
         save_to_CSV(this->filename); // Save the updated list to the file
     }
 
-
+    T find_by_ID(int id)
+    {
+        for(auto &entity : entities)
+        {
+            if(is_same_v<T,Car> && entity.getLicensePlate()==id)
+            {
+                return entity;
+            }
+            if(is_same_v<T,Order> && entity.getOrderId()==id)
+            {
+                return entity;
+            }
+            if((is_same_v<T,Customer> || is_same_v<T,Employee> || is_same_v<T,User>) && entity.getID()==id)
+            {
+                return entity;
+            }
+        }
+    }
 };
 
 #endif //PROIECT_COLECTIV_REPO_H
