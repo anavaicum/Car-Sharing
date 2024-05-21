@@ -30,8 +30,8 @@ void Employee::setBirthday(const Date &_birthday) { Employee::birthday = _birthd
 User::User() {}
 
 void Employee::save_to_CSV(const string &filename) {
-    ofstream file(filename);
-    //file.open(filename, ios::app);
+    ofstream file;
+    file.open(filename, ios::app);
 
     if(!file.is_open()) {
         return;
@@ -42,18 +42,22 @@ void Employee::save_to_CSV(const string &filename) {
 //        file << "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
 //    }
 
-    file << "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
+    ifstream read_file(filename);
+    if(read_file.peek() == ifstream::traits_type::eof()){
+        file << "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
+    }
+    read_file.close();
 
-        file << get_id() << ","
-             << get_email() << ","
-             << get_password() << ","
-             << get_first_name() << ","
-             << get_last_name() << ","
-             << position << ","
-             << birthday.getDay() << "/" << birthday.getMonth() << "/" << birthday.getYear() << ","
-             << initials << ","
-             << salary << ","
-             << is_admin << "\n";
+    file << get_id() << ","
+        << get_email() << ","
+        << get_password() << ","
+        << get_first_name() << ","
+        << get_last_name() << ","
+        << position << ","
+        << birthday.getDay() << "/" << birthday.getMonth() << "/" << birthday.getYear() << ","
+        << initials << ","
+        << salary << ","
+        << is_admin << "\n";
 
     file.close();
 }
