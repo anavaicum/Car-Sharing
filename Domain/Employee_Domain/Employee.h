@@ -42,7 +42,9 @@ public:
 
     void save_to_CSV(const string &filename);
 
-    Employee From_String_To_Object(const string& string_of_obj);
+    Employee From_String_To_Object(const string& string_of_obj, char delim=',');
+
+    string Employee_To_string() const;
 
     Employee();
 

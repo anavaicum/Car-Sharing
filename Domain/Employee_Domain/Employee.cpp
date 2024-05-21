@@ -58,23 +58,23 @@ void Employee::save_to_CSV(const string &filename) {
     file.close();
 }
 
-Employee Employee::From_String_To_Object(const string &string_of_obj) {
+Employee Employee::From_String_To_Object(const string &string_of_obj, char delim) {
     stringstream ss(string_of_obj);
     string id_string, email_string, pass_string, f_name, l_name, pos, birth, init, sal, admin;
     bool admin_bool;
     int id_int;
     float sal_num;
 
-    getline(ss, id_string,',');
-    getline(ss, email_string,',');
-    getline(ss, pass_string,',');
-    getline(ss, f_name,',');
-    getline(ss, l_name,',');
-    getline(ss, pos,',');
-    getline(ss, birth,',');
-    getline(ss, init,',');
-    getline(ss, sal,',');
-    getline(ss, admin,',');
+    getline(ss, id_string,delim);
+    getline(ss, email_string,delim);
+    getline(ss, pass_string, delim);
+    getline(ss, f_name,delim);
+    getline(ss, l_name,delim);
+    getline(ss, pos,delim);
+    getline(ss, birth,delim);
+    getline(ss, init,delim);
+    getline(ss, sal,delim);
+    getline(ss, admin,delim);
 
     admin_bool = (admin == "1");
     id_int = stoi(id_string);
@@ -90,5 +90,24 @@ Employee Employee::From_String_To_Object(const string &string_of_obj) {
     Employee e(id_int, email_string, pass_string, f_name, l_name, pos,
                birth_d, init, sal_num, admin_bool);
     return e;
+}
+
+string Employee::Employee_To_string() const {
+    stringstream ss;
+    ss << get_id() << "!"
+         << get_email() << "!"
+         << get_password() << "!"
+         << get_first_name() << "!"
+         << get_last_name() << "!"
+         << position << "!"
+         << birthday.getDay() << "/" << birthday.getMonth() << "/" << birthday.getYear() << "!"
+         << initials << "!"
+         << salary << "!"
+         << is_admin;
+    return ss.str();
+}
+
+Employee::Employee() {
+
 }
 
