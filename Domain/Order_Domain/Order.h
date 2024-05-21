@@ -5,12 +5,14 @@
 #include "../Customer_Domain/Customer.h"
 #include <string>
 #include <vector>
+#include <unordered_map>
+
 using namespace std;
 
 class Order {
 public:
 
-    enum status { Reserved, Ordered, Completed, Canceled};
+    enum status { Reserved, Ordered, Completed, Canceled, Unknown};
 
 private:
 
@@ -22,18 +24,27 @@ private:
     float total_price;
     vector <string> remarks;
     bool is_reserved;
-    Car* car;
-    Customer* customer;
-    Employee* employee;
+    vector<Car> car;
+    Customer customer;
+    Employee employee;
+
+    unordered_map<string, status> stringToStatus{
+            {"Reserved", Reserved},
+            {"Ordered", Ordered},
+            {"Completed", Completed},
+            {"Canceled", Canceled}
+    };
+
+    status stringToStatusEnum(string status_string);
 
 public:
 
     Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate, float totalPrice,
-          const vector<string> &remarks, bool isReserved, Car *car, Customer *customer, Employee *employee);
+          const vector<string> &remarks, bool isReserved, vector<Car> cars, Employee employee, Customer customer);
 
-    Car *getCar() const;
+    vector<Car> getCar() const;
 
-    void setCar(Car *car);
+    void setCar(vector<Car> new_cars);
 
     int getOrderId() const;
 
@@ -63,23 +74,27 @@ public:
 
     void setIsReserved(bool isReserved);
 
-    Customer *getCustomer() const;
+    Customer getCustomer() const;
 
-    void setCustomer(Customer *customer);
+    void setCustomer(Customer customer);
 
-    Employee *getEmployee() const;
+    Employee getEmployee() const;
 
-    void setEmployee(Employee *employee);
+    void setEmployee(Employee employee);
 
     status getStat() const;
 
     void setStat(status stat);
 
-    void save_to_CSV(const vector<Order>& data, const string& filename) const;
+    void save_to_CSV(const string& filename) const;
 
     static string statusToString(status s);
 
     static string vectorToString(const vector<string>& vec);
+
+    string CarsToString() const;
+    Order FromStringToObject(const string& string_of_obj);
+    Order();
 
 };
 
