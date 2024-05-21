@@ -93,7 +93,9 @@ public:
     static string vectorToString(const vector<string>& vec);
 
     string CarsToString() const;
-    Order FromStringToObject(const string& string_of_obj);
+
+    Order From_String_To_Object(const string& string_of_obj);
+
     Order();
 
 };

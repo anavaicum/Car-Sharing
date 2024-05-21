@@ -23,8 +23,8 @@ const vector<Car>& Customer::get_favorites() const { return favorites; }
 void Customer::add_favorite(const Car& favorite) { favorites.push_back(favorite); }
 
 void Customer::save_to_CSV(const string &filename) {
-    ofstream file(filename);
-    //file.open(filename, ios::app);
+    ofstream file;
+    file.open(filename, ios::app);
 
     if(!file.is_open()) {
         return;
@@ -34,17 +34,21 @@ void Customer::save_to_CSV(const string &filename) {
 //    if(!file_exists) {
 //        file << "ID,email,password,first name,last name,phone,address,GDPR deleted,favorites,remarks\n";
 //    }
+    ifstream read_file(filename);
+    if(read_file.peek() == ifstream::traits_type::eof()){
+        file << "ID,email,password,first name,last name,phone,address,GDPR deleted,favorites\n";
+    }
+    read_file.close();
 
-    file << "ID,email,password,first name,last name,phone,address,GDPR deleted,favorites\n";
-        file << get_id() << ","
-             << get_email() << ","
-             << get_password() << ","
-             << get_first_name() << ","
-             << get_last_name() << ","
-             << phone << ","
-             << address << ","
-             << GDPRdeleted << ","
-             << Customer::favoritesToString() << "\n";
+    file << get_id() << ","
+        << get_email() << ","
+        << get_password() << ","
+        << get_first_name() << ","
+        << get_last_name() << ","
+        << phone << ","
+        << address << ","
+        << GDPRdeleted << ","
+        << Customer::favoritesToString() << "\n";
     file.close();
 }
 

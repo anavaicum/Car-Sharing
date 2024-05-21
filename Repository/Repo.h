@@ -51,6 +51,9 @@ private:
     }
 
 public:
+
+    Repo(const string& f_name) : filename(f_name){}
+
     void add(T t){
         if (!ID_is_unique(t)) {
             throw exception(); // object already in repo
@@ -78,7 +81,7 @@ public:
 
             stringstream ss(line);
             T object;
-            //object = To_Object(line);
+            object = object.From_String_To_Object(line);
             data.push_back(object);
         }
         readFile.close();

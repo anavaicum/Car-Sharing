@@ -1,0 +1,3 @@
+License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks
+SB12OGV,Sandero,Dacia,2017,100000,12,Gas,Manual,Red,primul;second
+SB12OGV,Sandero,Dacia,2017,100000,12,Gas,Manual,Red,primul;second

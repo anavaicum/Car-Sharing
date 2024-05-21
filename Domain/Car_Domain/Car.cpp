@@ -92,8 +92,10 @@ void Car::setTrans(Car::transmission Trans) {
 }
 
 void Car::save_to_CSV(const string &filename) {
-    ofstream file(filename);
-    //file.open(filename, ios::app);
+
+
+    ofstream file;
+    file.open(filename, ios::app);
 
     if(!file.is_open()) {
         return;
@@ -104,19 +106,27 @@ void Car::save_to_CSV(const string &filename) {
 //        file << "License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
 //    }
 
-    file << "License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
+    ifstream read_file(filename);
+    if(read_file.peek() == ifstream::traits_type::eof())
+    {
+        file << "License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
+    }
+
+    read_file.close();
 
 
-        file << license_plate << ","
-             << model << ","
-             << brand << ","
-             << year_of_first_reg << ","
-             << mileage << ","
-             << price_per_day << ","
-             << fuelTypeToString(fuel) << ","
-             << transmissionToString(trans) << ","
-             << color << ","
-             << vectorToString(remarks) << "\n";
+
+
+    file << license_plate << ","
+        << model << ","
+        << brand << ","
+        << year_of_first_reg << ","
+        << mileage << ","
+        << price_per_day << ","
+        << fuelTypeToString(fuel) << ","
+        << transmissionToString(trans) << ","
+        << color << ","
+        << vectorToString(remarks) << "\n";
 
     file.close();
 }

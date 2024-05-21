@@ -140,7 +140,7 @@ TEST(SavingData, OrderSaving){
 
     getline(file, line);
 
-    o = o.FromStringToObject(line);
+    o = o.From_String_To_Object(line);
 
     ASSERT_EQ(o.getOrderId(), 1);
     ASSERT_EQ(o.getOrderDate().getDay(), 12);
