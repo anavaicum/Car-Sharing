@@ -3,17 +3,20 @@
 
 
 #include "EmployeeUI.h"
+#include <vector>
 
 class AdminUI : public EmployeeUI {
+private:
+    std::vector<Employee> workers;
 public:
-    void createWorker();
-    void updateWorker();
-    void activateWorker();
-    void deactivateWorker();
-    void deleteWorker();
-    void giveAdminRights();
-    void workerSalary();
-    void changeWorkerSalary();
+    void create_worker();
+    void update_worker();
+    void activate_worker();
+    void deactivate_worker();
+    void delete_worker();
+    void give_admin_rights();
+    void worker_salary();
+    void change_worker_salary();
 };
 
 
