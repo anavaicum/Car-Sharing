@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "../Domain/Car_Domain/Car.h"
 #include "../Domain/Customer_Domain/Customer.h"
+#include "../Domain/Employee_Domain/Employee.h"
 #include <fstream>
 
 TEST(TestGtest, FirstTest) {
@@ -66,4 +67,36 @@ TEST(SavingData, CustomerSaving){
     ASSERT_EQ(cus.get_address(), "Str. Lui");
     ASSERT_EQ(cus.is_GDPRdeleted(), false);
     ASSERT_EQ(cus.get_favorites()[0].getRemarks()[0], "primul");
+}
+
+
+TEST(SavingData, EmployeeSaving){
+    Employee e(1, "this", "pass", "Gigel", "Fronel",
+               "buna", Date(12, 12, 1996), "GF",
+               1204.4, false);
+
+    e.save_to_CSV("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
+
+    ifstream file("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
+
+    string line;
+
+    getline(file, line); // Remove Header
+
+    getline(file, line);
+
+
+    e = e.From_String_To_Object(line);
+    ASSERT_EQ(e.get_id(), 1);
+    ASSERT_EQ(e.get_email(), "this");
+    ASSERT_EQ(e.get_password(), "pass");
+    ASSERT_EQ(e.get_first_name(), "Gigel");
+    ASSERT_EQ(e.get_last_name(), "Fronel");
+    ASSERT_EQ(e.get_position(), "buna");
+    ASSERT_EQ(e.getBirthday().getDay(), 12);
+    ASSERT_EQ(e.getBirthday().getMonth(), 12);
+    ASSERT_EQ(e.getBirthday().getYear(), 1996);
+    ASSERT_EQ(e.get_initials(), "GF");
+    //ASSERT_EQ(e.get_salary(), 1204.4); TODO: Needs to add a comparison with float
+    ASSERT_EQ(e.is_administrator(), false);
 }
