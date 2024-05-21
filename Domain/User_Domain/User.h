@@ -10,8 +10,9 @@ using namespace std;
 #include <fstream>
 #include <sstream>
 #include <filesystem>
+#include "../Entity"
 
-class User {
+class User: public Entity {
 private:
     int id;
     string email;
@@ -24,9 +25,6 @@ public:
     User(int _id, const string& _email, const string& _password, const string& _first_name, const string& _last_name);
 
     User();
-
-    const int get_id() const;
-    void set_id(int _id);
 
     const string& get_email() const;
     void set_email(const string& _email);
