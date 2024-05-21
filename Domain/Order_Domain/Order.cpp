@@ -1,9 +1,11 @@
 #include "Order.h"
 
-Order::Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate, float totalPrice,
-             const vector<string> &remarks, bool isReserved, Car *car, Customer *customer, Employee *employee)
+Order::Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate,
+             float totalPrice,
+             const vector<string> &remarks, bool isReserved, vector<Car> cars, Employee employee, Customer customer)
         : order_id(orderId), order_date(orderDate), stat(stat), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
-          remarks(remarks), is_reserved(isReserved), car(car), customer(customer), employee(employee) {}
+          remarks(remarks), is_reserved(isReserved), car(cars), employee(employee), customer(customer) {
+}
 
 int Order::getOrderId() const {
     return order_id;
@@ -61,27 +63,27 @@ void Order::setIsReserved(bool isReserved) {
     is_reserved = isReserved;
 }
 
-Car *Order::getCar() const {
+vector<Car> Order::getCar() const {
     return car;
 }
 
-void Order::setCar(Car *Car) {
-    Order::car = Car;
+void Order::setCar(vector<Car> c) {
+    Order::car = c;
 }
 
-Customer *Order::getCustomer() const {
+Customer Order::getCustomer() const {
     return customer;
 }
 
-void Order::setCustomer(Customer *Customer) {
+void Order::setCustomer(Customer Customer) {
     Order::customer = Customer;
 }
 
-Employee *Order::getEmployee() const {
+Employee Order::getEmployee() const {
     return employee;
 }
 
-void Order::setEmployee(Employee *Employee) {
+void Order::setEmployee(Employee Employee) {
     Order::employee = Employee;
 }
 
@@ -93,7 +95,7 @@ void Order::setStat(Order::status Stat) {
     Order::stat = Stat;
 }
 
-void Order::save_to_CSV(const vector<Order>& data, const string &filename) const {
+void Order::save_to_CSV( const string &filename) const {
     ofstream file(filename);
     //bool fileExists = filesystem::exists(filename);
 
@@ -109,20 +111,18 @@ void Order::save_to_CSV(const vector<Order>& data, const string &filename) const
 //    }
 
     file << "Order ID,order Date,status,begin date,end date,total price,remarks,is reserved,car license plate,customer id,employee id,car license plate,customer id,employee id\n";
+        file << order_id << ","
+             << order_date.getDay() << "/" << order_date.getMonth() << "/" << order_date.getYear() << ","
+             << statusToString(stat) << ","
+             << begin_date.getDay() << "/" << begin_date.getMonth() << "/" << begin_date.getYear() << ","
+             << end_date.getDay() << "/" << end_date.getMonth() << "/" <<end_date.getYear() << ","
+             << total_price << ","
+             << vectorToString(remarks) << ","
+             << is_reserved << ","
+             << CarsToString() << ","
+             << customer.Customer_To_String() << ","
+             << employee.Employee_To_string() << "\n";
 
-    for(const auto& obj : data) {
-        file << obj.order_id << ","
-             << obj.order_date.getDay() << "/" << obj.order_date.getMonth() << "/" << obj.order_date.getYear() << ","
-             << statusToString(obj.stat) << ","
-             << obj.begin_date.getDay() << "/" << obj.begin_date.getMonth() << "/" << obj.begin_date.getYear() << ","
-             << obj.end_date.getDay() << "/" << obj.end_date.getMonth() << "/" << obj.end_date.getYear() << ","
-             << obj.total_price << ","
-             << vectorToString(obj.remarks) << ","
-             << obj.is_reserved << ","
-             << obj.car->getLicensePlate() << ","
-             << obj.customer->get_id() << ","
-             << obj.employee->get_id() << "\n";
-    }
     file.close();
 }
 
@@ -141,8 +141,118 @@ string Order::vectorToString(const vector<string> &vec) {
     for (size_t i = 0; i < vec.size(); ++i) {
         ss << vec[i];
         if (i != vec.size() - 1) {
-            ss << "; "; // Use semicolon and space as separator for readability for vector
+            ss << ";"; // Use semicolon and space as separator for readability for vector
         }
     }
     return ss.str();
 }
+
+string Order::CarsToString() const {
+    stringstream ss;
+    for(int i = 0; i < car.size(); i++){
+        ss << car[i].getLicensePlate() << "!"
+           << car[i].getModel() << "!"
+           << car[i].getBrand() << "!"
+           << car[i].getYearOfFirstReg() << "!"
+           << car[i].getMileage() << "!"
+           << car[i].getPricePerDay() << "!"
+           << car[i].fuelTypeToString(car[i].getFuel()) << "!"
+           << car[i].transmissionToString(car[i].getTrans()) << "!"
+           << car[i].getColor() << "!"
+           << car[i].vectorToString(car[i].getRemarks());
+
+        if (i != car.size() - 1) {
+            ss << " | "; // Use vertical bar as separator for readability
+        }
+    }
+
+    return ss.str();
+}
+
+Order Order::FromStringToObject(const string &string_of_obj) {
+
+    stringstream ss(string_of_obj);
+    string id_string, ord_date, status, bg_date, e_date, tot_price,
+    rm_vec, reserve, cars_vec, emp_string, cus_string;
+
+    int id;
+    Date o_date, b_date, date_end;
+    vector<Car> cars;
+    Employee emp;
+    Customer cus;
+    Order::status sa;
+    bool res;
+    float t_price;
+
+    getline(ss, id_string, ',');
+    getline(ss, ord_date, ',');
+    getline(ss, status, ',');
+    getline(ss, bg_date, ',');
+    getline(ss, e_date, ',');
+    getline(ss, tot_price, ',');
+    getline(ss, rm_vec, ',');
+    getline(ss, reserve, ',');
+    getline(ss, cars_vec, ',');
+    getline(ss, cus_string, ',');
+    getline(ss, emp_string, ',');
+
+    res = (reserve == "1");
+    id = stoi(id_string);
+
+    stringstream DateStream(ord_date);
+    std::string part;
+    vector<std::string> Date_string;
+    while(getline(DateStream, part, '/')){
+        Date_string.push_back(part);
+    }
+    o_date = Date(Date_string);
+
+    Date_string = vector<std::string>();
+    part = "";
+    DateStream = stringstream(bg_date);
+    while(getline(DateStream, part, '/')){
+        Date_string.push_back(part);
+    }
+    b_date = Date(Date_string);
+
+    Date_string = vector<std::string>();
+    part = "";
+    DateStream = stringstream(e_date);
+    while(getline(DateStream, part, '/')){
+        Date_string.push_back(part);
+    }
+    date_end = Date(Date_string);
+
+    stringstream remarksStream(rm_vec);
+    string remark;
+    vector<string> remark_vector;
+    while(getline(remarksStream, remark, ';')){
+        remark_vector.push_back(remark);
+    }
+
+
+    stringstream CarStream(cars_vec);
+    std::string car_string;
+    while(getline(CarStream, car_string, '|')){
+        cars.push_back(Car().From_String_To_Object(car_string, '!'));
+    }
+
+    cus = Customer().From_String_To_Object(cus_string, '!');
+    emp = Employee().From_String_To_Object(emp_string, '!');
+    sa = stringToStatusEnum(status);
+    t_price = stof(tot_price);
+    return Order(id, o_date, sa, b_date, date_end, t_price, remark_vector, res, cars, emp, cus);
+}
+
+Order::Order() {
+
+}
+
+Order::status Order::stringToStatusEnum(string status_string) {
+    auto it = stringToStatus.find(status_string);
+    if (it != stringToStatus.end()) {
+        return it->second;
+    }
+    return Unknown;
+}
+

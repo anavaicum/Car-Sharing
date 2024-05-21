@@ -203,3 +203,7 @@ Car::transmission Car::stringToTransmissionEnum(string transStr) {
     }
     return UnknownTrans;
 }
+
+Car::Car() {
+
+}

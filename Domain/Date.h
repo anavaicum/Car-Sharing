@@ -4,7 +4,8 @@
 
 #ifndef PROIECT_COLECTIV_DATA_H
 #define PROIECT_COLECTIV_DATA_H
-
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,6 +19,10 @@ private:
 public:
 
     Date(int day, int month, int year);
+
+    Date();
+
+    Date(vector<string> birth);
 
     int getDay() const;
 

@@ -48,7 +48,7 @@ void Customer::save_to_CSV(const string &filename) {
     file.close();
 }
 
-string Customer::favoritesToString() {
+string Customer::favoritesToString() const {
     std::stringstream ss;
     for (size_t i = 0; i < favorites.size(); ++i) {
         //ss << "{";
@@ -70,7 +70,7 @@ string Customer::favoritesToString() {
     return ss.str();
 }
 
-Customer Customer::From_String_To_Object(const string &string_of_obj) {
+Customer Customer::From_String_To_Object(const string &string_of_obj, char delim) {
 
 
     stringstream ss(string_of_obj);
@@ -83,15 +83,15 @@ Customer Customer::From_String_To_Object(const string &string_of_obj) {
           Car::Gas, Car::Manual, "Red", vector<string>());
 
 
-    getline(ss, id_string,',');
-    getline(ss, mail,',');
-    getline(ss, pass,',');
-    getline(ss, f_name,',');
-    getline(ss, l_name,',');
-    getline(ss, phone_num,',');
-    getline(ss, addr,',');
-    getline(ss, gdpr,',');
-    getline(ss, vec_faves,',');
+    getline(ss, id_string,delim);
+    getline(ss, mail,delim);
+    getline(ss, pass,delim);
+    getline(ss, f_name,delim);
+    getline(ss, l_name,delim);
+    getline(ss, phone_num,delim);
+    getline(ss, addr,delim);
+    getline(ss, gdpr,delim);
+    getline(ss, vec_faves,delim);
 
     id_num = stoi(id_string);
     gdpr_bool = (gdpr == "1");
@@ -109,4 +109,18 @@ Customer Customer::From_String_To_Object(const string &string_of_obj) {
 
 Customer::Customer() {
 
+}
+
+string Customer::Customer_To_String() const {
+    stringstream ss;
+    ss << get_id() << "!"
+         << get_email() << "!"
+         << get_password() << "!"
+         << get_first_name() << "!"
+         << get_last_name() << "!"
+         << phone << "!"
+         << address << "!"
+         << GDPRdeleted << "!"
+         << Customer::favoritesToString();
+    return ss.str();
 }

@@ -35,9 +35,11 @@ public:
 
     void save_to_CSV(const string &filename);
 
-    string favoritesToString();
+    string favoritesToString() const;
 
-    Customer From_String_To_Object(const string& string_of_obj);
+    Customer From_String_To_Object(const string& string_of_obj, char delim=',');
+
+    string Customer_To_String() const;
 
     Customer();
 };

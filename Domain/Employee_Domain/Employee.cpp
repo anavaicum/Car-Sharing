@@ -29,7 +29,7 @@ void Employee::setBirthday(const Date &_birthday) { Employee::birthday = _birthd
 
 User::User() {}
 
-void Employee::save_to_CSV(const vector<Employee>& data, const string& filename) {
+void Employee::save_to_CSV(const string &filename) {
     ofstream file(filename);
     //file.open(filename, ios::app);
 
@@ -44,17 +44,70 @@ void Employee::save_to_CSV(const vector<Employee>& data, const string& filename)
 
     file << "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
 
-    for(const auto& obj : data) {
-        file << obj.get_id() << ","
-             << obj.get_email() << ","
-             << obj.get_password() << ","
-             << obj.get_first_name() << ","
-             << obj.get_last_name() << ","
-             << obj.position << ","
-             << obj.birthday.getDay() << "/" << obj.birthday.getMonth() << "/" << obj.birthday.getYear() << ","
-             << obj.initials << ","
-             << obj.salary << ","
-             << obj.is_admin << "\n";
-    }
+        file << get_id() << ","
+             << get_email() << ","
+             << get_password() << ","
+             << get_first_name() << ","
+             << get_last_name() << ","
+             << position << ","
+             << birthday.getDay() << "/" << birthday.getMonth() << "/" << birthday.getYear() << ","
+             << initials << ","
+             << salary << ","
+             << is_admin << "\n";
+
     file.close();
 }
+
+Employee Employee::From_String_To_Object(const string &string_of_obj, char delim) {
+    stringstream ss(string_of_obj);
+    string id_string, email_string, pass_string, f_name, l_name, pos, birth, init, sal, admin;
+    bool admin_bool;
+    int id_int;
+    float sal_num;
+
+    getline(ss, id_string,delim);
+    getline(ss, email_string,delim);
+    getline(ss, pass_string, delim);
+    getline(ss, f_name,delim);
+    getline(ss, l_name,delim);
+    getline(ss, pos,delim);
+    getline(ss, birth,delim);
+    getline(ss, init,delim);
+    getline(ss, sal,delim);
+    getline(ss, admin,delim);
+
+    admin_bool = (admin == "1");
+    id_int = stoi(id_string);
+    sal_num = stof(sal);
+
+    stringstream DateStream(birth);
+    string part;
+    vector<string> Date_string;
+    while(getline(DateStream, part, '/')){
+        Date_string.push_back(part);
+    }
+    Date birth_d(Date_string);
+    Employee e(id_int, email_string, pass_string, f_name, l_name, pos,
+               birth_d, init, sal_num, admin_bool);
+    return e;
+}
+
+string Employee::Employee_To_string() const {
+    stringstream ss;
+    ss << get_id() << "!"
+         << get_email() << "!"
+         << get_password() << "!"
+         << get_first_name() << "!"
+         << get_last_name() << "!"
+         << position << "!"
+         << birthday.getDay() << "/" << birthday.getMonth() << "/" << birthday.getYear() << "!"
+         << initials << "!"
+         << salary << "!"
+         << is_admin;
+    return ss.str();
+}
+
+Employee::Employee() {
+
+}
+

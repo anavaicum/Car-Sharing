@@ -3,6 +3,8 @@
 //
 
 #include "Date.h"
+#include <string>
+#include <vector>
 
 Date::Date(int day, int month, int year) {
     this->day = day;
@@ -68,4 +70,14 @@ bool Date::operator<=(const Date &rhs) const {
 
 bool Date::operator>=(const Date &rhs) const {
     return !(*this < rhs);
+}
+
+Date::Date() {
+
+}
+
+Date::Date(vector <string> birth) {
+    day = stoi(birth[0]);
+    month = stoi(birth[1]);
+    year = stoi(birth[2]);
 }

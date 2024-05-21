@@ -40,7 +40,13 @@ public:
     bool is_administrator() const;
     void set_admin(bool _is_admin);
 
-    void save_to_CSV(const vector<Employee>& data, const string& filename);
+    void save_to_CSV(const string &filename);
+
+    Employee From_String_To_Object(const string& string_of_obj, char delim=',');
+
+    string Employee_To_string() const;
+
+    Employee();
 
 };
 
