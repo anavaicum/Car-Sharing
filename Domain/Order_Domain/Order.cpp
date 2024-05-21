@@ -169,7 +169,7 @@ string Order::CarsToString() const {
     return ss.str();
 }
 
-Order Order::FromStringToObject(const string &string_of_obj) {
+Order Order::From_String_To_Object(const string &string_of_obj) {
 
     stringstream ss(string_of_obj);
     string id_string, ord_date, status, bg_date, e_date, tot_price,
