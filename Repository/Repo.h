@@ -103,23 +103,24 @@ public:
         save_to_CSV(this->filename); // Save the updated list to the file
     }
 
-    T find_by_ID(int id)
+    bool find_by_id(int id)
     {
         for(auto &entity : entities)
         {
             if(is_same_v<T,Car> && entity.getLicensePlate()==id)
             {
-                return entity;
+                return true;
             }
             if(is_same_v<T,Order> && entity.getOrderId()==id)
             {
-                return entity;
+                return true;
             }
-            if((is_same_v<T,Customer> || is_same_v<T,Employee> || is_same_v<T,User>) && entity.getID()==id)
+            if((is_same_v<T,Customer> || is_same_v<T,Employee> || is_same_v<T,User>) && entity.get_id()==id)
             {
-                return entity;
+                return true;
             }
         }
+        return false;
     }
 };
 
