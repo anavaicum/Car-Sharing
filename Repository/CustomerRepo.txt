@@ -1,3 +1,0 @@
-ID,email,password,first name,last name,phone,address,GDPR deleted,favorites
-1,this,password,Gica,Popescu,1234,Str. Lui,0,SB12OGV/Sandero/Dacia/2017/100000/12/Gas/Manual/Red/primul;second | SB12OGV/Sandero/Dacia/2017/100000/12/Gas/Manual/Red/primul;second
-1,this,password,Gica,Popescu,1234,Str. Lui,0,SB12OGV/Sandero/Dacia/2017/100000/12/Gas/Manual/Red/primul;second | SB12OGV/Sandero/Dacia/2017/100000/12/Gas/Manual/Red/primul;second

@@ -1,2 +1,0 @@
-ID,email,password,first name,last name,position,birthday,initials,salary,is admin
-1,this,pass,Gigel,Fronel,buna,12/12/1996,GF,1204.4,0
