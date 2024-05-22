@@ -42,7 +42,21 @@ void AdminUI::create_worker() {
     workers.push_back(newWorker);
 }
 
-void AdminUI::update_worker() {}
+void AdminUI::update_worker() {
+    string email;
+    cout << "Worker's email to update: ";
+    cin >> email;
+
+    for (auto& worker: workers) {
+        if (worker.get_email() == email){
+            //TODO: WHAT DO I UPDATE? :((
+            cout << "Worker updated!" << endl;
+            break;
+        } else {
+            cout << "Worker with given email not found!" << endl;
+        }
+    }
+}
 
 void AdminUI::activate_worker() {
     string email;
