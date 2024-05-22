@@ -121,7 +121,7 @@ void Order::save_to_CSV( const string &filename) const {
         << statusToString(stat) << ","
         << begin_date.getDay() << "/" << begin_date.getMonth() << "/" << begin_date.getYear() << ","
         << end_date.getDay() << "/" << end_date.getMonth() << "/" <<end_date.getYear() << ","
-        << total_price << ","
+        << fixed << setprecision(2) << total_price << ","
         << vectorToString(remarks) << ","
         << is_reserved << ","
         << CarsToString() << ","
