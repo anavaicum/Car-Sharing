@@ -56,7 +56,7 @@ void Employee::save_to_CSV(const string &filename) {
         << position << ","
         << birthday.getDay() << "/" << birthday.getMonth() << "/" << birthday.getYear() << ","
         << initials << ","
-        << salary << ","
+        << fixed << setprecision(2) << salary << ","
         << is_admin << "\n";
 
     file.close();
