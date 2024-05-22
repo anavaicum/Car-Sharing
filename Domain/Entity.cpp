@@ -6,5 +6,9 @@
 
 Entity::Entity(int _id): id(_id){};
 
-const int Entity::get_id() const { return id; }
+int Entity::get_id() const { return id; }
 void Entity::set_id(int _id) { id = _id; }
+
+Entity::Entity() {
+
+}

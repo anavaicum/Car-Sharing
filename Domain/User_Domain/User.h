@@ -10,11 +10,10 @@ using namespace std;
 #include <fstream>
 #include <sstream>
 #include <filesystem>
-#include "../Entity"
+#include "../Entity.h"
 
 class User: public Entity {
 private:
-    int id;
     string email;
     string password;
     string first_name;
@@ -37,8 +36,6 @@ public:
 
     const string& get_last_name() const;
     void set_last_name(const string& _last_name);
-
-    void set_salary(double salary);
 
     const vector<string>& get_remarks() const;
     void add_remark(const string& remark);

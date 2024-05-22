@@ -8,11 +8,11 @@
 
 class Entity {
 private:
-    Entity(int _id);
-
     int id;
 public:
-    const int get_id() const;
+    Entity(int _id);
+    Entity();
+    int get_id() const;
     void set_id(int _id);
 };
 
