@@ -3,12 +3,13 @@
 //
 
 #include "User.h"
+#include "../Entity.h"
 
 User::User(int _id, const string& _email, const string& _password, const string& _first_name, const string& _last_name)
         : id(_id), email(_email), password(_password), first_name(_first_name), last_name(_last_name) {}
 
-const int User::get_id() const { return id; }
-void User::set_id(int _id) { id = _id; }
+const int Entity::get_id() const { return id; }
+void Entity::set_id(int _id) { id = _id; }
 
 const string& User::get_email() const { return email; }
 void User::set_email(const string& _email) { email = _email; }
