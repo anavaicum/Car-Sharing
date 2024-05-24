@@ -23,3 +23,7 @@ void User::set_last_name(const string& _last_name) { last_name = _last_name; }
 
 const vector<string>& User::get_remarks() const { return remarks; }
 void User::add_remark(const string& remark) { remarks.push_back(remark); }
+
+User::User() {
+
+}
