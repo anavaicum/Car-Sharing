@@ -81,3 +81,10 @@ Date::Date(vector <string> birth) {
     month = stoi(birth[1]);
     year = stoi(birth[2]);
 }
+
+bool Date::operator==(const Date &rhs) const {
+    if(day == rhs.day && month == rhs.month && year == rhs.year){
+        return true;
+    }
+    return false;
+}
