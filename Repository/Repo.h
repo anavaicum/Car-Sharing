@@ -9,6 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include "IRepo.h"
 
 
 using namespace std;
@@ -18,7 +19,7 @@ using namespace std;
 // to_CSV (a CSV representation of the object's data)
 
 template<class T>
-class Repo{
+class Repo : public IRepo<T>{
 private:
      const string filename;
      vector<T> entities;
@@ -54,7 +55,15 @@ public:
 
     Repo(const string& f_name) : filename(f_name){}
 
-    void add(T t){
+    vector<T> get_all() override{
+        return entities;
+    }
+
+    void delete_by_id(int id) override{
+
+    }
+
+    void add(T t) override{
         if (!ID_is_unique(t)) {
             throw exception(); // object already in repo
         }
@@ -67,7 +76,7 @@ public:
         save_to_CSV(this->filename);
     }
 
-    void read(){
+    void read_from_file() override{
         vector<T> data;
         ifstream readFile(filename);
 
@@ -88,7 +97,7 @@ public:
         entities = data;
     }
 
-    void update(int id, T& new_entity) {
+    void update(int id, T& new_entity) override{
         bool found = false;
         for (auto& entity : entities) {
             if (entity.get_Id() == id) {
