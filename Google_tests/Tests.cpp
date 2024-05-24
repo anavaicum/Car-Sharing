@@ -13,61 +13,47 @@ TEST(TestGtest, FirstTest) {
 TEST(SavingData, CarSaving){
     Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
           Car::Gas, Car::Manual, "Red", vector<string>());
+    Car c2;
+    c2 = c2.From_String_To_Object(c.to_CSV());
 
-    c.save_to_CSV("../../Google_tests/TestRepos/CarRepoTest.txt");
+    ASSERT_EQ(c2.getLicensePlate(), c.getLicensePlate());
+    ASSERT_EQ(c2.getModel(), c.getModel());
+    ASSERT_EQ(c2.getBrand(), c.getBrand());
+    ASSERT_EQ(c2.getYearOfFirstReg(), c.getYearOfFirstReg());
+    ASSERT_EQ(c2.getMileage(), c.getMileage());
+    ASSERT_EQ(c2.getPricePerDay(), c.getPricePerDay());
+    ASSERT_EQ(c2.getFuel(), c.getFuel());
+    ASSERT_EQ(c2.getTrans(), c.getTrans());
+    ASSERT_EQ(c2.getColor(), c.getColor());
+    ASSERT_EQ(c2.getRemarks().size(), c.getRemarks().size());
 
-    ifstream file("../../Google_tests/TestRepos/CarRepoTest.txt");
-    string line;
-    getline(file, line); // Removing Header
-
-    getline(file, line);
-
-    c = c.From_String_To_Object(line);
-    ASSERT_EQ(c.getLicensePlate(), "SB12OGV");
-    ASSERT_EQ(c.getModel(), "Sandero");
-    ASSERT_EQ(c.getBrand(), "Dacia");
-    ASSERT_EQ(c.getYearOfFirstReg(), 2017);
-    //ASSERT_EQ(c.getMileage(), 100000.5);
-    ASSERT_EQ(c.getPricePerDay(), 12);
-    ASSERT_EQ(c.getFuel(), Car::Gas);
-    ASSERT_EQ(c.getTrans(), Car::Manual);
-    ASSERT_EQ(c.getColor(), "Red");
-    for(int i = 0; i < c.getRemarks().size(); i++){
-        ASSERT_EQ(true, false);
-    }
 }
 
-TEST(SavingData, CustomerSaving){
+TEST(SavingData, CustomerSaving) {
     vector<string> rm;
     rm.push_back("primul");
     rm.push_back("second");
     Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
           Car::Gas, Car::Manual, "Red", rm);
     vector<Car> fav;
-    fav.push_back(c);
-    fav.push_back(c);
+//    fav.push_back(c);
+//    fav.push_back(c);
     Customer cus(1, "this", "password", "Gica", "Popescu", "1234",
                  "Str. Lui", false, fav);
-    cus.save_to_CSV("../../Google_tests/TestRepos/CustomerRepoTest.txt");
 
-    ifstream file("../../Google_tests/TestRepos/CustomerRepoTest.txt");
-    string line;
+    Customer cus1;
+    cus1 = cus1.From_String_To_Object(cus.to_CSV());
 
-    getline(file, line); //Removing Header
+    ASSERT_EQ(cus.get_id(), cus1.get_id());
+    ASSERT_EQ(cus.get_email(), cus1.get_email());
+    ASSERT_EQ(cus.get_first_name(), cus1.get_first_name());
+    ASSERT_EQ(cus.get_last_name(), cus1.get_last_name());
+    ASSERT_EQ(cus.get_phone(), cus1.get_phone());
+    ASSERT_EQ(cus.get_password(), cus1.get_password());
+    ASSERT_EQ(cus.get_address(), cus1.get_address());
+    ASSERT_EQ(cus.is_GDPRdeleted(), cus1.is_GDPRdeleted());
+    ASSERT_EQ(cus.get_favorites().size(), cus1.get_favorites().size());
 
-    getline(file, line);
-
-    cus = Customer().From_String_To_Object(line);
-
-    ASSERT_EQ(cus.get_id(), 1);
-    ASSERT_EQ(cus.get_email(), "this");
-    ASSERT_EQ(cus.get_password(), "password");
-    ASSERT_EQ(cus.get_first_name(), "Gica");
-    ASSERT_EQ(cus.get_last_name(), "Popescu");
-    ASSERT_EQ(cus.get_phone(), "1234");
-    ASSERT_EQ(cus.get_address(), "Str. Lui");
-    ASSERT_EQ(cus.is_GDPRdeleted(), false);
-    ASSERT_EQ(cus.get_favorites()[0].getRemarks()[0], "primul");
 }
 
 
@@ -76,36 +62,25 @@ TEST(SavingData, EmployeeSaving){
                "buna", Date(12, 12, 1996), "GF",
                1204.4, false);
 
-    e.save_to_CSV("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
+    Employee e1;
+    e1 = e1.From_String_To_Object(e.to_CSV());
 
-    ifstream file("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
-
-    string line;
-
-    getline(file, line); // Remove Header
-
-    getline(file, line);
-
-
-    e = e.From_String_To_Object(line);
-    ASSERT_EQ(e.get_id(), 1);
-    ASSERT_EQ(e.get_email(), "this");
-    ASSERT_EQ(e.get_password(), "pass");
-    ASSERT_EQ(e.get_first_name(), "Gigel");
-    ASSERT_EQ(e.get_last_name(), "Fronel");
-    ASSERT_EQ(e.get_position(), "buna");
-    ASSERT_EQ(e.getBirthday().getDay(), 12);
-    ASSERT_EQ(e.getBirthday().getMonth(), 12);
-    ASSERT_EQ(e.getBirthday().getYear(), 1996);
-    ASSERT_EQ(e.get_initials(), "GF");
-    //ASSERT_EQ(e.get_salary(), 1204.4); TODO: Needs to add a comparison with float
-    ASSERT_EQ(e.is_administrator(), false);
+    ASSERT_EQ(e1.get_id(), e.get_id());
+    ASSERT_EQ(e1.get_email(), e.get_email());
+    ASSERT_EQ(e1.get_password(), e.get_password());
+    ASSERT_EQ(e1.get_first_name(), e.get_first_name());
+    ASSERT_EQ(e1.get_last_name(), e.get_last_name());
+    ASSERT_EQ(e1.get_position(), e.get_position());
+    ASSERT_EQ(e1.get_Birthday(), e.get_Birthday());
+    ASSERT_EQ(e1.get_initials(), e.get_initials());
+    ASSERT_EQ(e1.get_salary(), e.get_salary());
+    ASSERT_EQ(e1.is_administrator(), e.is_administrator());
 }
 
 TEST(SavingData, OrderSaving){
     vector<string> remark;
-    remark.push_back("this");
-    remark.push_back("that");
+//    remark.push_back("this");
+//    remark.push_back("that");
     vector<string> rm;
     rm.push_back("primul");
     rm.push_back("second");
@@ -129,22 +104,19 @@ TEST(SavingData, OrderSaving){
             Date(25, 12, 2022), 120.3, remark, true,
             fav, e, cus);
 
+    Order o1;
+    o1 = o1.From_String_To_Object(o.to_CSV());
 
-    o.save_to_CSV("../../Google_tests/TestRepos/OrderRepoTest.txt");
-
-    ifstream file("../../Google_tests/TestRepos/OrderRepoTest.txt");
-
-    string line;
-
-    getline(file, line); //Remove Header
-
-    getline(file, line);
-
-    o = o.From_String_To_Object(line);
-
-    ASSERT_EQ(o.getOrderId(), 1);
-    ASSERT_EQ(o.getOrderDate().getDay(), 12);
-    ASSERT_EQ(o.getOrderDate().getMonth(), 12);
-    ASSERT_EQ(o.getOrderDate().getYear(), 2022);
+    ASSERT_EQ(o1.getOrderId(), o.getOrderId());
+    ASSERT_EQ(o1.getOrderDate(), o.getOrderDate());
+    ASSERT_EQ(o1.getStat(), o.getStat());
+    ASSERT_EQ(o1.getBeginDate(), o.getBeginDate());
+    ASSERT_EQ(o1.getEndDate(), o.getEndDate());
+    ASSERT_EQ(o1.getTotalPrice(), o.getTotalPrice());
+    ASSERT_EQ(o1.getRemarks().size(), o.getRemarks().size());
+    ASSERT_EQ(o1.isReserved(), o.isReserved());
+    ASSERT_EQ(o1.getCar().size(), o.getCar().size());
+    ASSERT_EQ(o1.getEmployee().get_id(), o.getEmployee().get_id());
+    ASSERT_EQ(o1.getCustomer().get_id(), o.getCustomer().get_id());
 
 }

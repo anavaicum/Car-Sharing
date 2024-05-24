@@ -95,28 +95,21 @@ void Order::setStat(Order::status Stat) {
     Order::stat = Stat;
 }
 
-void Order::save_to_CSV( const string &filename) const {
+string Order::to_CSV() const {
 
     //bool fileExists = filesystem::exists(filename);
-    ofstream file;
-    file.open(filename, std::ios::app);
 
-    if (!file.is_open()) {
-        return;
-    }
 
     // Write the header only if the file does not exist
 //    if (!fileExists) {
 //        file << "Order ID,order Date,status,begin date,end date,total price,is reserved,car,customer,employee,remarks\n";
 //    }
 
-    ifstream read_file(filename);
-    if(read_file.peek() == ifstream::traits_type::eof()){
-        file << "Order ID,order Date,status,begin date,end date,total price,remarks,is reserved,car license plate,customer id,employee id,car license plate,customer id,employee id\n";
-    }
+//    "Order ID,order Date,status,begin date,end date,total price,remarks,is reserved,car license plate,customer id,employee id,car license plate,customer id,employee id\n";
 
-    read_file.close();
-    file << order_id << ","
+
+    stringstream ss;
+    ss << order_id << ","
         << order_date.getDay() << "/" << order_date.getMonth() << "/" << order_date.getYear() << ","
         << statusToString(stat) << ","
         << begin_date.getDay() << "/" << begin_date.getMonth() << "/" << begin_date.getYear() << ","
@@ -128,7 +121,7 @@ void Order::save_to_CSV( const string &filename) const {
         << customer.Customer_To_String() << ","
         << employee.Employee_To_string() << "\n";
 
-    file.close();
+   return ss.str();
 }
 
 string Order::statusToString(Order::status s) {

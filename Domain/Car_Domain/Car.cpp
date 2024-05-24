@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <unordered_map>
+#include <string.h>
 
 Car::Car(string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
          float pricePerDay, fuel_type fuel, transmission trans, string color, const vector<string> &remarks) : license_plate(std::move(licensePlate)),
@@ -91,33 +92,10 @@ void Car::setTrans(Car::transmission Trans) {
     Car::trans = Trans;
 }
 
-void Car::save_to_CSV(const string &filename) {
-
-
-    ofstream file;
-    file.open(filename, ios::app);
-
-    if(!file.is_open()) {
-        return;
-    }
-
-//    bool file_exists = filesystem::exists(filename);
-//    if(!file_exists) {
-//        file << "License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
-//    }
-
-    ifstream read_file(filename);
-    if(read_file.peek() == ifstream::traits_type::eof())
-    {
-        file << "License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
-    }
-
-    read_file.close();
-
-
-
-
-    file << license_plate << ","
+string Car::to_CSV() {
+    //"License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
+    stringstream ss;
+    ss << license_plate << ","
         << model << ","
         << brand << ","
         << year_of_first_reg << ","
@@ -127,8 +105,7 @@ void Car::save_to_CSV(const string &filename) {
         << transmissionToString(trans) << ","
         << color << ","
         << vectorToString(remarks) << "\n";
-
-    file.close();
+    return ss.str();
 }
 
 string Car::fuelTypeToString(Car::fuel_type f) {
@@ -191,8 +168,11 @@ Car Car::From_String_To_Object(const string &string_of_obj, char delim) {
     }
     fuel_type ft = stringToFuelTypeEnum(fu);
     transmission tr = stringToTransmissionEnum(tra);
-
-    Car obj(license, mod, br, year, mil, price, ft, tr, col, rm_vec);
+    if(rm_vec.size() == 1 && rm_vec[0] == "\n"){
+        rm_vec.pop_back();
+    }
+    Car obj(license, mod, br, year, mil, price,
+            ft, tr, col, rm_vec);
     return obj;
 }
 
