@@ -86,7 +86,7 @@ public:
 
     void setStat(status stat);
 
-    void save_to_CSV(const string& filename) const;
+    string to_CSV() const;
 
     static string statusToString(status s);
 

@@ -62,7 +62,7 @@ TEST(SavingData, EmployeeSaving){
 //               "buna", Date(12, 12, 1996), "GF",
 //               1204.4, false);
 //
-//    e.save_to_CSV("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
+//    e.to_CSV("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
 //
 //    ifstream file("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
 //
@@ -89,48 +89,45 @@ TEST(SavingData, EmployeeSaving){
 }
 
 TEST(SavingData, OrderSaving){
-//    vector<string> remark;
+    vector<string> remark;
 //    remark.push_back("this");
 //    remark.push_back("that");
-//    vector<string> rm;
-//    rm.push_back("primul");
-//    rm.push_back("second");
-//
-//
-//    Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
-//          Car::Gas, Car::Manual, "Red", rm);
-//
-//    vector<Car> fav;
-//    fav.push_back(c);
-//    fav.push_back(c);
-//    Customer cus(1, "this", "password", "Gica", "Popescu", "1234",
-//                 "Str. Lui", false, fav);
-//
-//    Employee e(1, "this", "pass", "Gigel", "Fronel",
-//               "buna", Date(12, 12, 1996), "GF",
-//               1204.4, false);
-//
-//
-//    Order o(1, Date(12, 12, 2022), Order::Reserved, Date(24, 12, 2022),
-//            Date(25, 12, 2022), 120.3, remark, true,
-//            fav, e, cus);
-//
-//
-//    o.save_to_CSV("../../Google_tests/TestRepos/OrderRepoTest.txt");
-//
-//    ifstream file("../../Google_tests/TestRepos/OrderRepoTest.txt");
-//
-//    string line;
-//
-//    getline(file, line); //Remove Header
-//
-//    getline(file, line);
-//
-//    o = o.From_String_To_Object(line);
-//
-//    ASSERT_EQ(o.getOrderId(), 1);
-//    ASSERT_EQ(o.getOrderDate().getDay(), 12);
-//    ASSERT_EQ(o.getOrderDate().getMonth(), 12);
-//    ASSERT_EQ(o.getOrderDate().getYear(), 2022);
+    vector<string> rm;
+    rm.push_back("primul");
+    rm.push_back("second");
+
+
+    Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
+          Car::Gas, Car::Manual, "Red", rm);
+
+    vector<Car> fav;
+    fav.push_back(c);
+    fav.push_back(c);
+    Customer cus(1, "this", "password", "Gica", "Popescu", "1234",
+                 "Str. Lui", false, fav);
+
+    Employee e(1, "this", "pass", "Gigel", "Fronel",
+               "buna", Date(12, 12, 1996), "GF",
+               1204.4, false);
+
+
+    Order o(1, Date(12, 12, 2022), Order::Reserved, Date(24, 12, 2022),
+            Date(25, 12, 2022), 120.3, remark, true,
+            fav, e, cus);
+
+    Order o1;
+    o1 = o1.From_String_To_Object(o.to_CSV());
+
+    ASSERT_EQ(o1.getOrderId(), o.getOrderId());
+    ASSERT_EQ(o1.getOrderDate(), o.getOrderDate());
+    ASSERT_EQ(o1.getStat(), o.getStat());
+    ASSERT_EQ(o1.getBeginDate(), o.getBeginDate());
+    ASSERT_EQ(o1.getEndDate(), o.getEndDate());
+    ASSERT_EQ(o1.getTotalPrice(), o.getTotalPrice());
+    ASSERT_EQ(o1.getRemarks().size(), o.getRemarks().size());
+    ASSERT_EQ(o1.isReserved(), o.isReserved());
+    ASSERT_EQ(o1.getCar().size(), o.getCar().size());
+    ASSERT_EQ(o1.getEmployee().get_id(), o.getEmployee().get_id());
+    ASSERT_EQ(o1.getCustomer().get_id(), o.getCustomer().get_id());
 
 }
