@@ -9,6 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include "IRepo.h"
 
 
 using namespace std;
@@ -18,7 +19,7 @@ using namespace std;
 // to_CSV (a CSV representation of the object's data)
 
 template<class T>
-class Repo{
+class Repo : public IRepo<T>{
 private:
      const string filename;
      vector<T> entities;
@@ -26,7 +27,7 @@ private:
 
     bool ID_is_unique(const T& t) {
         for (const auto& e : entities) {
-            if (e.get_Id() == t.get_Id()) { //identification of each objects
+            if (e.get_id() == t.get_id()) { //identification of each objects
                 return false;
             }
         }
@@ -54,7 +55,39 @@ public:
 
     Repo(const string& f_name) : filename(f_name){}
 
-    void add(T t){
+    vector<T> get_all() override{
+        return entities;
+    }
+
+    T get_by_Id(int id) override{
+        for(int i = 0; i < entities.size(); i++){
+            if(entities[i].get_id() == id){
+                return entities[i];
+            }
+        }
+
+        throw exception(); // Object with that id was not found
+    }
+
+    void delete_by_id(int id) override{
+        vector<T> new_data;
+        for(int i = 0; i < entities.size(); i++){
+            if(entities[i].get_id() != id){
+                new_data.push_back(entities[i]);
+            }
+        }
+        entities = new_data;
+
+        ofstream clearFile;
+        clearFile.open(filename, ios::out | ios::trunc); //Deletes all the data in the persistent Repo
+        clearFile.close();
+
+        for(int i = 0; i < entities.size(); i++){
+            add(entities[i]);
+        }
+    }
+
+    void add(T t) override{
         if (!ID_is_unique(t)) {
             throw exception(); // object already in repo
         }
@@ -67,7 +100,7 @@ public:
         save_to_CSV(this->filename);
     }
 
-    void read(){
+    void read_from_file(){
         vector<T> data;
         ifstream readFile(filename);
 
@@ -78,20 +111,18 @@ public:
 
         string line;
         while(getline(readFile, line)){
-
-            stringstream ss(line);
             T object;
-            object = object.From_String_To_Object(line);
+            object = object.From_String_To_Object(line); //sends line with all the attributes
             data.push_back(object);
         }
         readFile.close();
         entities = data;
     }
 
-    void update(int id, T& new_entity) {
+    void update(int id, T& new_entity) override{
         bool found = false;
         for (auto& entity : entities) {
-            if (entity.get_Id() == id) {
+            if (entity.get_id() == id) {
                 entity = new_entity;
                 found = true;
                 break;
