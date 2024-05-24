@@ -58,34 +58,23 @@ TEST(SavingData, CustomerSaving) {
 
 
 TEST(SavingData, EmployeeSaving){
-//    Employee e(1, "this", "pass", "Gigel", "Fronel",
-//               "buna", Date(12, 12, 1996), "GF",
-//               1204.4, false);
-//
-//    e.to_CSV("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
-//
-//    ifstream file("../../Google_tests/TestRepos/EmployeeRepoTest.txt");
-//
-//    string line;
-//
-//    getline(file, line); // Remove Header
-//
-//    getline(file, line);
-//
-//
-//    e = e.From_String_To_Object(line);
-//    ASSERT_EQ(e.get_id(), 1);
-//    ASSERT_EQ(e.get_email(), "this");
-//    ASSERT_EQ(e.get_password(), "pass");
-//    ASSERT_EQ(e.get_first_name(), "Gigel");
-//    ASSERT_EQ(e.get_last_name(), "Fronel");
-//    ASSERT_EQ(e.get_position(), "buna");
-//    ASSERT_EQ(e.getBirthday().getDay(), 12);
-//    ASSERT_EQ(e.getBirthday().getMonth(), 12);
-//    ASSERT_EQ(e.getBirthday().getYear(), 1996);
-//    ASSERT_EQ(e.get_initials(), "GF");
-//    //ASSERT_EQ(e.get_salary(), 1204.4); TODO: Needs to add a comparison with float
-//    ASSERT_EQ(e.is_administrator(), false);
+    Employee e(1, "this", "pass", "Gigel", "Fronel",
+               "buna", Date(12, 12, 1996), "GF",
+               1204.4, false);
+
+    Employee e1;
+    e1 = e1.From_String_To_Object(e.to_CSV());
+
+    ASSERT_EQ(e1.get_id(), e.get_id());
+    ASSERT_EQ(e1.get_email(), e.get_email());
+    ASSERT_EQ(e1.get_password(), e.get_password());
+    ASSERT_EQ(e1.get_first_name(), e.get_first_name());
+    ASSERT_EQ(e1.get_last_name(), e.get_last_name());
+    ASSERT_EQ(e1.get_position(), e.get_position());
+    ASSERT_EQ(e1.get_Birthday(), e.get_Birthday());
+    ASSERT_EQ(e1.get_initials(), e.get_initials());
+    ASSERT_EQ(e1.get_salary(), e.get_salary());
+    ASSERT_EQ(e1.is_administrator(), e.is_administrator());
 }
 
 TEST(SavingData, OrderSaving){

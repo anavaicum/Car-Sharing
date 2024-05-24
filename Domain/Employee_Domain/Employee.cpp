@@ -23,32 +23,16 @@ void Employee::set_salary(float _salary) { salary = _salary; }
 bool Employee::is_administrator() const { return is_admin; }
 void Employee::set_admin(bool _is_admin) { is_admin = _is_admin; }
 
-const Date &Employee::getBirthday() const { return birthday; }
+const Date &Employee::get_Birthday() const { return birthday; }
 
-void Employee::setBirthday(const Date &_birthday) { Employee::birthday = _birthday; }
+void Employee::set_Birthday(const Date &_birthday) { Employee::birthday = _birthday; }
 
-User::User() {}
+string Employee::to_CSV() {
 
-void Employee::save_to_CSV(const string &filename) {
-    ofstream file;
-    file.open(filename, ios::app);
+//        "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
 
-    if(!file.is_open()) {
-        return;
-    }
-
-//    bool file_exists = filesystem::exists(filename);
-//    if(!file_exists) {
-//        file << "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
-//    }
-
-    ifstream read_file(filename);
-    if(read_file.peek() == ifstream::traits_type::eof()){
-        file << "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
-    }
-    read_file.close();
-
-    file << get_id() << ","
+    stringstream ss;
+    ss << get_id() << ","
         << get_email() << ","
         << get_password() << ","
         << get_first_name() << ","
@@ -59,7 +43,7 @@ void Employee::save_to_CSV(const string &filename) {
         << fixed << setprecision(2) << salary << ","
         << is_admin << "\n";
 
-    file.close();
+    return ss.str();
 }
 
 Employee Employee::From_String_To_Object(const string &string_of_obj, char delim) {
