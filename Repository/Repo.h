@@ -106,8 +106,8 @@ public:
 
 
         //Ignore the header
-        string header;
-        getline(readFile, header);
+//        string header;
+//        getline(readFile, header);
 
         string line;
         while(getline(readFile, line)){
