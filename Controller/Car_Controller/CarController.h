@@ -3,18 +3,21 @@
 
 
 #include "../../Domain/Car_Domain/Car.h"
+#include "../../Repository/IRepo.h"
 #include <vector>
+#include <memory>
 #include <map>
 
 using namespace std;
 
 class Car_Controller {
 private:
-    map<string, Car> cars; // Map to store cars with license plate as key
+//    map<string, Car> cars; // Map to store cars with license plate as key
+    shared_ptr<IRepo<Car>> car_repo;
     string type; // Field to store type of controller
 
 public:
-    Car_Controller(const string& type); // Constructor
+    Car_Controller(const string& type, shared_ptr<IRepo<Car>> repo); // Constructor
 
     // Function to add a car to the controller
     void addCar(const Car& car);
