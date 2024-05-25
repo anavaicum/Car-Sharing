@@ -35,14 +35,14 @@ string Customer::to_CSV() {
     stringstream ss;
 
     ss << get_id() << ","
-        << get_email() << ","
-        << get_password() << ","
-        << get_first_name() << ","
-        << get_last_name() << ","
-        << phone << ","
-        << address << ","
-        << GDPRdeleted << ","
-        << Customer::favoritesToString() << "\n";
+       << get_email() << ","
+       << get_password() << ","
+       << get_first_name() << ","
+       << get_last_name() << ","
+       << phone << ","
+       << address << ","
+       << GDPRdeleted << ","
+       << Customer::favoritesToString() << "\n";
     return ss.str();
 }
 
@@ -77,7 +77,7 @@ Customer Customer::From_String_To_Object(const string &string_of_obj, char delim
     bool gdpr_bool;
     vector<Car> faves;
 
-    Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
+    Car c(1,"SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
           Car::Gas, Car::Manual, "Red", vector<string>());
 
 
@@ -115,13 +115,13 @@ Customer::Customer() {
 string Customer::Customer_To_String() const {
     stringstream ss;
     ss << get_id() << "!"
-         << get_email() << "!"
-         << get_password() << "!"
-         << get_first_name() << "!"
-         << get_last_name() << "!"
-         << phone << "!"
-         << address << "!"
-         << GDPRdeleted << "!"
-         << Customer::favoritesToString();
+       << get_email() << "!"
+       << get_password() << "!"
+       << get_first_name() << "!"
+       << get_last_name() << "!"
+       << phone << "!"
+       << address << "!"
+       << GDPRdeleted << "!"
+       << Customer::favoritesToString();
     return ss.str();
 }
