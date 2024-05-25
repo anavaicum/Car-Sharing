@@ -7,10 +7,10 @@
 #include <filesystem>
 #include <unordered_map>
 #include <iomanip>
-
+#include "../Entity.h"
 using namespace std;
 
-class Car {
+class Car:public Entity {
 public:
 
     enum fuel_type { Gas, Diesel, Electric, Petrol, Unknown };
@@ -47,7 +47,7 @@ private:
 
 public:
 
-    Car(string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
+    Car(int _id, string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
         float pricePerDay, fuel_type fuel, transmission trans, string color, const vector<string> &remarks);
 
     Car();
