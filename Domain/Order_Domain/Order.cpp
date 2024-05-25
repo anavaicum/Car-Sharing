@@ -7,13 +7,6 @@ Order::Order(int _id, const Date &orderDate, status stat, const Date &beginDate,
           remarks(remarks), is_reserved(isReserved), car(cars), employee(employee), customer(customer) {
 }
 
-int Order::getOrderId() const {
-    return order_id;
-}
-
-void Order::setOrderId(int orderId) {
-    order_id = orderId;
-}
 
 const Date &Order::getOrderDate() const {
     return order_date;
@@ -109,7 +102,7 @@ string Order::to_CSV() const {
 
 
     stringstream ss;
-    ss << order_id << ","
+    ss << get_id() << ","
         << order_date.getDay() << "/" << order_date.getMonth() << "/" << order_date.getYear() << ","
         << statusToString(stat) << ","
         << begin_date.getDay() << "/" << begin_date.getMonth() << "/" << begin_date.getYear() << ","
