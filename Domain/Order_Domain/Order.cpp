@@ -1,9 +1,9 @@
 #include "Order.h"
 
-Order::Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate,
+Order::Order(int _id, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate,
              float totalPrice,
              const vector<string> &remarks, bool isReserved, vector<Car> cars, Employee employee, Customer customer)
-        : order_id(orderId), order_date(orderDate), stat(stat), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
+        : Entity(_id), order_date(orderDate), stat(stat), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
           remarks(remarks), is_reserved(isReserved), car(cars), employee(employee), customer(customer) {
 }
 
