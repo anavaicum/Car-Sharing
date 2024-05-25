@@ -10,5 +10,6 @@ add_executable(Proiect_Colectiv main.cpp
         Domain/User_Domain/User.cpp
         Domain/Employee_Domain/Employee.cpp
         Domain/Date.cpp
-        Domain/Entity.cpp)
+        Domain/Entity.cpp
+        Controller/Car_Controller/CarController.cpp)
 add_subdirectory(Google_tests)

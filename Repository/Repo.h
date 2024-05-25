@@ -1,7 +1,3 @@
-//
-// Created by Cristina.
-//
-
 #ifndef PROIECT_COLECTIV_REPO_H
 #define PROIECT_COLECTIV_REPO_H
 
@@ -23,7 +19,6 @@ class Repo : public IRepo<T>{
 private:
      const string filename;
      vector<T> entities;
-//    IValidator<T>& validator;  // implemented in domain
 
     bool ID_is_unique(const T& t) {
         for (const auto& e : entities) {
@@ -39,9 +34,6 @@ private:
         if (!file.is_open()) {
             throw exception();
         }
-
-        // Write header
-        file << T::get_CSV_header() << endl;
 
         // Write data
         for (const auto &obj: entities) {
@@ -92,18 +84,13 @@ public:
             throw exception(); // object already in repo
         }
 
-//        if (!validator.isValid(t)) {
-//            throw exception(); // entity is not valid
-//        }
-
         this->entities.push_back(t);
         save_to_CSV(this->filename);
     }
 
-    void read_from_file(){
+    void read_from_file() override{
         vector<T> data;
         ifstream readFile(filename);
-
 
         //Ignore the header
 //        string header;
