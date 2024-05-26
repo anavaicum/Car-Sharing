@@ -1,0 +1,14 @@
+//
+// Created by wndws on 5/26/2024.
+//
+
+#ifndef PROIECT_COLECTIV_USERCONTROLLER_H
+#define PROIECT_COLECTIV_USERCONTROLLER_H
+
+
+class UserController {
+
+};
+
+
+#endif //PROIECT_COLECTIV_USERCONTROLLER_H
