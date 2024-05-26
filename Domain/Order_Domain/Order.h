@@ -9,14 +9,13 @@
 
 using namespace std;
 
-class Order {
+class Order:public Entity {
 public:
 
     enum status { Reserved, Ordered, Completed, Canceled, Unknown};
 
 private:
 
-    int order_id;
     Date order_date;
     status stat;
     Date begin_date;
