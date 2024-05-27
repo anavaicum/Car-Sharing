@@ -88,7 +88,7 @@ public:
         save_to_CSV(this->filename);
     }
 
-    void read_from_file() override{
+    void read_from_file(){
         vector<T> data;
         ifstream readFile(filename);
 
