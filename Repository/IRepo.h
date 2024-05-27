@@ -11,7 +11,6 @@ public:
     virtual void update(int id, T& new_entity) = 0;
     virtual void delete_by_id(int id) = 0;
     virtual T get_by_Id(int id) = 0;
-    virtual void read_from_file()=0;
 };
 
 
