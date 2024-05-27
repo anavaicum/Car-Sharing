@@ -3,7 +3,7 @@
 
 // Constructor
 Car_Controller::Car_Controller(const string& type, shared_ptr<IRepo<Car>> repo) : type(type), car_repo(repo) {
-    this->car_repo->read_from_file();
+    this->car_repo = make_shared<Repo<Car>>("../../Repository/CarRepo.txt");
 }
 
 // Function to add a car to the controller
@@ -18,8 +18,6 @@ Car Car_Controller::search_by_license_plate(const string& license_plate) const {
             return car;
         }
     }
-//    // Return a default-constructed Car if not found
-//    return Car("", "", "", 0, 0.0, 0.0, "", {}); // TO DO: this is an invalid constructor, replaced it with: throw exception()
 
     throw exception(); // if object not found
 }
