@@ -98,7 +98,7 @@ public:
 
     static string vectorToString(const vector<string>& vec);
 
-    string to_CSV();
+    string to_CSV() const;
 
     Car From_String_To_Object(const string &string_of_obj, char delim = ',');
 

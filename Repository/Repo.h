@@ -88,7 +88,7 @@ public:
         save_to_CSV(this->filename);
     }
 
-    void read_from_file() override{
+    void read_from_file(){
         vector<T> data;
         ifstream readFile(filename);
 
@@ -106,7 +106,7 @@ public:
         entities = data;
     }
 
-    void update(int id, T& new_entity) override{
+    void update(int id, const T& new_entity) override{
         bool found = false;
         for (auto& entity : entities) {
             if (entity.get_id() == id) {

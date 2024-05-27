@@ -3,10 +3,13 @@
 
 
 #include "../../Domain/Order_Domain/Order.h"
+#include "../../Repository/IRepo.h"
+#include "../../Repository/Repo.h"
 #include <vector>
 
 class Order_Controller {
 private:
+    shared_ptr<IRepo<Order>> order_repo;
     std::string type; // Field to store type of controller
 
 public:
