@@ -93,7 +93,7 @@ void Car::setTrans(Car::transmission Trans) {
     Car::trans = Trans;
 }
 
-string Car::to_CSV() {
+string Car::to_CSV() const {
     //"ID, license plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
     stringstream ss;
     ss << get_id() << ","
