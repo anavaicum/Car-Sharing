@@ -83,3 +83,7 @@ void CustomerUI::show_delete_car_from_favorites() {
 
 void CustomerUI::show_favorites() {
 }
+
+void CustomerUI::show_customer_menu() {
+
+}
