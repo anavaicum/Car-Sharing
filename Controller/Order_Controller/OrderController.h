@@ -14,9 +14,22 @@ private:
     std::string type; // Field to store type of controller
 
 public:
-    Order_Controller(IRepo<Order>& repo);
+    Order_Controller();
 
     bool create_order(const Order& order);
+
+    bool update_order(const Order& existing_order, const Order& new_order);
+
+    bool complete_order(Order& order);
+
+    bool take_over_order(Order& order, int employee_id);
+
+    Order get_by_id(int id) const;
+
+    float get_total_price_year(int year) const;
+
+    float get_total_price_month(int month) const;
+
 
 
 };
