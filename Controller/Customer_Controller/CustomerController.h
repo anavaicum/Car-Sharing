@@ -28,6 +28,8 @@ public:
 
     bool add_car_to_favorites(int customer_id, const Car &car);
     bool remove_car_from_favorites(int customer_id, const Car &car);
+    std::vector<Car> get_favorites(const Customer& customer) const;
+    bool create_customer(const Customer& customer);
 };
 
 

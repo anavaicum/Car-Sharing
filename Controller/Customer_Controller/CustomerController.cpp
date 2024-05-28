@@ -61,7 +61,24 @@ bool CustomerController::remove_car_from_favorites(int customer_id, const Car &c
     }
 }
 
+std::vector<Car> CustomerController::get_favorites(const Customer& customer) const {
+    try {
+        return customer.get_favorites();
+    } catch (const std::exception& e) {
+        //std::cerr << "Failed to get favorites: " << e.what() << std::endl;
+        return std::vector<Car>();
+    }
+}
 
+bool CustomerController::create_customer(const Customer& customer) {
+    try {
+        customerRepo->add(customer);
+        return true;
+    } catch (const std::exception& e) {
+        //std::cerr << "Failed to create customer: " << e.what() << std::endl;
+        return false;
+    }
+}
 
 
 
