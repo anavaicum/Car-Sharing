@@ -30,11 +30,16 @@ public:
 
     float get_total_price_month(int month) const;
 
+
+
+    std::vector<Order> get_orders_between_dates(const Date& start_date, const Date& end_date) const;
+
     bool give_order_to_coworker(Order& order);
 
     bool delete_reservation(Order& order);
 
     bool make_reservation(Order& order, Customer& customer);
+
 
 
 
