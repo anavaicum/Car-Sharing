@@ -82,7 +82,7 @@ public:
         }
     }
 
-    void add(T t) override{
+    bool add(T t) override{
         if (!ID_is_unique(t)) {
             throw exception(); // object already in repo
         }
