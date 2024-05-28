@@ -78,6 +78,10 @@ bool CustomerController::update_customer(int customer_id, Customer customer) {
     return customerRepo->update(customer_id,customer);
 }
 
+vector<Customer> CustomerController::get_all_customers() {
+    return customerRepo->get_all();
+}
+
 
 
 
