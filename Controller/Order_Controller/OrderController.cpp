@@ -84,3 +84,26 @@ float Order_Controller::get_total_price_month(int month) const {
     }
     return total_price;
 }
+
+bool Order_Controller::update_reservation(const Order& updated_order) {
+    try {
+        order_repo->update(updated_order.get_id(), updated_order);
+        return true;
+    } catch (const std::exception& e) {
+        return false;
+    }
+}
+
+std::vector<Order> Order_Controller::get_orders_between_dates(const Date& start_date, const Date& end_date) const {
+    auto orders = order_repo->get_all();
+    std::vector<Order> filtered_orders;
+
+    for (const auto& order : orders) {
+        Date order_date = order.getOrderDate();
+        if (order_date >= start_date && order_date <= end_date) {
+            filtered_orders.push_back(order);
+        }
+    }
+
+    return filtered_orders;
+}
