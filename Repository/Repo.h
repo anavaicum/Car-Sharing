@@ -106,7 +106,7 @@ public:
         entities = data;
     }
 
-    void update(int id, const T& new_entity) override{
+    bool update(int id, const T& new_entity) override{
         bool found = false;
         for (auto& entity : entities) {
             if (entity.get_id() == id) {
