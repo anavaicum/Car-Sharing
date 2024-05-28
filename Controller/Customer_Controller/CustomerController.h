@@ -17,6 +17,7 @@ private:
     std::shared_ptr<IRepo<Customer>> customerRepo;
     std::shared_ptr<IRepo<Car>> carRepo;
     std::shared_ptr<IRepo<Order>> orderRepo;
+    int find_next_id();
 
 public:
 
@@ -33,9 +34,9 @@ public:
 
     std::vector<Customer> search_by_car(const Car& car) const;
     bool create_customer(const Customer& customer);
-
+    bool create_customer(string mail, string pass,
+                         string f_name, string l_name, string ph, string address);
     vector<Car> get_favorites(int customer_id);
-    bool create_customer(Customer customer);
     bool update_customer(int customer_id, Customer customer);
     bool delete_customer(int customer_id);
     bool GDPR_customer(int customer_id);

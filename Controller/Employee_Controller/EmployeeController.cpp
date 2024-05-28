@@ -12,10 +12,10 @@ float EmployeeController::get_employee_salary(int employee_id) {
 }
 
 EmployeeController::EmployeeController() {
-    repo = make_shared<Repo<Employee>>("../../Repository/EmployeeRepo.txt");
-    employee_repo = make_shared<Repo<Employee>>("../../Repository/EmployeeRepo.txt");
-    car_repo = make_shared<Repo<Car>>("../../Repository/CarRepo.txt");
-    order_repo = make_shared<Repo<Order>>("../../Repository/OrderRepo.txt");
+    repo = make_shared<Repo<Employee>>("../Repository/EmployeeRepo.txt");
+    employee_repo = make_shared<Repo<Employee>>("../Repository/EmployeeRepo.txt");
+    car_repo = make_shared<Repo<Car>>("../Repository/CarRepo.txt");
+    order_repo = make_shared<Repo<Order>>("../Repository/OrderRepo.txt");
 
 }
 
@@ -109,5 +109,35 @@ std::vector<Employee> EmployeeController::search_between_dates(const Date& start
 
 vector<Employee> EmployeeController::get_all_employees() {
     return employee_repo->get_all();
+}
+
+bool
+EmployeeController::create_employee(string mail, string pass, string f_name, string l_name, string ph, string address,
+                                    string pos, float salary ,int day, int month, int year) {
+
+    string initials = make_initials(f_name, l_name);
+    Employee e = Employee(find_next_id(), mail, pass, f_name,
+                          l_name, pos, Date(day, month, year), initials, salary,false);
+
+    employee_repo->add(e);
+    return true;
+}
+
+int EmployeeController::find_next_id() {
+    vector<Employee> employees = employee_repo->get_all();
+    int max = 0;
+
+    for(auto employee : employees){
+        if(max < employee.get_id()){
+            max = employee.get_id();
+        }
+    }
+    return max + 1;
+
+}
+
+string EmployeeController::make_initials(string f_name, string l_name) {
+
+    return string(1, f_name[0]) + string(1, l_name[0]);
 }
 

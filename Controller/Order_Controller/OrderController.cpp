@@ -2,7 +2,7 @@
 #include "OrderController.h"
 
 Order_Controller::Order_Controller() {
-    order_repo = make_shared<Repo<Order>>("../../Repository/OrderRepo.txt");
+    order_repo = make_shared<Repo<Order>>("../Repository/OrderRepo.txt");
 }
 
 bool Order_Controller::create_order(const Order& order) {
