@@ -22,7 +22,7 @@ void Customer::set_GDPRdeleted(bool _GDPRdeleted) { GDPRdeleted = _GDPRdeleted; 
 const vector<Car>& Customer::get_favorites() const { return favorites; }
 void Customer::add_favorite(const Car& favorite) { favorites.push_back(favorite); }
 
-string Customer::to_CSV() {
+string Customer::to_CSV() const{
 
 
 

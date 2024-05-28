@@ -3,6 +3,7 @@
 #define PROIECT_COLECTIV_CUSTOMERCONTROLLER_H
 
 #include "../../Repository/IRepo.h"
+#include "../../Repository/Repo.h"
 #include "../../Domain/Customer_Domain/Customer.h"
 #include "../../Domain/Car_Domain/Car.h"
 #include "../../Domain/Order_Domain/Order.h"
@@ -17,7 +18,12 @@ private:
     std::shared_ptr<IRepo<Order>> orderRepo;
 
 public:
-    CustomerController(const std::shared_ptr<IRepo<Customer>> &customer_repo, const std::shared_ptr<IRepo<Car>> &car_repo);
+
+    //I would say this isn't necessary, so that we don't include the Repos in the UI as well, instead use a normal constructor
+    CustomerController(const std::shared_ptr<IRepo<Customer>> &customer_repo,
+                       const std::shared_ptr<IRepo<Car>> &car_repo, const std::shared_ptr<IRepo<Order>> &order_repo);
+
+    CustomerController();
 
     bool add_car_to_favorites(int customer_id, const Car &car);
     bool remove_car_from_favorites(int customer_id, const Car &car);
