@@ -105,8 +105,16 @@ Customer CustomerController::search_by_email(string email) {
         if(customer.get_email()==email)
             return customer;
     }
+}
 
+Customer CustomerController::search_by_phone(string phone) {
+    vector<Customer> customers=customerRepo->get_all();
 
+    for(const auto &customer:customers)
+    {
+        if(customer.get_phone()==phone)
+            return customer;
+    }
 }
 
 

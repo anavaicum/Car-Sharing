@@ -35,6 +35,7 @@ public:
     bool GDPR_customer(int customer_id);
     vector<Customer> get_all_customers_sorted();
     Customer search_by_email(string email);
+    Customer search_by_phone(string phone);
 };
 
 
