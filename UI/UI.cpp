@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "CustomerUI.h"
 #include <iostream>
 
 
@@ -25,7 +26,7 @@ void UI::show_user_type() {
             "2 - Employee\n";
 }
 
-void UI::login_customer() {
+int UI::login_customer() {
     string email;
     string password;
 
@@ -34,8 +35,8 @@ void UI::login_customer() {
         cin >> email;
         cout << "\nEnter your password: ";
         cin >> password;
-        if(validate_login_customer(email, password)){
-            return;
+        if(validate_login_customer(email, password)!=-1){
+            return validate_login_customer(email, password);
         }
         cout << "\nIncorrect Information\n";
     }
@@ -58,14 +59,14 @@ void UI::login_employee() {
 }
 
 
-bool UI::validate_login_customer(string email, string password) {
+int UI::validate_login_customer(string email, string password) {
 
     for(auto customer : customers){
         if(customer.get_email() == email && customer.get_password() == password){
-            return true;
+            return customer.get_id();
         }
     }
-    return false;
+    return -1;
 }
 
 bool UI::validate_login_employee(string email, string password) {
@@ -94,9 +95,9 @@ void UI::show_signup() {
 }
 
 
-void UI::show_customer_menu() {
-//    CustomerUI customer;
-//    customer.show_customer_menu();
+void UI::show_customer_menu(int customerId) {
+    CustomerUI customer;
+    customer.show_customer_menu(customerId);
 }
 
 
@@ -199,8 +200,8 @@ void UI::run() {
             show_user_type();
             user_type = choosing_user_type();
             if(user_type == 1){
-                login_customer();
-                //customerUi.show_customer_menu();
+                int customerId = login_customer();
+                customerUi.show_customer_menu(customerId);
             }
             else{
                 login_employee();
@@ -232,3 +233,14 @@ void UI::show_ordered_cars_by_customer() {
     cin >> id;
     //controller.car_repository; // functie pentru afisarea masinilor din repo
     }
+
+
+
+
+
+
+
+
+
+
+

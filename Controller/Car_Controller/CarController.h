@@ -15,11 +15,15 @@ private:
     string type; // Field to store type of controller
 
 public:
-    Car_Controller(const std::shared_ptr<IRepo<Car>> &repo);
+    Car_Controller();
 
     Car search_by_license_plate(const std::string &license_plate) const;
 
-    std::vector<Car> get_ordered_cars(int customer_id) const;
+    Car get_by_id(int carId);
+
+    std::vector<Car> get_ordered_cars() const;
+
+    std::vector<Car> get_cars_between_dates(int startYear, int endYear) const;
 
     void load_cars();
 };

@@ -90,7 +90,7 @@ public:
 
     const vector<string> &getRemarks() const;
 
-    void setRemarks(const vector<string> &remarks);
+    void setRemarks(const string remark);
 
     static string fuelTypeToString(fuel_type f);
 

@@ -28,6 +28,10 @@ bool CustomerController::add_car_to_favorites(int customer_id, const Car &car) {
     }
 }
 
+Customer CustomerController::get_by_id(int customer_id){
+    return customerRepo->get_by_Id(customer_id);
+};
+
 bool CustomerController::remove_car_from_favorites(int customer_id, const Car &car) {
     try {
         // Get the customer from the repository

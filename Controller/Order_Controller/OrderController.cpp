@@ -1,8 +1,10 @@
 
+#include <algorithm>
 #include "OrderController.h"
 
 Order_Controller::Order_Controller() {
-    order_repo = make_shared<Repo<Order>>("../Repository/OrderRepo.txt");
+    order_repo = make_shared<Repo<Order>>("../../Repository/OrderRepo.txt");
+    customer_repo = make_shared<Repo<Customer>>("../../Repository/OrderRepo.txt");
 }
 
 bool Order_Controller::create_order(const Order& order) {
@@ -127,7 +129,20 @@ std::vector<Order> Order_Controller::get_orders_between_dates(const Date& start_
     return filtered_orders;
 }
 
-bool Order_Controller::delete_reservation(Order& order) {
+std::vector<Order> Order_Controller::get_orders_sorted_by_price() const {
+    auto orders = order_repo->get_all();
+    std::sort(orders.begin(), orders.end(), [](const Order &a, const Order &b) {
+        return a.getTotalPrice() < b.getTotalPrice();
+    });
+    return orders;
+}
+
+
+
+
+bool Order_Controller::delete_reservation(int id) {
+    Order order = order_repo->get_by_Id(id);
+
     try {
         order.setIsReserved(false);
 
@@ -144,7 +159,10 @@ bool Order_Controller::delete_reservation(Order& order) {
     }
 }
 
-bool Order_Controller::make_reservation(Order& order, Customer& customer) {
+bool Order_Controller::make_reservation(int orderId, int customerId) {
+    Order order = order_repo->get_by_Id(orderId);
+    Customer customer = customer_repo->get_by_Id(customerId);
+
     try {
         order.setCustomer(customer);
         order.setIsReserved(true);
@@ -157,3 +175,4 @@ bool Order_Controller::make_reservation(Order& order, Customer& customer) {
         return false;
     }
 }
+
