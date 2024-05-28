@@ -107,18 +107,15 @@ public:
     }
 
     bool update(int id, const T& new_entity) override{
-        bool found = false;
         for (auto& entity : entities) {
             if (entity.get_id() == id) {
                 entity = new_entity;
-                found = true;
-                break;
+                save_to_CSV(this->filename); // Save the updated list to the file
+                return true;
             }
         }
-        if (!found) {
-            throw exception(); // or handle the case where the entity is not found
-        }
-        save_to_CSV(this->filename); // Save the updated list to the file
+        return false; // or handle the case where the entity is not found
+
     }
 
 
