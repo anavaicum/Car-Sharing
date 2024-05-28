@@ -26,11 +26,24 @@ public:
 
     CustomerController();
 
+    vector<Customer> get_all_customers();
     bool add_car_to_favorites(int customer_id, const Car &car);
     bool remove_car_from_favorites(int customer_id, const Car &car);
+
+
+    std::vector<Customer> search_by_car(const Car& car) const;
+    bool create_customer(const Customer& customer);
+
     vector<Car> get_favorites(int customer_id);
     bool create_customer(Customer customer);
     bool update_customer(int customer_id, Customer customer);
+    bool delete_customer(int customer_id);
+    bool GDPR_customer(int customer_id);
+    vector<Customer> get_all_customers_sorted();
+    Customer search_by_email(string email);
+    Customer search_by_phone(string phone);
+    Customer search_by_name(string first_name,string last_name);
+
 };
 
 

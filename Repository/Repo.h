@@ -64,11 +64,16 @@ public:
         throw exception(); // Object with that id was not found
     }
 
-    void delete_by_id(int id) override{
+    bool delete_by_id(int id) override{
+        bool found=false;
         vector<T> new_data;
         for(int i = 0; i < entities.size(); i++){
             if(entities[i].get_id() != id){
                 new_data.push_back(entities[i]);
+            }
+            else
+            {
+                found=true;
             }
         }
         entities = new_data;
@@ -80,6 +85,7 @@ public:
         for(int i = 0; i < entities.size(); i++){
             add(entities[i]);
         }
+        return found;
     }
 
     bool add(T t) override{
