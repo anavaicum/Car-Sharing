@@ -1,7 +1,3 @@
-//
-// Created by Cristina.
-//
-
 #ifndef PROIECT_COLECTIV_REPO_H
 #define PROIECT_COLECTIV_REPO_H
 
@@ -9,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include "IRepo.h"
 
 
 using namespace std;
@@ -18,15 +15,14 @@ using namespace std;
 // to_CSV (a CSV representation of the object's data)
 
 template<class T>
-class Repo{
+class Repo : public IRepo<T>{
 private:
      const string filename;
      vector<T> entities;
-//    IValidator<T>& validator;  // implemented in domain
 
     bool ID_is_unique(const T& t) {
         for (const auto& e : entities) {
-            if (e.get_Id() == t.get_Id()) { //identification of each objects
+            if (e.get_id() == t.get_id()) { //identification of each objects
                 return false;
             }
         }
@@ -39,9 +35,6 @@ private:
             throw exception();
         }
 
-        // Write header
-        file << T::get_CSV_header() << endl;
-
         // Write data
         for (const auto &obj: entities) {
             file << obj.to_CSV() << endl;
@@ -51,53 +44,84 @@ private:
     }
 
 public:
-    void add(T t){
-        if (!ID_is_unique(t)) {
-            throw exception(); // object already in repo
+
+    Repo(const string& f_name) : filename(f_name){
+        read_from_file();
+    }
+
+    vector<T> get_all() override{
+        read_from_file();
+        return entities;
+    }
+
+    T get_by_Id(int id) override{
+        for(int i = 0; i < entities.size(); i++){
+            if(entities[i].get_id() == id){
+                return entities[i];
+            }
         }
 
-//        if (!validator.isValid(t)) {
-//            throw exception(); // entity is not valid
-//        }
+        throw exception(); // Object with that id was not found
+    }
+
+    bool delete_by_id(int id) override{
+        bool found=false;
+        vector<T> new_data;
+        for(int i = 0; i < entities.size(); i++){
+            if(entities[i].get_id() != id){
+                new_data.push_back(entities[i]);
+            }
+            else
+            {
+                found=true;
+            }
+        }
+        entities = new_data;
+
+        ofstream clearFile;
+        clearFile.open(filename, ios::out | ios::trunc); //Deletes all the data in the persistent Repo
+        clearFile.close();
+
+        for(int i = 0; i < entities.size(); i++){
+            add(entities[i]);
+        }
+        return found;
+    }
+
+    bool add(T t) override{
+        if (!ID_is_unique(t)) {
+            return false;
+        }
 
         this->entities.push_back(t);
         save_to_CSV(this->filename);
+        return true;
     }
 
-    void read(){
+    void read_from_file(){
         vector<T> data;
         ifstream readFile(filename);
 
-
-        //Ignore the header
-        string header;
-        getline(readFile, header);
-
         string line;
         while(getline(readFile, line)){
-
-            stringstream ss(line);
             T object;
-            //object = To_Object(line);
+            object = object.From_String_To_Object(line); //sends line with all the attributes
             data.push_back(object);
         }
         readFile.close();
         entities = data;
     }
 
-    void update(int id, T& new_entity) {
-        bool found = false;
+    bool update(int id, const T& new_entity) override{
         for (auto& entity : entities) {
-            if (entity.get_Id() == id) {
+            if (entity.get_id() == id) {
                 entity = new_entity;
-                found = true;
-                break;
+                save_to_CSV(this->filename); // Save the updated list to the file
+                return true;
             }
         }
-        if (!found) {
-            throw exception(); // or handle the case where the entity is not found
-        }
-        save_to_CSV(this->filename); // Save the updated list to the file
+        return false; // or handle the case where the entity is not found
+
     }
 
 

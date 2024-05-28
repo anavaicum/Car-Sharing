@@ -6,8 +6,6 @@
 #define OOPCOLECTIV_CUSTOMER_H
 
 using namespace std;
-#include <string>
-#include <vector>
 #include "../User_Domain/User.h"
 #include "../Car_Domain/Car.h"
 
@@ -20,7 +18,8 @@ private:
     vector<Car> favorites;
 
 public:
-    Customer(int _id, const string& _email, const string& _password, const string& _first_name, const string& _last_name);
+    Customer(int id, const string &email, const string &password, const string &firstName, const string &lastName,
+             const string &phone, const string &address, bool gdpRdeleted, const vector<Car>& favorites);
 
     const string& get_phone() const;
     void set_phone(const string& _phone);
@@ -33,6 +32,16 @@ public:
 
     const vector<Car>& get_favorites() const;
     void add_favorite(const Car& favorite);
+
+    string to_CSV() const;
+
+    string favoritesToString() const;
+
+    Customer From_String_To_Object(const string& string_of_obj, char delim=',');
+
+    string Customer_To_String() const;
+
+    Customer();
 };
 
 
