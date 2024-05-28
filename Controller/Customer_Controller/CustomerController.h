@@ -28,6 +28,7 @@ public:
 
     bool add_car_to_favorites(int customer_id, const Car &car);
     bool remove_car_from_favorites(int customer_id, const Car &car);
+    vector<Car> get_favorites(int customer_id);
 };
 
 

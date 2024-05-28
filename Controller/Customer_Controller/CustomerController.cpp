@@ -61,6 +61,14 @@ bool CustomerController::remove_car_from_favorites(int customer_id, const Car &c
     }
 }
 
+vector<Car> CustomerController::get_favorites(int customer_id)
+{
+    vector<Car> favorites;
+    Customer customer = customerRepo->get_by_Id(customer_id);
+    favorites = customer.get_favorites();
+    return favorites;
+}
+
 
 
 
