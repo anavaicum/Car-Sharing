@@ -28,6 +28,10 @@ public:
 
     bool add_car_to_favorites(int customer_id, const Car &car);
     bool remove_car_from_favorites(int customer_id, const Car &car);
+
+    Customer search_by_phone(const std::string& phone) const;
+    std::vector<Customer> search_by_name(const std::string& first_name, const std::string& last_name) const;
+    std::vector<Customer> search_by_car(const Car& car) const;
 };
 
 

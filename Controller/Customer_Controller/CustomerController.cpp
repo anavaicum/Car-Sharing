@@ -61,7 +61,54 @@ bool CustomerController::remove_car_from_favorites(int customer_id, const Car &c
     }
 }
 
+Customer CustomerController::search_by_phone(const std::string& phone) const {
+    auto customers = customerRepo->get_all();
+    auto it = std::find_if(customers.begin(), customers.end(), [&phone](const Customer& customer) {
+        return customer.get_phone() == phone;
+    });
 
+    if (it != customers.end()) {
+        return *it;
+    }
+
+    throw std::runtime_error("Customer with the given phone number not found.");
+}
+
+
+std::vector<Customer> CustomerController::search_by_name(const std::string& first_name, const std::string& last_name) const {
+    auto customers = customerRepo->get_all();
+    std::vector<Customer> result;
+    std::copy_if(customers.begin(), customers.end(), std::back_inserter(result), [&first_name, &last_name](const Customer& customer) {
+        return customer.get_first_name() == first_name && customer.get_last_name() == last_name;
+    });
+
+    return result;
+}
+
+
+std::vector<Customer> CustomerController::search_by_car(const Car& car) const {
+    auto customers = customerRepo->get_all();
+    std::vector<Customer> result;
+
+    for (const auto& customer : customers) {
+        const auto& favorites = customer.get_favorites();
+        if (std::any_of(favorites.begin(), favorites.end(), [&car](const Car& favoriteCar) {
+            return favoriteCar.getLicensePlate() == car.getLicensePlate() &&
+                   favoriteCar.getModel() == car.getModel() &&
+                   favoriteCar.getBrand() == car.getBrand() &&
+                   favoriteCar.getYearOfFirstReg() == car.getYearOfFirstReg() &&
+                   favoriteCar.getMileage() == car.getMileage() &&
+                   favoriteCar.getPricePerDay() == car.getPricePerDay() &&
+                   favoriteCar.getFuel() == car.getFuel() &&
+                   favoriteCar.getTrans() == car.getTrans() &&
+                   favoriteCar.getColor() == car.getColor();
+        })) {
+            result.push_back(customer);
+        }
+    }
+
+    return result;
+}
 
 
 
