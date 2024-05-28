@@ -78,6 +78,12 @@ bool CustomerController::update_customer(int customer_id, Customer customer) {
     return customerRepo->update(customer_id,customer);
 }
 
+
+vector<Customer> CustomerController::get_all_customers() {
+    return customerRepo->get_all();
+}
+
+
 bool CustomerController::delete_customer(int customer_id) {
     return customerRepo->delete_by_id(customer_id);
 }
@@ -126,7 +132,6 @@ Customer CustomerController::search_by_name(string first_name, string last_name)
             return customer;
     }
 }
-
 
 
 

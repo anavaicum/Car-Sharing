@@ -19,3 +19,7 @@ EmployeeController::EmployeeController() {
 
 }
 
+vector<Employee> EmployeeController::get_all_employees() {
+    return employee_repo->get_all();
+}
+
