@@ -19,6 +19,7 @@ EmployeeController::EmployeeController() {
 
 }
 
+
 std::vector<Employee> EmployeeController::search_by_email(const std::string& email) const {
     std::vector<Employee> result;
     try {
@@ -64,3 +65,9 @@ std::vector<Employee> EmployeeController::search_between_dates(const Date& start
     }
     return result;
 }
+
+vector<Employee> EmployeeController::get_all_employees() {
+    return employee_repo->get_all();
+}
+
+

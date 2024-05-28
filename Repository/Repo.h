@@ -64,11 +64,16 @@ public:
         throw exception(); // Object with that id was not found
     }
 
-    void delete_by_id(int id) override{
+    bool delete_by_id(int id) override{
+        bool found=false;
         vector<T> new_data;
         for(int i = 0; i < entities.size(); i++){
             if(entities[i].get_id() != id){
                 new_data.push_back(entities[i]);
+            }
+            else
+            {
+                found=true;
             }
         }
         entities = new_data;
@@ -80,15 +85,17 @@ public:
         for(int i = 0; i < entities.size(); i++){
             add(entities[i]);
         }
+        return found;
     }
 
-    void add(T t) override{
+    bool add(T t) override{
         if (!ID_is_unique(t)) {
-            throw exception(); // object already in repo
+            return false;
         }
 
         this->entities.push_back(t);
         save_to_CSV(this->filename);
+        return true;
     }
 
     void read_from_file(){
@@ -105,19 +112,16 @@ public:
         entities = data;
     }
 
-    void update(int id, const T& new_entity) override{
-        bool found = false;
+    bool update(int id, const T& new_entity) override{
         for (auto& entity : entities) {
             if (entity.get_id() == id) {
                 entity = new_entity;
-                found = true;
-                break;
+                save_to_CSV(this->filename); // Save the updated list to the file
+                return true;
             }
         }
-        if (!found) {
-            throw exception(); // or handle the case where the entity is not found
-        }
-        save_to_CSV(this->filename); // Save the updated list to the file
+        return false; // or handle the case where the entity is not found
+
     }
 
 

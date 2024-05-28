@@ -23,6 +23,7 @@ public:
 //    EmployeeController(IRepo<Employee>& emp_repo, IRepo<Car>& car_repo, IRepo<Order>& order_repo)
 //            : employee_repo(emp_repo), car_repo(car_repo), order_repo(order_repo) {}
     EmployeeController();
+    vector<Employee> get_all_employees();
     float get_employee_salary(int employee_id);
     std::vector<Employee> search_by_email(const std::string& email) const;
     std::vector<Employee> search_by_full_name(const std::string& first_name, const std::string& last_name) const;

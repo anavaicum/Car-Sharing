@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <string>
-#include "Car.h"
-
+#include "../Domain/Car_Domain/Car.h"
+#include "../Controller/Customer_Controller/CustomerController.h"
 class CustomerUI {
 public:
     CustomerUI();
@@ -23,6 +23,8 @@ public:
     void show_add_car_to_favorites();
     void show_delete_car_from_favorites();
     void show_favorites();
+    void show_customer_menu();
+
 };
 
 #endif // CUSTOMERUI_H
