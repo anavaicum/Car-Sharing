@@ -82,13 +82,14 @@ public:
         }
     }
 
-    void add(T t) override{
+    bool add(T t) override{
         if (!ID_is_unique(t)) {
-            throw exception(); // object already in repo
+            return false;
         }
 
         this->entities.push_back(t);
         save_to_CSV(this->filename);
+        return true;
     }
 
     void read_from_file(){
@@ -105,19 +106,16 @@ public:
         entities = data;
     }
 
-    void update(int id, const T& new_entity) override{
-        bool found = false;
+    bool update(int id, const T& new_entity) override{
         for (auto& entity : entities) {
             if (entity.get_id() == id) {
                 entity = new_entity;
-                found = true;
-                break;
+                save_to_CSV(this->filename); // Save the updated list to the file
+                return true;
             }
         }
-        if (!found) {
-            throw exception(); // or handle the case where the entity is not found
-        }
-        save_to_CSV(this->filename); // Save the updated list to the file
+        return false; // or handle the case where the entity is not found
+
     }
 
 
