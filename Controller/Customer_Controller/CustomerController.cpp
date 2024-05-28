@@ -10,6 +10,7 @@ CustomerController::CustomerController(const shared_ptr<IRepo<Customer>> &custom
 
 
 CustomerController::CustomerController() {
+    repo = make_shared<Repo<Customer>>("../../Repository/CustomerRepo.txt");
     this->customerRepo = make_shared<Repo<Customer>>("../../Repository/CustomerRepo.txt");
     this->carRepo = make_shared<Repo<Car>>("../../Repository/CarRepo.txt");
     this->orderRepo = make_shared<Repo<Order>>("../../Repository/OrderRepo.txt");

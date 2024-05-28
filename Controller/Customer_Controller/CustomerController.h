@@ -7,11 +7,12 @@
 #include "../../Domain/Customer_Domain/Customer.h"
 #include "../../Domain/Car_Domain/Car.h"
 #include "../../Domain/Order_Domain/Order.h"
+#include "../User_Controller/UserController.h"
 #include <vector>
 #include <string>
 #include <memory>
 
-class CustomerController {
+class CustomerController : public UserController<Customer>{
 private:
     std::shared_ptr<IRepo<Customer>> customerRepo;
     std::shared_ptr<IRepo<Car>> carRepo;

@@ -12,7 +12,7 @@ float EmployeeController::get_employee_salary(int employee_id) {
 }
 
 EmployeeController::EmployeeController() {
-
+    repo = make_shared<Repo<Employee>>("../../Repository/EmployeeRepo.txt");
     employee_repo = make_shared<Repo<Employee>>("../../Repository/EmployeeRepo.txt");
     car_repo = make_shared<Repo<Car>>("../../Repository/CarRepo.txt");
     order_repo = make_shared<Repo<Order>>("../../Repository/OrderRepo.txt");

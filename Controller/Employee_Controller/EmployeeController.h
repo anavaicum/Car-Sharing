@@ -9,9 +9,10 @@
 #include "../../Repository/IRepo.h"
 #include "../../Domain/Car_Domain/Car.h"
 #include "../../Domain/Order_Domain/Order.h"
+#include "../User_Controller/UserController.h"
 
 
-class EmployeeController {
+class EmployeeController : public UserController<Employee>{
 private:
     shared_ptr<IRepo<Employee>> employee_repo;
     shared_ptr<IRepo<Car>> car_repo;
