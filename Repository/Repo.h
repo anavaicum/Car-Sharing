@@ -84,11 +84,12 @@ public:
 
     bool add(T t) override{
         if (!ID_is_unique(t)) {
-            throw exception(); // object already in repo
+            return false;
         }
 
         this->entities.push_back(t);
         save_to_CSV(this->filename);
+        return true;
     }
 
     void read_from_file(){
