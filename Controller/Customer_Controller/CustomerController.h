@@ -31,6 +31,8 @@ public:
     vector<Car> get_favorites(int customer_id);
     bool create_customer(Customer customer);
     bool update_customer(int customer_id, Customer customer);
+    bool delete_customer(int customer_id);
+    bool GDPR_customer(int customer_id);
 };
 
 

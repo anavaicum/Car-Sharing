@@ -78,6 +78,15 @@ bool CustomerController::update_customer(int customer_id, Customer customer) {
     return customerRepo->update(customer_id,customer);
 }
 
+bool CustomerController::delete_customer(int customer_id) {
+    return customerRepo->delete_by_id(customer_id);
+}
+
+bool CustomerController::GDPR_customer(int customer_id) {
+    Customer customer=customerRepo->get_by_Id(customer_id);
+    return customer.is_GDPRdeleted();
+}
+
 
 
 
