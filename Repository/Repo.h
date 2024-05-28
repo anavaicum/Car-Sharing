@@ -45,9 +45,12 @@ private:
 
 public:
 
-    Repo(const string& f_name) : filename(f_name){}
+    Repo(const string& f_name) : filename(f_name){
+        read_from_file();
+    }
 
     vector<T> get_all() override{
+        read_from_file();
         return entities;
     }
 
@@ -91,10 +94,6 @@ public:
     void read_from_file(){
         vector<T> data;
         ifstream readFile(filename);
-
-        //Ignore the header
-//        string header;
-//        getline(readFile, header);
 
         string line;
         while(getline(readFile, line)){

@@ -10,7 +10,7 @@
 
 class Car_Controller {
 private:
-    std::shared_ptr<IRepo<Car>> carRepo;
+    //std::shared_ptr<IRepo<Car>> carRepo;
     shared_ptr<IRepo<Car>> car_repo;
     string type; // Field to store type of controller
 
