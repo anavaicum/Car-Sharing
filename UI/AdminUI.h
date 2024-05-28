@@ -17,6 +17,7 @@ public:
     void give_admin_rights();
     void worker_salary();
     void change_worker_salary();
+    void show_all_workers();
 };
 
 

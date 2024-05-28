@@ -272,3 +272,69 @@ void CustomerUI::show_favorites(const Customer& customer) {
 void CustomerUI::show_customer_menu() {
 
 }
+
+
+void CustomerUI::show_customer_menu() {
+    int choice;
+    int choice2;
+    do {
+        cout << "1. Reservations and Orders" << endl;
+        cout << "2. Cars" << endl;
+        cout << "3. Change password" << endl;
+        cout << "4. Change remarks" << endl;
+        cout << "Enter your choice: " << endl;
+
+        cin >> choice;
+
+        switch (choice){
+            case 1:
+                cout << "1. Make a reservation" << endl;
+                cout << "2. Cancel a reservation" << endl;
+                cout << "3. Update a reservation" << endl;
+                cout << "4. All ordered cars sorted by price" << endl;
+                cout << "5. Search order by id" << endl;
+                cout << "Enter your choice: " << endl;
+                cin >> choice2;
+                switch (choice2) {
+                    case 1:
+                        show_make_reservation();
+                    case 2:
+                        show_delete_reservation();
+                    case 3:
+                        show_update_reservation();
+                    case 4:
+                        show_all_orders_sorted_by_price();
+                    case 5:
+                        show_search_by_order_id();
+                }
+            case 2:
+                cout << "1. See cars" << endl;
+                cout << "2. See cars between two dates" << endl;
+                cout << "3. Search car by license plate" << endl;
+                cout << "4. See favorite cars" << endl;
+                cout << "5. Add car to favorites" << endl;
+                cout << "6. Delete car from favorites" << endl;
+                cout << "Enter your choice: " << endl;
+                cin >> choice2;
+                switch (choice2) {
+                    case 1:
+                        show_cars();
+                    case 2:
+                        show_cars_between_dates();
+                    case 3:
+                        search_car_by_license_plate();
+                    case 4:
+                        show_favorites();
+                    case 5:
+                        show_add_car_to_favorites();
+                    case 6:
+                        show_delete_car_from_favorites();
+                }
+            case 3:
+                show_change_password();
+            case 4:
+                show_change_remarks();
+
+        }
+    } while (choice != 0);
+}

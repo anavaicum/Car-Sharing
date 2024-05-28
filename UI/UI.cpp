@@ -135,6 +135,11 @@ void UI::show_signup() {
 }
 
 
+void UI::show_customer_menu() {
+    CustomerUI customer;
+    customer.show_customer_menu();
+}
+
 
 void UI::show_employee_menu() {
 
@@ -207,14 +212,3 @@ void UI::show_ordered_cars_by_customer() {
     cin >> id;
     //controller.car_repository; // functie pentru afisarea masinilor din repo
     }
-
-
-
-
-
-
-
-
-
-
-
