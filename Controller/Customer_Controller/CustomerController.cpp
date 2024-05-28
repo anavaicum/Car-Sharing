@@ -87,6 +87,17 @@ bool CustomerController::GDPR_customer(int customer_id) {
     return customer.is_GDPRdeleted();
 }
 
+vector<Customer> CustomerController::get_all_customers_sorted() {
+    vector<Customer> customers=customerRepo->get_all();
+    sort(customers.begin(), customers.end(), [](const Customer &customer1, const Customer &customer2) {
+        return customer1.get_last_name() < customer2.get_last_name();
+    });
+
+
+    return customers;
+}
+
+
 
 
 
