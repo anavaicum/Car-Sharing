@@ -13,14 +13,15 @@
 
 class EmployeeController {
 private:
-    IRepo<Employee>& employee_repo;
-    IRepo<Car>& car_repo;
-    IRepo<Order>& order_repo;
+    shared_ptr<IRepo<Employee>> employee_repo;
+    shared_ptr<IRepo<Car>> car_repo;
+    shared_ptr<IRepo<Order>> order_repo;
 
 public:
-    EmployeeController(IRepo<Employee>& emp_repo, IRepo<Car>& car_repo, IRepo<Order>& order_repo)
-            : employee_repo(emp_repo), car_repo(car_repo), order_repo(order_repo) {}
-
+    //I would say this isn't necessary, so that we don't include the Repos in the UI as well, instead use a normal constructor
+//    EmployeeController(IRepo<Employee>& emp_repo, IRepo<Car>& car_repo, IRepo<Order>& order_repo)
+//            : employee_repo(emp_repo), car_repo(car_repo), order_repo(order_repo) {}
+    EmployeeController();
     float get_employee_salary(int employee_id);
 };
 
