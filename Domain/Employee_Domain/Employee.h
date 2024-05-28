@@ -8,6 +8,7 @@
 using namespace std;
 #include "../User_Domain/User.h"
 #include "../Date.h"
+#include <iomanip>
 
 class Employee : public User {
 private:
@@ -28,8 +29,8 @@ public:
 
 //    const string& get_birthday() const;
 //    void set_birthday(const string& _birthday);
-    const Date &getBirthday() const;
-    void setBirthday(const Date &_birthday);
+    const Date &get_Birthday() const;
+    void set_Birthday(const Date &_birthday);
 
     const string& get_initials() const;
     void set_initials(const string& _initials);
@@ -40,7 +41,7 @@ public:
     bool is_administrator() const;
     void set_admin(bool _is_admin);
 
-    void save_to_CSV(const string &filename);
+    string to_CSV() const;
 
     Employee From_String_To_Object(const string& string_of_obj, char delim=',');
 

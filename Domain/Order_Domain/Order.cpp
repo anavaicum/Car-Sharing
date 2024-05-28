@@ -1,19 +1,12 @@
 #include "Order.h"
 
-Order::Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate,
+Order::Order(int _id, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate,
              float totalPrice,
              const vector<string> &remarks, bool isReserved, vector<Car> cars, Employee employee, Customer customer)
-        : order_id(orderId), order_date(orderDate), stat(stat), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
+        : Entity(_id), order_date(orderDate), stat(stat), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
           remarks(remarks), is_reserved(isReserved), car(cars), employee(employee), customer(customer) {
 }
 
-int Order::getOrderId() const {
-    return order_id;
-}
-
-void Order::setOrderId(int orderId) {
-    order_id = orderId;
-}
 
 const Date &Order::getOrderDate() const {
     return order_date;
@@ -95,35 +88,25 @@ void Order::setStat(Order::status Stat) {
     Order::stat = Stat;
 }
 
-void Order::save_to_CSV( const string &filename) const {
-    ofstream file(filename);
-    //bool fileExists = filesystem::exists(filename);
+string Order::to_CSV() const {
 
-    //file.open(filename, std::ios::app);
+//    "Order ID,order Date,status,begin date,end date,total price,remarks,is reserved,car license plate,customer id,employee id,car license plate,customer id,employee id\n";
 
-    if (!file.is_open()) {
-        return;
-    }
 
-    // Write the header only if the file does not exist
-//    if (!fileExists) {
-//        file << "Order ID,order Date,status,begin date,end date,total price,is reserved,car,customer,employee,remarks\n";
-//    }
+    stringstream ss;
+    ss << get_id() << ","
+        << order_date.getDay() << "/" << order_date.getMonth() << "/" << order_date.getYear() << ","
+        << statusToString(stat) << ","
+        << begin_date.getDay() << "/" << begin_date.getMonth() << "/" << begin_date.getYear() << ","
+        << end_date.getDay() << "/" << end_date.getMonth() << "/" <<end_date.getYear() << ","
+        << fixed << setprecision(2) << total_price << ","
+        << vectorToString(remarks) << ","
+        << is_reserved << ","
+        << CarsToString() << ","
+        << customer.Customer_To_String() << ","
+        << employee.Employee_To_string() << "\n";
 
-    file << "Order ID,order Date,status,begin date,end date,total price,remarks,is reserved,car license plate,customer id,employee id,car license plate,customer id,employee id\n";
-        file << order_id << ","
-             << order_date.getDay() << "/" << order_date.getMonth() << "/" << order_date.getYear() << ","
-             << statusToString(stat) << ","
-             << begin_date.getDay() << "/" << begin_date.getMonth() << "/" << begin_date.getYear() << ","
-             << end_date.getDay() << "/" << end_date.getMonth() << "/" <<end_date.getYear() << ","
-             << total_price << ","
-             << vectorToString(remarks) << ","
-             << is_reserved << ","
-             << CarsToString() << ","
-             << customer.Customer_To_String() << ","
-             << employee.Employee_To_string() << "\n";
-
-    file.close();
+   return ss.str();
 }
 
 string Order::statusToString(Order::status s) {
@@ -169,7 +152,7 @@ string Order::CarsToString() const {
     return ss.str();
 }
 
-Order Order::FromStringToObject(const string &string_of_obj) {
+Order Order::From_String_To_Object(const string &string_of_obj) {
 
     stringstream ss(string_of_obj);
     string id_string, ord_date, status, bg_date, e_date, tot_price,
@@ -254,5 +237,9 @@ Order::status Order::stringToStatusEnum(string status_string) {
         return it->second;
     }
     return Unknown;
+}
+
+void Order::setStat(string st) {
+    stat = stringToStatusEnum(st);
 }
 

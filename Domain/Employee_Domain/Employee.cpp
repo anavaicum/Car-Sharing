@@ -23,39 +23,27 @@ void Employee::set_salary(float _salary) { salary = _salary; }
 bool Employee::is_administrator() const { return is_admin; }
 void Employee::set_admin(bool _is_admin) { is_admin = _is_admin; }
 
-const Date &Employee::getBirthday() const { return birthday; }
+const Date &Employee::get_Birthday() const { return birthday; }
 
-void Employee::setBirthday(const Date &_birthday) { Employee::birthday = _birthday; }
+void Employee::set_Birthday(const Date &_birthday) { Employee::birthday = _birthday; }
 
-User::User() {}
+string Employee::to_CSV() const{
 
-void Employee::save_to_CSV(const string &filename) {
-    ofstream file(filename);
-    //file.open(filename, ios::app);
+//        "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
 
-    if(!file.is_open()) {
-        return;
-    }
+    stringstream ss;
+    ss << get_id() << ","
+        << get_email() << ","
+        << get_password() << ","
+        << get_first_name() << ","
+        << get_last_name() << ","
+        << position << ","
+        << birthday.getDay() << "/" << birthday.getMonth() << "/" << birthday.getYear() << ","
+        << initials << ","
+        << fixed << setprecision(2) << salary << ","
+        << is_admin << "\n";
 
-//    bool file_exists = filesystem::exists(filename);
-//    if(!file_exists) {
-//        file << "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
-//    }
-
-    file << "ID,email,password,first name,last name,position,birthday,initials,salary,is admin\n";
-
-        file << get_id() << ","
-             << get_email() << ","
-             << get_password() << ","
-             << get_first_name() << ","
-             << get_last_name() << ","
-             << position << ","
-             << birthday.getDay() << "/" << birthday.getMonth() << "/" << birthday.getYear() << ","
-             << initials << ","
-             << salary << ","
-             << is_admin << "\n";
-
-    file.close();
+    return ss.str();
 }
 
 Employee Employee::From_String_To_Object(const string &string_of_obj, char delim) {

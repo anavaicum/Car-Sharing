@@ -22,30 +22,28 @@ void Customer::set_GDPRdeleted(bool _GDPRdeleted) { GDPRdeleted = _GDPRdeleted; 
 const vector<Car>& Customer::get_favorites() const { return favorites; }
 void Customer::add_favorite(const Car& favorite) { favorites.push_back(favorite); }
 
-void Customer::save_to_CSV(const string &filename) {
-    ofstream file(filename);
-    //file.open(filename, ios::app);
+string Customer::to_CSV() const{
 
-    if(!file.is_open()) {
-        return;
-    }
+
 
 //    bool file_exists = filesystem::exists(filename);
 //    if(!file_exists) {
 //        file << "ID,email,password,first name,last name,phone,address,GDPR deleted,favorites,remarks\n";
 //    }
+//    "ID,email,password,first name,last name,phone,address,GDPR deleted,favorites\n";
 
-    file << "ID,email,password,first name,last name,phone,address,GDPR deleted,favorites\n";
-        file << get_id() << ","
-             << get_email() << ","
-             << get_password() << ","
-             << get_first_name() << ","
-             << get_last_name() << ","
-             << phone << ","
-             << address << ","
-             << GDPRdeleted << ","
-             << Customer::favoritesToString() << "\n";
-    file.close();
+    stringstream ss;
+
+    ss << get_id() << ","
+       << get_email() << ","
+       << get_password() << ","
+       << get_first_name() << ","
+       << get_last_name() << ","
+       << phone << ","
+       << address << ","
+       << GDPRdeleted << ","
+       << Customer::favoritesToString() << "\n";
+    return ss.str();
 }
 
 string Customer::favoritesToString() const {
@@ -79,7 +77,7 @@ Customer Customer::From_String_To_Object(const string &string_of_obj, char delim
     bool gdpr_bool;
     vector<Car> faves;
 
-    Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
+    Car c(1,"SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
           Car::Gas, Car::Manual, "Red", vector<string>());
 
 
@@ -99,6 +97,9 @@ Customer Customer::From_String_To_Object(const string &string_of_obj, char delim
     stringstream CarStream(vec_faves);
     string line;
     while(getline(CarStream, line, '|')){
+        if(line == "\n"){
+            break;
+        }
         c = c.From_String_To_Object(line, '/');
         faves.push_back(c);
     }
@@ -114,13 +115,13 @@ Customer::Customer() {
 string Customer::Customer_To_String() const {
     stringstream ss;
     ss << get_id() << "!"
-         << get_email() << "!"
-         << get_password() << "!"
-         << get_first_name() << "!"
-         << get_last_name() << "!"
-         << phone << "!"
-         << address << "!"
-         << GDPRdeleted << "!"
-         << Customer::favoritesToString();
+       << get_email() << "!"
+       << get_password() << "!"
+       << get_first_name() << "!"
+       << get_last_name() << "!"
+       << phone << "!"
+       << address << "!"
+       << GDPRdeleted << "!"
+       << Customer::favoritesToString();
     return ss.str();
 }

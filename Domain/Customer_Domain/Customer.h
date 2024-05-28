@@ -33,7 +33,7 @@ public:
     const vector<Car>& get_favorites() const;
     void add_favorite(const Car& favorite);
 
-    void save_to_CSV(const string &filename);
+    string to_CSV() const;
 
     string favoritesToString() const;
 

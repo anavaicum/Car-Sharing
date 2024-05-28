@@ -9,14 +9,13 @@
 
 using namespace std;
 
-class Order {
+class Order:public Entity {
 public:
 
     enum status { Reserved, Ordered, Completed, Canceled, Unknown};
 
 private:
 
-    int order_id;
     Date order_date;
     status stat;
     Date begin_date;
@@ -45,10 +44,6 @@ public:
     vector<Car> getCar() const;
 
     void setCar(vector<Car> new_cars);
-
-    int getOrderId() const;
-
-    void setOrderId(int orderId);
 
     const Date &getOrderDate() const;
 
@@ -86,14 +81,18 @@ public:
 
     void setStat(status stat);
 
-    void save_to_CSV(const string& filename) const;
+    void setStat(string st);
+
+    string to_CSV() const;
 
     static string statusToString(status s);
 
     static string vectorToString(const vector<string>& vec);
 
     string CarsToString() const;
-    Order FromStringToObject(const string& string_of_obj);
+
+    Order From_String_To_Object(const string& string_of_obj);
+
     Order();
 
 };
