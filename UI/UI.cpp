@@ -18,47 +18,13 @@ void UI::show_login() {
     cin >> password;
 //    controller.login(email, password); //functie din controller
     if (validate_login(email, password)) {
-        determine_user_type_and_showMenu(email);
+        determine_user_type_and_show_menu(email);
     } else {
         std::cout << "Invalid email or password!" << std::endl;
     }
 }
 
-void UI::determine_user_type_and_showMenu(std::string email) {
-    for (auto& customer : customers) {
-        if (customer.get_email() == email) {
-            show_customer_menu();
-            return;
-        }
-    }
 
-    for (auto& worker : workers) {
-        if (worker.get_email() == email) {
-            if (worker.is_administrator()) {
-                show_admin_menu();
-            } else {
-                show_employee_menu();
-            }
-            return;
-        }
-    }
-
-    std::cout << "User not found!" << std::endl;
-}
-
-bool UI::validate_login(string email, string password) {
-    for (const auto& customer : customers) {
-        if (customer.get_email() == email && customer.get_password() == password) {
-            return true;
-        }
-    }
-    for (const auto& worker : workers) {
-        if (worker.get_email() == email && worker.get_password() == password) {
-            return true;
-        }
-    }
-    return false;
-}
 
 void UI::show_signup() {
     int opt = 0;
@@ -117,7 +83,8 @@ void UI::show_signup() {
 }
 
 void UI::show_customer_menu() {
-
+    CustomerUI customer;
+    customer.show_customer_menu();
 }
 
 void UI::show_employee_menu() {
@@ -148,17 +115,3 @@ void UI::run() {
     }
 
 }
-
-void UI::show_search_car_by_license_plate() {
-    string license_plate;
-    cout << "Write the license plate: " << endl;
-    cin >> license_plate;
-    controller.search_by_license_plate(license_plate);
-}
-
-void UI::show_ordered_cars_by_customer() {
-    int id;
-    cout << "Customers's Id: " << endl;
-    cin >> id;
-    controller.car_repository; // functie pentru afisarea masinilor din repo
-    }

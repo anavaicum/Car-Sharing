@@ -23,6 +23,7 @@ public:
     void show_add_car_to_favorites();
     void show_delete_car_from_favorites();
     void show_favorites();
+    void show_customer_menu();
 };
 
 #endif // CUSTOMERUI_H
