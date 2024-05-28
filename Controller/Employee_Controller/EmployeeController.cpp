@@ -141,3 +141,31 @@ string EmployeeController::make_initials(string f_name, string l_name) {
     return string(1, f_name[0]) + string(1, l_name[0]);
 }
 
+bool EmployeeController::reset_coworker_password(int employee_id, const string& password) {
+    try {
+        Employee employee = employee_repo->get_by_Id(employee_id);
+        employee.set_password(password);
+        employee_repo->update(employee_id, employee);
+        return true;
+    } catch (const std::exception& e) {
+        return false; // ex.: if employee not found
+    }
+}
+
+vector<Employee> EmployeeController::get_sorted_coworkers() {
+    vector<Employee> employees = employee_repo->get_all();
+    sort(employees.begin(), employees.end(), [](const Employee& a, const Employee& b) {
+        return a.get_last_name() < b.get_last_name();
+    });
+    return employees;
+}
+
+Employee EmployeeController::search_by_initials(const string& initials) {
+    vector<Employee> employees = employee_repo->get_all();
+    for (const auto& employee : employees) {
+        if (employee.get_initials() == initials) {
+            return employee;
+        }
+    }
+    throw std::runtime_error("Employee not found");
+}

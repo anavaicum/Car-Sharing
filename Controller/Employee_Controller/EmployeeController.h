@@ -9,6 +9,7 @@
 #include "../../Repository/IRepo.h"
 #include "../../Domain/Car_Domain/Car.h"
 #include "../../Domain/Order_Domain/Order.h"
+#include "../../Domain/User_Domain/Entity.h"
 #include "../User_Controller/UserController.h"
 
 
@@ -28,6 +29,11 @@ public:
     bool create_employee(string mail, string pass, string f_name, string l_name,
                          string ph, string address, string pos, float salary ,int day, int month, int year);
     float get_employee_salary(int employee_id);
+
+    bool reset_coworker_password(int employee_id, string password);
+    vector<Employee> get_sorted_coworkers();
+    Employee search_by_initials(const string& initials);
+
     bool disable_employee(int employee_id);
     bool enable_employee(int employee_id);
     bool delete_employee(int employee_id);
