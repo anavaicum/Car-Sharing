@@ -268,3 +268,7 @@ void CustomerUI::show_favorites(const Customer& customer) {
              << ", Price Per Day: " << fixed << setprecision(2) << car.getPricePerDay() << endl;
     }
 }
+
+void CustomerUI::show_customer_menu() {
+
+}

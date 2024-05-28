@@ -78,6 +78,12 @@ bool CustomerController::update_customer(int customer_id, Customer customer) {
     return customerRepo->update(customer_id,customer);
 }
 
+
+vector<Customer> CustomerController::get_all_customers() {
+    return customerRepo->get_all();
+}
+
+
 bool CustomerController::delete_customer(int customer_id) {
     return customerRepo->delete_by_id(customer_id);
 }
@@ -129,6 +135,15 @@ Customer CustomerController::search_by_name(string first_name, string last_name)
 
 
 
+bool CustomerController::create_customer(const Customer& customer) {
+    try {
+        customerRepo->add(customer);
+        return true;
+    } catch (const std::exception& e) {
+        //std::cerr << "Failed to create customer: " << e.what() << std::endl;
+        return false;
+    }
+}
 
 
 

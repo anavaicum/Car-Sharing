@@ -28,11 +28,14 @@ public:
     void show_update_reservation();
     void show_all_orders_sorted_by_price();
     void show_search_by_order_id();
-    void show_change_password(Customer& customer, const std::string& newPassword);
-    void show_change_remarks(Car& car, const std::vector<std::string>& newRemarks);
-    void show_add_car_to_favorites(Customer& customer, const Car& car);
-    void show_delete_car_from_favorites(Customer& customer, const Car& car);
-    void show_favorites(const Customer& customer);
+
+    void show_change_password();
+    void show_change_remarks();
+    void show_add_car_to_favorites();
+    void show_delete_car_from_favorites();
+    void show_favorites();
+    void show_customer_menu();
+
 };
 
 #endif // CUSTOMER_UI_H
