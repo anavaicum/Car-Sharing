@@ -74,8 +74,8 @@ bool CustomerController::create_customer(Customer customer) {
     return customerRepo->add(customer);
 }
 
-bool CustomerController::update_customer(Customer customer) {
-    return false;
+bool CustomerController::update_customer(int customer_id, Customer customer) {
+    return customerRepo->update(customer_id,customer);
 }
 
 
