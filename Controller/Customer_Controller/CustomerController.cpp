@@ -70,7 +70,12 @@ vector<Car> CustomerController::get_favorites(int customer_id)
 }
 
 bool CustomerController::create_customer(Customer customer) {
-    customerRepo->add(customer);
+
+    return customerRepo->add(customer);
+}
+
+bool CustomerController::update_customer(Customer customer) {
+    return false;
 }
 
 
