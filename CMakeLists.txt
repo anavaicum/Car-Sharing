@@ -11,6 +11,6 @@ add_executable(Proiect_Colectiv main.cpp
         Domain/Order_Domain/Order.cpp
         Domain/User_Domain/User.cpp
         Domain/Employee_Domain/Employee.cpp
-        UI/UI.h
-        UI/UI.cpp)
+        UI/UI.cpp
+        UI/UI_employee.cpp)
 add_subdirectory(Google_tests)

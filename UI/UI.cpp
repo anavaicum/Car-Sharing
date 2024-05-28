@@ -7,12 +7,6 @@ void UI::show_menu() {
             "1. Log in\n"
             "2. Sign up\n"
             "3. Exit";
-    cout << "Choose next!\n"
-            "1. Show all workers\n"
-            "2. Search worker\n"
-            "3. Show change worker password\n"
-            "4. Show customer modifications\n"
-            "5. Show search customer\n"
 }
 
 void UI::show_login() {
