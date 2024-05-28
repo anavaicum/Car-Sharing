@@ -36,6 +36,7 @@ public:
     vector<Customer> get_all_customers_sorted();
     Customer search_by_email(string email);
     Customer search_by_phone(string phone);
+    Customer search_by_name(string first_name,string last_name);
 };
 
 

@@ -117,6 +117,16 @@ Customer CustomerController::search_by_phone(string phone) {
     }
 }
 
+Customer CustomerController::search_by_name(string first_name, string last_name) {
+    vector<Customer> customers=customerRepo->get_all();
+
+    for(const auto &customer:customers)
+    {
+        if(customer.get_first_name()==first_name && customer.get_last_name()==last_name)
+            return customer;
+    }
+}
+
 
 
 
