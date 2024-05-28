@@ -73,8 +73,8 @@ const vector<string> &Car::getRemarks() const {
     return remarks;
 }
 
-void Car::setRemarks(const vector<string> &Remarks) {
-    Car::remarks = Remarks;
+void Car::setRemarks(const string remark) {
+    Car::remarks.push_back(remark);
 }
 
 Car::fuel_type Car::getFuel() const {

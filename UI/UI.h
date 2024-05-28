@@ -23,7 +23,7 @@ public:
     void show_user_type();
     int choosing_user_type();
     void show_menu();
-    void login_customer();
+    int login_customer();
     void login_employee();
     void show_signup();
     void show_all_cars_between_dates();
@@ -31,7 +31,7 @@ public:
     void show_ordered_cars_by_customer();
     void redirect_menu();
     bool validate_login_employee(string email, string password);
-    bool validate_login_customer(string email, string password);
+    int validate_login_customer(string email, string password);
     void determine_user_type_and_showMenu(string email);
     void show_employee_menu();
     void show_admin_menu();

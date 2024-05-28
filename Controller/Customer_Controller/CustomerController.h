@@ -39,6 +39,7 @@ public:
     bool update_customer(int customer_id, Customer customer);
     bool delete_customer(int customer_id);
     bool GDPR_customer(int customer_id);
+    Customer get_by_id(int customer_id);
     vector<Customer> get_all_customers_sorted();
     Customer search_by_email(string email);
     Customer search_by_phone(string phone);

@@ -2,6 +2,7 @@
 // Created by Cosmin on 5/14/2024.
 //
 
+#include <algorithm>
 #include "Customer.h"
 
 Customer::Customer(int id, const string &email, const string &password, const string &firstName, const string &lastName,
@@ -124,4 +125,11 @@ string Customer::Customer_To_String() const {
        << GDPRdeleted << "!"
        << Customer::favoritesToString();
     return ss.str();
+}
+
+void Customer::remove_favorite(int id) {
+    auto new_end = std::remove_if(favorites.begin(), favorites.end(), [&id](Car car){
+        return car.get_id()==id;
+    });
+    favorites.erase(new_end, favorites.end());
 }

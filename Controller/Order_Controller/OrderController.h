@@ -11,6 +11,7 @@
 class Order_Controller {
 private:
     shared_ptr<IRepo<Order>> order_repo;
+    shared_ptr<IRepo<Customer>> customer_repo;
     std::string type; // Field to store type of controller
 
 public:
@@ -33,12 +34,13 @@ public:
 
 
     std::vector<Order> get_orders_between_dates(const Date& start_date, const Date& end_date) const;
+    std::vector<Order> get_orders_sorted_by_price() const;
 
     bool give_order_to_coworker(Order& order);
 
-    bool delete_reservation(Order& order);
+    bool delete_reservation(int id);
 
-    bool make_reservation(Order& order, Customer& customer);
+    bool make_reservation(int orderId, int customerId);
 
 
 
