@@ -78,6 +78,56 @@ bool CustomerController::update_customer(int customer_id, Customer customer) {
     return customerRepo->update(customer_id,customer);
 }
 
+bool CustomerController::delete_customer(int customer_id) {
+    return customerRepo->delete_by_id(customer_id);
+}
+
+bool CustomerController::GDPR_customer(int customer_id) {
+    Customer customer=customerRepo->get_by_Id(customer_id);
+    return customer.is_GDPRdeleted();
+}
+
+vector<Customer> CustomerController::get_all_customers_sorted() {
+    vector<Customer> customers=customerRepo->get_all();
+    sort(customers.begin(), customers.end(), [](const Customer &customer1, const Customer &customer2) {
+        return customer1.get_last_name() < customer2.get_last_name();
+    });
+
+
+    return customers;
+}
+
+Customer CustomerController::search_by_email(string email) {
+    vector<Customer> customers=customerRepo->get_all();
+
+    for(const auto &customer:customers)
+    {
+        if(customer.get_email()==email)
+            return customer;
+    }
+}
+
+Customer CustomerController::search_by_phone(string phone) {
+    vector<Customer> customers=customerRepo->get_all();
+
+    for(const auto &customer:customers)
+    {
+        if(customer.get_phone()==phone)
+            return customer;
+    }
+}
+
+Customer CustomerController::search_by_name(string first_name, string last_name) {
+    vector<Customer> customers=customerRepo->get_all();
+
+    for(const auto &customer:customers)
+    {
+        if(customer.get_first_name()==first_name && customer.get_last_name()==last_name)
+            return customer;
+    }
+}
+
+
 
 
 
