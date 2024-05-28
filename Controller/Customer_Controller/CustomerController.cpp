@@ -1,9 +1,20 @@
 #include "../../Controller/Customer_Controller/CustomerController.h"
 #include <algorithm>  // For std::remove_if
 
-CustomerController::CustomerController(const std::shared_ptr<IRepo<Customer>> &customer_repo, const std::shared_ptr<IRepo<Car>> &car_repo)
-        : customerRepo(customer_repo), carRepo(car_repo) {
+CustomerController::CustomerController(const shared_ptr<IRepo<Customer>> &customer_repo,
+                                       const shared_ptr<IRepo<Car>> &car_repo,
+                                       const shared_ptr<IRepo<Order>> &order_repo)
+        : customerRepo(customer_repo), carRepo(car_repo), orderRepo(order_repo){}
+
+
+
+
+CustomerController::CustomerController() {
+    this->customerRepo = make_shared<Repo<Customer>>("../../Repository/CustomerRepo.txt");
+    this->carRepo = make_shared<Repo<Car>>("../../Repository/CarRepo.txt");
+    this->orderRepo = make_shared<Repo<Order>>("../../Repository/OrderRepo.txt");
 }
+
 
 bool CustomerController::add_car_to_favorites(int customer_id, const Car &car) {
     try {
@@ -48,6 +59,9 @@ bool CustomerController::remove_car_from_favorites(int customer_id, const Car &c
         return false;
     }
 }
+
+
+
 
 
 
