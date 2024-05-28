@@ -88,6 +88,16 @@ float Order_Controller::get_total_price_month(int month) const {
 }
 
 
+bool Order_Controller::update_reservation(const Order& updated_order) {
+    try {
+        order_repo->update(updated_order.get_id(), updated_order);
+        return true;
+    } catch (const std::exception& e) {
+        return false;
+    }
+}
+
+
 bool Order_Controller::give_order_to_coworker(Order& order) {
     try {
         Date birthday(1, 1, 1990); // Exemplu de dată de naștere

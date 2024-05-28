@@ -17,13 +17,16 @@ private:
     shared_ptr<IRepo<Employee>> employee_repo;
     shared_ptr<IRepo<Car>> car_repo;
     shared_ptr<IRepo<Order>> order_repo;
-
+    int find_next_id();
+    string make_initials(string f_name, string l_name);
 public:
     //I would say this isn't necessary, so that we don't include the Repos in the UI as well, instead use a normal constructor
 //    EmployeeController(IRepo<Employee>& emp_repo, IRepo<Car>& car_repo, IRepo<Order>& order_repo)
 //            : employee_repo(emp_repo), car_repo(car_repo), order_repo(order_repo) {}
     EmployeeController();
     vector<Employee> get_all_employees();
+    bool create_employee(string mail, string pass, string f_name, string l_name,
+                         string ph, string address, string pos, float salary ,int day, int month, int year);
     float get_employee_salary(int employee_id);
     bool disable_employee(int employee_id);
     bool enable_employee(int employee_id);

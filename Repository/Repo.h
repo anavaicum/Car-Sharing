@@ -31,9 +31,9 @@ private:
 
     void save_to_CSV(const string& filename) {
         ofstream file(filename);
-        if (!file.is_open()) {
-            throw exception();
-        }
+//        if (!file.is_open()) {
+//            throw exception();
+//        }
 
         // Write data
         for (const auto &obj: entities) {
