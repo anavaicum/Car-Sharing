@@ -4,8 +4,9 @@
 #include <unordered_map>
 #include <string.h>
 
-Car::Car(string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
-         float pricePerDay, fuel_type fuel, transmission trans, string color, const vector<string> &remarks) : license_plate(std::move(licensePlate)),
+Car::Car(int _id,string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
+         float pricePerDay, fuel_type fuel, transmission trans, string color, const vector<string> &remarks) : Entity(_id),
+                                                                                                               license_plate(std::move(licensePlate)),
                                                                                                                model(std::move(model)), brand(std::move(brand)),
                                                                                                                year_of_first_reg(yearOfFirstReg),
                                                                                                                mileage(mileage),
@@ -92,19 +93,20 @@ void Car::setTrans(Car::transmission Trans) {
     Car::trans = Trans;
 }
 
-string Car::to_CSV() {
-    //"License plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
+string Car::to_CSV() const {
+    //"ID, license plate,model,brand,year of first registration,mileage,price per day,fuel type,transmission,color,remarks\n";
     stringstream ss;
-    ss << license_plate << ","
-        << model << ","
-        << brand << ","
-        << year_of_first_reg << ","
-        << fixed << setprecision(2) << mileage << ","
-        << fixed << setprecision(2) << price_per_day << ","
-        << fuelTypeToString(fuel) << ","
-        << transmissionToString(trans) << ","
-        << color << ","
-        << vectorToString(remarks) << "\n";
+    ss << get_id() << ","
+       << license_plate << ","
+       << model << ","
+       << brand << ","
+       << year_of_first_reg << ","
+       << fixed << setprecision(2) << mileage << ","
+       << fixed << setprecision(2) << price_per_day << ","
+       << fuelTypeToString(fuel) << ","
+       << transmissionToString(trans) << ","
+       << color << ","
+       << vectorToString(remarks) << "\n";
     return ss.str();
 }
 
@@ -139,11 +141,12 @@ string Car::vectorToString(const vector<string> &vec) {
 
 Car Car::From_String_To_Object(const string &string_of_obj, char delim) {
     stringstream ss(string_of_obj);
-    string license, mod, br, year_of_rg, ml, ppd, fu, tra, col, rm;
+    string idstring, license, mod, br, year_of_rg, ml, ppd, fu, tra, col, rm;
     vector<string> rm_vec;
+    int id;
     int year;
     float mil, price;
-
+    getline(ss,idstring,delim);
     getline(ss, license, delim);
     getline(ss, mod, delim);
     getline(ss, br, delim);
@@ -155,6 +158,7 @@ Car Car::From_String_To_Object(const string &string_of_obj, char delim) {
     getline(ss, col, delim);
     getline(ss, rm, delim);
 
+    id=stoi(idstring);
     year = stoi(year_of_rg);
     mil = stof(ml);
     price = stof(ppd);
@@ -171,7 +175,7 @@ Car Car::From_String_To_Object(const string &string_of_obj, char delim) {
     if(rm_vec.size() == 1 && rm_vec[0] == "\n"){
         rm_vec.pop_back();
     }
-    Car obj(license, mod, br, year, mil, price,
+    Car obj(id,license, mod, br, year, mil, price,
             ft, tr, col, rm_vec);
     return obj;
 }

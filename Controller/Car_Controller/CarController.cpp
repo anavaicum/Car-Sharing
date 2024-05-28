@@ -1,8 +1,9 @@
 #include "../../Controller/Car_Controller/CarController.h"
 #include <algorithm> // Include this header for std::sort
 
-Car_Controller::Car_Controller(const std::shared_ptr<IRepo<Car>> &repo) : carRepo(repo) {
-    load_cars();
+// Constructor
+Car_Controller::Car_Controller(const string& type, shared_ptr<IRepo<Car>> repo) : type(type), car_repo(repo) {
+    this->car_repo = make_shared<Repo<Car>>("../../Repository/CarRepo.txt");
 }
 
 Car Car_Controller::search_by_license_plate(const std::string &license_plate) const {

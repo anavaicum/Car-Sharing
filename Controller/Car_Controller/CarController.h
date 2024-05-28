@@ -3,6 +3,7 @@
 
 #include "../../Repository/IRepo.h"
 #include "../../Domain/Car_Domain/Car.h"
+#include "../../Repository/Repo.h"
 #include <vector>
 #include <string>
 #include <memory>
@@ -10,6 +11,8 @@
 class Car_Controller {
 private:
     std::shared_ptr<IRepo<Car>> carRepo;
+    shared_ptr<IRepo<Car>> car_repo;
+    string type; // Field to store type of controller
 
 public:
     Car_Controller(const std::shared_ptr<IRepo<Car>> &repo);

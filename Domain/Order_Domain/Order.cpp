@@ -1,19 +1,12 @@
 #include "Order.h"
 
-Order::Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate,
+Order::Order(int _id, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate,
              float totalPrice,
              const vector<string> &remarks, bool isReserved, vector<Car> cars, Employee employee, Customer customer)
-        : order_id(orderId), order_date(orderDate), stat(stat), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
+        : Entity(_id), order_date(orderDate), stat(stat), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
           remarks(remarks), is_reserved(isReserved), car(cars), employee(employee), customer(customer) {
 }
 
-int Order::getOrderId() const {
-    return order_id;
-}
-
-void Order::setOrderId(int orderId) {
-    order_id = orderId;
-}
 
 const Date &Order::getOrderDate() const {
     return order_date;
@@ -109,7 +102,7 @@ string Order::to_CSV() const {
 
 
     stringstream ss;
-    ss << order_id << ","
+    ss << get_id() << ","
         << order_date.getDay() << "/" << order_date.getMonth() << "/" << order_date.getYear() << ","
         << statusToString(stat) << ","
         << begin_date.getDay() << "/" << begin_date.getMonth() << "/" << begin_date.getYear() << ","
