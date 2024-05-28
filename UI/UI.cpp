@@ -1,18 +1,12 @@
 #include "UI.h"
-using namespace std;
 #include <iostream>
+using namespace std;
 
 void UI::show_menu() {
     cout << "Welcome!\n"
             "1. Log in\n"
             "2. Sign up\n"
             "3. Exit";
-    cout << "Choose next!\n"
-            "1. Show all workers\n"
-            "2. Search worker\n"
-            "3. Show change worker password\n"
-            "4. Show customer modifications\n"
-            "5. Show search customer\n"
 }
 
 void UI::show_login() {
@@ -22,7 +16,48 @@ void UI::show_login() {
     cin >> email;
     cout << "Enter your password: ";
     cin >> password;
-    controller.login(email, password); //functie din controller
+//    controller.login(email, password); //functie din controller
+    if (validate_login(email, password)) {
+        determine_user_type_and_showMenu(email);
+    } else {
+        std::cout << "Invalid email or password!" << std::endl;
+    }
+}
+
+void UI::determine_user_type_and_showMenu(std::string email) {
+    for (auto& customer : customers) {
+        if (customer.get_email() == email) {
+            show_customer_menu();
+            return;
+        }
+    }
+
+    for (auto& worker : workers) {
+        if (worker.get_email() == email) {
+            if (worker.is_administrator()) {
+                show_admin_menu();
+            } else {
+                show_employee_menu();
+            }
+            return;
+        }
+    }
+
+    std::cout << "User not found!" << std::endl;
+}
+
+bool UI::validate_login(string email, string password) {
+    for (const auto& customer : customers) {
+        if (customer.get_email() == email && customer.get_password() == password) {
+            return true;
+        }
+    }
+    for (const auto& worker : workers) {
+        if (worker.get_email() == email && worker.get_password() == password) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void UI::show_signup() {
@@ -81,6 +116,18 @@ void UI::show_signup() {
 
 }
 
+void UI::show_customer_menu() {
+
+}
+
+void UI::show_employee_menu() {
+
+}
+
+void UI::show_admin_menu() {
+
+}
+
 void UI::run() {
     while(true) {
         show_menu();
@@ -115,101 +162,3 @@ void UI::show_ordered_cars_by_customer() {
     cin >> id;
     controller.car_repository; // functie pentru afisarea masinilor din repo
     }
-
-void UI::show_all_workers() {
-        string all_employees;
-        cout << "The list of the workers: " << endl;
-        cin >> all_workers; //vector dinamic din controller
-        controller.worker_repository;
-    }
-void UI::search_worker() {
-    int opt;
-    if (opt == 1){
-        string email;
-        cout << "Enter the worker's email: ";
-        cin >> email;
-        controller.worker_repository;
-    }
-    if (opt == 2){
-        string full_name;
-        cout << "Enter the worker's full name: ";
-        cin >> full_name;
-        controller.worker_repository;
-    }
-    if (opt == 3){
-        string birthday;
-        cout << "Enter the worker's birthday: ";
-        cin >> birthday;
-        controller.worker_repository;
-    }
-}
-void UI::show_change_worker_password() {
-    string password;
-    string new_password;
-
-}
-void UI::customer_modifications(){
-    int opt;
-    if (opt == 1){
-        string email;
-        string password;
-        string first_name;
-        string last_name;
-        string phone;
-        string address;
-        cout << "Enter your mail: ";
-        cin >> email;
-        cout << "Enter your password: ";
-        cin >> password;
-        cout << "Enter your first name: ";
-        cin >> first_name;
-        cout << "Enter your last name: ";
-        cin >> last_name;
-        cout << "Enter your phone number: ";
-        cin >> phone;
-        cout << "Enter your address: ";
-        cin >> address;
-        controller.customer_signup(email, password, first_name, last_name, phone, address);
-    }
-    if (opt == 2){
-        //update customer
-        controller.customer_repository;
-    }
-    if (opt == 3){
-        //delete customer
-        controller.customer_repository;
-    }
-}
-void search_customer(){
-    int opt;
-    if (opt == 1){
-        string email;
-        cout << "Enter the customer's email: ";
-        cin >> email;
-        controller.customer_repository;
-    }
-    if (opt == 2){
-        string phone;
-        cout << "Enter the customer's phone number: ";
-        cin >> phone;
-        controller.customer_repository;
-    }
-    if (opt == 3){
-        string name;
-        cout << "Enter the customer's name: ";
-        cin >> name;
-        controller.customer_repository;
-    }
-}
-
-
-string license_plate;
-cout << "Write the license plate: " << endl;
-cin >> license_plate;
-controller.search_by_license_plate(license_plate);
-"10. Show anonymise GDPR\n"
-"14. Show customer by ordered car\n"
-"15. Show create car\n"
-"16. Show update car\n"
-"17. Show delete car\n"
-"18. Show deactivate car\n"

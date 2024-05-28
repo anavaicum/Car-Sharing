@@ -5,7 +5,10 @@
 
 using namespace std;
 
-CustomerUI::CustomerUI() {}
+CustomerUI::CustomerUI() {
+    this->customercontroller=CustomerController();
+//    this->carcontroller=Car_Controller();
+}
 
 void CustomerUI::show_cars(const vector<Car>& cars) {
     cout << "List of Cars:\n";

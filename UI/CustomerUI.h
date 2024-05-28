@@ -6,11 +6,15 @@
 #include "../Domain/Car_Domain/Car.h"
 #include "../Domain/Order_Domain/Order.h"
 #include "../Domain/Customer_Domain/Customer.h"
+#include "../Controller/Customer_Controller/CustomerController.h"
+#include "../Controller/Car_Controller/CarController.h"
 
 class CustomerUI {
 private:
     std::vector<Customer> customers;
     std::vector<Order> orders;
+    CustomerController customercontroller;
+    //Car_Controller carcontroller;
 
 public:
     CustomerUI();
