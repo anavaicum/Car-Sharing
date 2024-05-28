@@ -25,6 +25,9 @@ public:
     EmployeeController();
     vector<Employee> get_all_employees();
     float get_employee_salary(int employee_id);
+    std::vector<Employee> search_by_email(const std::string& email) const;
+    std::vector<Employee> search_by_full_name(const std::string& first_name, const std::string& last_name) const;
+    std::vector<Employee> search_between_dates(const Date& start_date, const Date& end_date) const;
 };
 
 
