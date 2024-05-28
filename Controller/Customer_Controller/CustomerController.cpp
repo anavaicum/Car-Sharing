@@ -61,30 +61,6 @@ bool CustomerController::remove_car_from_favorites(int customer_id, const Car &c
     }
 }
 
-Customer CustomerController::search_by_phone(const std::string& phone) const {
-    auto customers = customerRepo->get_all();
-    auto it = std::find_if(customers.begin(), customers.end(), [&phone](const Customer& customer) {
-        return customer.get_phone() == phone;
-    });
-
-    if (it != customers.end()) {
-        return *it;
-    }
-
-    throw std::runtime_error("Customer with the given phone number not found.");
-}
-
-
-std::vector<Customer> CustomerController::search_by_name(const std::string& first_name, const std::string& last_name) const {
-    auto customers = customerRepo->get_all();
-    std::vector<Customer> result;
-    std::copy_if(customers.begin(), customers.end(), std::back_inserter(result), [&first_name, &last_name](const Customer& customer) {
-        return customer.get_first_name() == first_name && customer.get_last_name() == last_name;
-    });
-
-    return result;
-}
-
 
 std::vector<Customer> CustomerController::search_by_car(const Car& car) const {
     auto customers = customerRepo->get_all();
@@ -108,6 +84,90 @@ std::vector<Customer> CustomerController::search_by_car(const Car& car) const {
     }
 
     return result;
+
+vector<Car> CustomerController::get_favorites(int customer_id)
+{
+    vector<Car> favorites;
+    Customer customer = customerRepo->get_by_Id(customer_id);
+    favorites = customer.get_favorites();
+    return favorites;
+}
+
+bool CustomerController::create_customer(Customer customer) {
+
+    return customerRepo->add(customer);
+}
+
+bool CustomerController::update_customer(int customer_id, Customer customer) {
+    return customerRepo->update(customer_id,customer);
+}
+
+
+vector<Customer> CustomerController::get_all_customers() {
+    return customerRepo->get_all();
+}
+
+
+bool CustomerController::delete_customer(int customer_id) {
+    return customerRepo->delete_by_id(customer_id);
+}
+
+bool CustomerController::GDPR_customer(int customer_id) {
+    Customer customer=customerRepo->get_by_Id(customer_id);
+    return customer.is_GDPRdeleted();
+}
+
+vector<Customer> CustomerController::get_all_customers_sorted() {
+    vector<Customer> customers=customerRepo->get_all();
+    sort(customers.begin(), customers.end(), [](const Customer &customer1, const Customer &customer2) {
+        return customer1.get_last_name() < customer2.get_last_name();
+    });
+
+
+    return customers;
+}
+
+Customer CustomerController::search_by_email(string email) {
+    vector<Customer> customers=customerRepo->get_all();
+
+    for(const auto &customer:customers)
+    {
+        if(customer.get_email()==email)
+            return customer;
+    }
+}
+
+Customer CustomerController::search_by_phone(string phone) {
+    vector<Customer> customers=customerRepo->get_all();
+
+    for(const auto &customer:customers)
+    {
+        if(customer.get_phone()==phone)
+            return customer;
+    }
+}
+
+Customer CustomerController::search_by_name(string first_name, string last_name) {
+    vector<Customer> customers=customerRepo->get_all();
+
+    for(const auto &customer:customers)
+    {
+        if(customer.get_first_name()==first_name && customer.get_last_name()==last_name)
+            return customer;
+    }
+}
+
+
+
+bool CustomerController::create_customer(const Customer& customer) {
+    try {
+        customerRepo->add(customer);
+        return true;
+    } catch (const std::exception& e) {
+        //std::cerr << "Failed to create customer: " << e.what() << std::endl;
+        return false;
+    }
+
 }
 
 
