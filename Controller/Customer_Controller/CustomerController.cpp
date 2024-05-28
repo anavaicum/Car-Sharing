@@ -97,6 +97,18 @@ vector<Customer> CustomerController::get_all_customers_sorted() {
     return customers;
 }
 
+Customer CustomerController::search_by_email(string email) {
+    vector<Customer> customers=customerRepo->get_all();
+
+    for(const auto &customer:customers)
+    {
+        if(customer.get_email()==email)
+            return customer;
+    }
+
+
+}
+
 
 
 
