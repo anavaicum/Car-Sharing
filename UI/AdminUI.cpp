@@ -43,114 +43,114 @@ void AdminUI::create_worker() {
 }
 
 void AdminUI::update_worker() {
-    string email;
-    cout << "Worker's email to update: ";
-    cin >> email;
+    int id;
+    cout << "Worker's id to update: ";
+    cin >> id;
 
     for (auto& worker: workers) {
-        if (worker.get_email() == email){
+        if (worker.get_id() == id){
             //TODO: WHAT DO I UPDATE? :((
             cout << "Worker updated!" << endl;
             break;
         } else {
-            cout << "Worker with given email not found!" << endl;
+            cout << "Worker with given id not found!" << endl;
         }
     }
 }
 
 void AdminUI::activate_worker() {
-    string email;
-    cout << "Worker's email to activate: ";
-    cin >> email;
+    int id;
+    cout << "Worker's id to activate: ";
+    cin >> id;
 
     for (auto& worker: workers) {
-        if (worker.get_email() == email){
+        if (worker.get_id() == id){
             worker.activate(true);
             cout << "Worker activated!" << endl;
             break;
         } else {
-            cout << "Worker with given email not found!" << endl;
+            cout << "Worker with given id not found!" << endl;
         }
     }
 }
 
 void AdminUI::deactivate_worker() {
-    string email;
-    cout << "Worker's email to deactivate: ";
-    cin >> email;
+    int id;
+    cout << "Worker's id to deactivate: ";
+    cin >> id;
 
     for (auto& worker: workers) {
-        if (worker.get_email() == email){
+        if (worker.get_id() == id){
             worker.deactivate(false);
             cout << "Worker deactivated!" << endl;
             break;
         } else {
-            cout << "Worker with given email not found!" << endl;
+            cout << "Worker with given id not found!" << endl;
         }
     }
 }
 
 void AdminUI::delete_worker() {
-    string email;
-    cout << "Worker's email to delete: ";
-    cin >> email;
+    int id;
+    cout << "Worker's id to delete: ";
+    cin >> id;
     for (auto worker = workers.begin(); worker != workers.end(); worker++){
-        if (worker->get_email() == email) {
+        if (worker->get_id() == id) {
             workers.erase(worker);
             cout << "Worker deleted!" << endl;
             break;
         } else {
-            cout << "Worker with given email not found!" << endl;
+            cout << "Worker with given id not found!" << endl;
         }
     }
 }
 
 void AdminUI::give_admin_rights() {
-    string email;
-    cout << "Worker's email to give admin rights to: ";
-    cin >> email;
+    int id;
+    cout << "Worker's id to give admin rights to: ";
+    cin >> id;
 
     for (auto& worker: workers) {
-        if (worker.get_email() == email){
+        if (worker.get_id() == id){
             worker.set_admin(true);
             cout << "Worker is now admin!" << endl;
             break;
         } else {
-            cout << "Worker with given email not found!" << endl;
+            cout << "Worker with given id not found!" << endl;
         }
     }
 }
 
 void AdminUI::worker_salary() {
-    string email;
-    cout << "Worker's email to view salary: ";
-    cin >> email;
+    int id;
+    cout << "Worker's id to view salary: ";
+    cin >> id;
 
     for (auto& worker: workers) {
-        if (worker.get_email() == email){
+        if (worker.get_id() == id){
             cout << "Worker's salary: " << worker.get_salary() << endl;
             break;
         } else {
-            cout << "Worker with given email not found!" << endl;
+            cout << "Worker with given id not found!" << endl;
         }
     }
 }
 
 void AdminUI::change_worker_salary() {
-    string email;
-    cout << "Worker's email to change salary: ";
-    cin >> email;
+    int id;
+    cout << "Worker's id to change salary: ";
+    cin >> id;
     float new_salary;
 
     for (auto& worker: workers) {
-        if (worker.get_email() == email){
+        if (worker.get_id() == id){
             cout << "Enter new salary: ";
             cin >> new_salary;
             worker.set_salary(new_salary);
             cout << "Worker's salary has been updated!" << endl;
             break;
         } else {
-            cout << "Worker with given email not found!" << endl;
+            cout << "Worker with given id not found!" << endl;
         }
     }
 }
