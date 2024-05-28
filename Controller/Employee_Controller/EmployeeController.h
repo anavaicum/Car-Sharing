@@ -24,6 +24,10 @@ public:
 //            : employee_repo(emp_repo), car_repo(car_repo), order_repo(order_repo) {}
     EmployeeController();
     float get_employee_salary(int employee_id);
+
+    bool disable_employee(int employee_id);
+    bool enable_employee(int employee_id);
+    bool delete_employee(int employee_id);
 };
 
 
