@@ -90,14 +90,6 @@ void Order::setStat(Order::status Stat) {
 
 string Order::to_CSV() const {
 
-    //bool fileExists = filesystem::exists(filename);
-
-
-    // Write the header only if the file does not exist
-//    if (!fileExists) {
-//        file << "Order ID,order Date,status,begin date,end date,total price,is reserved,car,customer,employee,remarks\n";
-//    }
-
 //    "Order ID,order Date,status,begin date,end date,total price,remarks,is reserved,car license plate,customer id,employee id,car license plate,customer id,employee id\n";
 
 
@@ -245,5 +237,9 @@ Order::status Order::stringToStatusEnum(string status_string) {
         return it->second;
     }
     return Unknown;
+}
+
+void Order::setStat(string st) {
+    stat = stringToStatusEnum(st);
 }
 

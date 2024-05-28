@@ -45,10 +45,6 @@ public:
 
     void setCar(vector<Car> new_cars);
 
-    int getOrderId() const;
-
-    void setOrderId(int orderId);
-
     const Date &getOrderDate() const;
 
     void setOrderDate(const Date &orderDate);
@@ -84,6 +80,8 @@ public:
     status getStat() const;
 
     void setStat(status stat);
+
+    void setStat(string st);
 
     string to_CSV() const;
 
