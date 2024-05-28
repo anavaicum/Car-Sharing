@@ -16,7 +16,7 @@ void UI::show_menu() {
     cout << "Welcome!\n"
             "1. Log in\n"
             "2. Sign up\n"
-            "3. Exit";
+            "3. Exit\n";
 }
 
 void UI::show_user_type() {
@@ -30,14 +30,14 @@ void UI::login_customer() {
     string password;
 
     while(true) {
-        cout << "Enter your mail: ";
+        cout << "Enter your email: ";
         cin >> email;
-        cout << "Enter your password: ";
+        cout << "\nEnter your password: ";
         cin >> password;
         if(validate_login_customer(email, password)){
             return;
         }
-        cout << "Incorrect Information\n";
+        cout << "\nIncorrect Information\n";
     }
 }
 
@@ -46,14 +46,14 @@ void UI::login_employee() {
     string password;
 
     while(true) {
-        cout << "Enter your mail: ";
+        cout << "Enter your email: ";
         cin >> email;
-        cout << "Enter your password: ";
+        cout << "\nEnter your password: ";
         cin >> password;
         if(validate_login_employee(email, password)){
             return;
         }
-        cout << "Incorrect Information\n";
+        cout << "\nIncorrect Information\n";
     }
 }
 
@@ -81,63 +81,22 @@ bool UI::validate_login_employee(string email, string password) {
 void UI::show_signup() {
     int opt = 0;
     cout << "1. Customer\n"
-            "2. Worker\n";
+            " 2. Worker\n"
+            "Enter your choice: ";
     cin >> opt;
     if (opt == 1){
-        string email;
-        string password;
-        string first_name;
-        string last_name;
-        string phone;
-        string address;
-        cout << "Enter your mail: ";
-        cin >> email;
-        cout << "Enter your password: ";
-        cin >> password;
-        cout << "Enter your first name: ";
-        cin >> first_name;
-        cout << "Enter your last name: ";
-        cin >> last_name;
-        cout << "Enter your phone number: ";
-        cin >> phone;
-        cout << "Enter your address: ";
-        cin >> address;
-        //controller.customer_signup(email, password, first_name, last_name, phone, address); // din controller
+        signup_customer();
     }
     if (opt == 2){
-        string email;
-        string password;
-        string first_name;
-        string last_name;
-        string phone;
-        string address;
-        string position;
-        string birthday;
-        cout << "Enter your mail: ";
-        cin >> email;
-        cout << "Enter your password: ";
-        cin >> password;
-        cout << "Enter your first name: ";
-        cin >> first_name;
-        cout << "Enter your last name: ";
-        cin >> last_name;
-        cout << "Enter your phone number: ";
-        cin >> phone;
-        cout << "Enter your address: ";
-        cin >> address;
-        cout << "Enter your position: ";
-        cin >> position;
-        cout << "Enter your birthday: ";
-        cin >> birthday;
-        //controller.worker_signup(email, password, first_name, last_name, phone, address, position, birthday) // din controller
+        signup_employee();
     }
 
 }
 
 
 void UI::show_customer_menu() {
-    CustomerUI customer;
-    customer.show_customer_menu();
+//    CustomerUI customer;
+//    customer.show_customer_menu();
 }
 
 
@@ -166,13 +125,74 @@ int UI::choosing_user_type() {
     }
 }
 
+void UI::signup_customer() {
+    string email;
+    string password;
+    string first_name;
+    string last_name;
+    string phone;
+    string address;
+    cout << "Enter your mail: ";
+    cin >> email;
+    cout << "Enter your password: ";
+    cin >> password;
+    cout << "Enter your first name: ";
+    cin >> first_name;
+    cout << "Enter your last name: ";
+    cin >> last_name;
+    cout << "Enter your phone number: ";
+    cin >> phone;
+    cout << "Enter your address: ";
+    cin >> address;
+    cus_controller.create_customer(email, password, first_name, last_name, phone, address);
+}
+
+void UI::signup_employee() {
+    string email;
+    string password;
+    string first_name;
+    string last_name;
+    string phone;
+    string address;
+    string position;
+    int day;
+    int month;
+    int year;
+    float salary;
+    cout << "Enter your mail: ";
+    cin >> email;
+    cout << "Enter your password: ";
+    cin >> password;
+    cout << "Enter your first name: ";
+    cin >> first_name;
+    cout << "Enter your last name: ";
+    cin >> last_name;
+    cout << "Enter your phone number: ";
+    cin >> phone;
+    cout << "Enter your address: ";
+    cin >> address;
+    cout << "Enter your position: ";
+    cin >> position;
+    cout << "Enter your day of birth: ";
+    cin >> day;
+    cout << "Enter your month of birth: ";
+    cin >> month;
+    cout << "Enter your year of birth: ";
+    cin >> year;
+    cout << "Enter your salary: ";
+    cin >> salary;
+    emp_controller.create_employee(email, password, first_name,
+                                   last_name, phone, address, position,
+                                   salary, day, month, year);
+}
+
 
 void UI::run() {
     while(true) {
         show_menu();
         int choice;
         int user_type;
-        cout << "Enter your choice: ";
+        cout << "\nEnter your choice: ";
         cin >> choice;
 
         if (choice == 1) {
@@ -184,7 +204,7 @@ void UI::run() {
             }
             else{
                 login_employee();
-
+                //Needs employee UI
             }
 
         } else if (choice == 2) {

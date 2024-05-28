@@ -10,10 +10,10 @@ CustomerController::CustomerController(const shared_ptr<IRepo<Customer>> &custom
 
 
 CustomerController::CustomerController() {
-    repo = make_shared<Repo<Customer>>("../../Repository/CustomerRepo.txt");
-    this->customerRepo = make_shared<Repo<Customer>>("../../Repository/CustomerRepo.txt");
-    this->carRepo = make_shared<Repo<Car>>("../../Repository/CarRepo.txt");
-    this->orderRepo = make_shared<Repo<Order>>("../../Repository/OrderRepo.txt");
+    repo = make_shared<Repo<Customer>>("../Repository/CustomerRepo.txt");
+    this->customerRepo = make_shared<Repo<Customer>>("../Repository/CustomerRepo.txt");
+    this->carRepo = make_shared<Repo<Car>>("../Repository/CarRepo.txt");
+    this->orderRepo = make_shared<Repo<Order>>("../Repository/OrderRepo.txt");
 }
 
 
@@ -94,7 +94,7 @@ vector<Car> CustomerController::get_favorites(int customer_id)
     return favorites;
 }
 
-bool CustomerController::create_customer(Customer customer) {
+bool CustomerController::create_customer(const Customer& customer) {
 
     return customerRepo->add(customer);
 }
@@ -158,18 +158,30 @@ Customer CustomerController::search_by_name(string first_name, string last_name)
     }
 }
 
+bool CustomerController::create_customer(string mail, string pass, string f_name, string l_name,
+                                         string ph, string address) {
 
 
-bool CustomerController::create_customer(const Customer& customer) {
-    try {
-        customerRepo->add(customer);
-        return true;
-    } catch (const std::exception& e) {
-        //std::cerr << "Failed to create customer: " << e.what() << std::endl;
-        return false;
-    }
+    Customer cus = Customer(find_next_id(), mail, pass, f_name,
+                            l_name, ph, address, false, vector<Car>());
 
+    customerRepo->add(cus);
+
+    return true;
 }
+
+int CustomerController::find_next_id() {
+    vector<Customer> customers = customerRepo->get_all();
+    int max = 0;
+    for(auto customer : customers){
+        if(max < customer.get_id()){
+            max = customer.get_id();
+        }
+    }
+    return max + 1;
+}
+
+
 
 
 
