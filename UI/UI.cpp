@@ -175,7 +175,7 @@ void UI::run() {
             user_type = choosing_user_type();
             if(user_type == 1){
                 login_customer();
-                customerUi.show_customer_menu();
+                //customerUi.show_customer_menu();
             }
             else{
                 login_employee();

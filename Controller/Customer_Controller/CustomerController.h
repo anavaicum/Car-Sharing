@@ -30,6 +30,8 @@ public:
     bool add_car_to_favorites(int customer_id, const Car &car);
     bool remove_car_from_favorites(int customer_id, const Car &car);
 
+
+    std::vector<Customer> search_by_car(const Car& car) const;
     bool create_customer(const Customer& customer);
 
     vector<Car> get_favorites(int customer_id);
@@ -41,6 +43,7 @@ public:
     Customer search_by_email(string email);
     Customer search_by_phone(string phone);
     Customer search_by_name(string first_name,string last_name);
+
 };
 
 

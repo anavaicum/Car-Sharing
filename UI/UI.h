@@ -6,13 +6,13 @@
 #include "../Controller/Order_Controller/OrderController.h"
 #include "../Controller/Customer_Controller/CustomerController.h"
 #include "../Controller/Employee_Controller/EmployeeController.h"
-#include "CustomerUI.h"
+//#include "CustomerUI.h"
 
 using namespace std;
 
 class UI {
 private:
-    CustomerUI customerUi;
+    //CustomerUI customerUi;
     EmployeeController emp_controller;
     CustomerController cus_controller;
     vector <Customer> customers;

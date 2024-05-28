@@ -85,6 +85,13 @@ float Order_Controller::get_total_price_month(int month) const {
     return total_price;
 }
 
+<<<<<<<<< Temporary merge branch 1
+bool Order_Controller::update_reservation(const Order& updated_order) {
+    try {
+        order_repo->update(updated_order.get_id(), updated_order);
+        return true;
+    } catch (const std::exception& e) {
+=========
 bool Order_Controller::give_order_to_coworker(Order& order) {
     try {
         Date birthday(1, 1, 1990); // Exemplu de dată de naștere
@@ -97,10 +104,26 @@ bool Order_Controller::give_order_to_coworker(Order& order) {
         return true;
     } catch (const std::exception& e) {
         //std::cerr << "Failed to assign order to coworker: " << e.what() << std::endl;
+>>>>>>>>> Temporary merge branch 2
         return false;
     }
 }
 
+<<<<<<<<< Temporary merge branch 1
+std::vector<Order> Order_Controller::get_orders_between_dates(const Date& start_date, const Date& end_date) const {
+    auto orders = order_repo->get_all();
+    std::vector<Order> filtered_orders;
+
+    for (const auto& order : orders) {
+        Date order_date = order.getOrderDate();
+        if (order_date >= start_date && order_date <= end_date) {
+            filtered_orders.push_back(order);
+        }
+    }
+
+    return filtered_orders;
+}
+=========
 bool Order_Controller::delete_reservation(Order& order) {
     try {
         order.setIsReserved(false);
@@ -131,3 +154,4 @@ bool Order_Controller::make_reservation(Order& order, Customer& customer) {
         return false;
     }
 }
+>>>>>>>>> Temporary merge branch 2
