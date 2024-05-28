@@ -66,9 +66,9 @@ std::vector<Customer> CustomerController::search_by_car(const Car& car) const {
     auto customers = customerRepo->get_all();
     std::vector<Customer> result;
 
-    for (const auto& customer : customers) {
-        const auto& favorites = customer.get_favorites();
-        if (std::any_of(favorites.begin(), favorites.end(), [&car](const Car& favoriteCar) {
+    for (const auto &customer: customers) {
+        const auto &favorites = customer.get_favorites();
+        if (std::any_of(favorites.begin(), favorites.end(), [&car](const Car &favoriteCar) {
             return favoriteCar.getLicensePlate() == car.getLicensePlate() &&
                    favoriteCar.getModel() == car.getModel() &&
                    favoriteCar.getBrand() == car.getBrand() &&
@@ -84,6 +84,7 @@ std::vector<Customer> CustomerController::search_by_car(const Car& car) const {
     }
 
     return result;
+}
 
 vector<Car> CustomerController::get_favorites(int customer_id)
 {
