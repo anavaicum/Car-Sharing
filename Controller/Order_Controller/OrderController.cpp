@@ -85,25 +85,49 @@ float Order_Controller::get_total_price_month(int month) const {
     return total_price;
 }
 
-bool Order_Controller::update_reservation(const Order& updated_order) {
+bool Order_Controller::give_order_to_coworker(Order& order) {
     try {
-        order_repo->update(updated_order.get_id(), updated_order);
+        Date birthday(1, 1, 1990); // Exemplu de dată de naștere
+        Employee* coworker = new Employee(1, "coworker@example.com", "password", "John", "Doe", "Technician", birthday, "JD", 3000.0f, false);
+        order.setEmployee(*coworker);
+
+        order_repo->update(order.get_id(), order);
+
+        delete coworker; // Eliberarea memoriei alocate
         return true;
     } catch (const std::exception& e) {
+        //std::cerr << "Failed to assign order to coworker: " << e.what() << std::endl;
         return false;
     }
 }
 
-std::vector<Order> Order_Controller::get_orders_between_dates(const Date& start_date, const Date& end_date) const {
-    auto orders = order_repo->get_all();
-    std::vector<Order> filtered_orders;
+bool Order_Controller::delete_reservation(Order& order) {
+    try {
+        order.setIsReserved(false);
 
-    for (const auto& order : orders) {
-        Date order_date = order.getOrderDate();
-        if (order_date >= start_date && order_date <= end_date) {
-            filtered_orders.push_back(order);
-        }
+        // Creare obiect Customer gol
+        Customer empty_customer;
+        order.setCustomer(empty_customer);
+
+        order_repo->update(order.get_id(), order);
+
+        return true;
+    } catch (const std::exception& e) {
+        //std::cerr << "Failed to delete reservation: " << e.what() << std::endl;
+        return false;
     }
+}
 
-    return filtered_orders;
+bool Order_Controller::make_reservation(Order& order, Customer& customer) {
+    try {
+        order.setCustomer(customer);
+        order.setIsReserved(true);
+
+        order_repo->update(order.get_id(), order);
+
+        return true;
+    } catch (const std::exception& e) {
+        //std::cerr << "Failed to make reservation: " << e.what() << std::endl;
+        return false;
+    }
 }
