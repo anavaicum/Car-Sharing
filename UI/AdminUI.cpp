@@ -49,7 +49,18 @@ void AdminUI::update_worker() {
 
     for (auto& worker: workers) {
         if (worker.get_id() == id){
-            //TODO: WHAT DO I UPDATE? :((
+            string new_position;
+            float new_salary;
+            bool new_is_admin;
+            cout << "New position: " << endl;
+            cin >> new_position;
+            cout << "New salary: " << endl;
+            cin >> new_salary;
+            cout << "Is this worker now admin?: " << endl;
+            cin >> new_is_admin;
+            worker.set_position(new_position);
+            worker.set_salary(new_salary);
+            worker.set_is_administrator(new_is_admin);
             cout << "Worker updated!" << endl;
             break;
         } else {
@@ -152,5 +163,12 @@ void AdminUI::change_worker_salary() {
         } else {
             cout << "Worker with given id not found!" << endl;
         }
+    }
+}
+
+void AdminUI::show_all_workers() {
+    std::cout << "List of all workers:" << endl;
+    for (auto& worker : workers) {
+        std::cout << "Name: " << worker.get_first_name() << " " << worker.get_last_name() << endl;
     }
 }
