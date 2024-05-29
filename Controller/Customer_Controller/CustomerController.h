@@ -33,7 +33,6 @@ public:
 
 
     std::vector<Customer> search_by_car(const Car& car) const;
-    bool create_customer(const Customer& customer);
     bool create_customer(string mail, string pass,
                          string f_name, string l_name, string ph, string address);
     vector<Car> get_favorites(int customer_id);
