@@ -145,7 +145,8 @@ string Order::vectorToString(const vector<string> &vec) {
 string Order::CarsToString() const {
     stringstream ss;
     for(int i = 0; i < car.size(); i++){
-        ss << car[i].getLicensePlate() << "!"
+        ss << car[i].get_id() << "!"
+            <<car[i].getLicensePlate() << "!"
            << car[i].getModel() << "!"
            << car[i].getBrand() << "!"
            << car[i].getYearOfFirstReg() << "!"
