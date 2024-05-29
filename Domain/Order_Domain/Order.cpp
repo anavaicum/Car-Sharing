@@ -1,17 +1,12 @@
 #include "Order.h"
 
-Order::Order(int orderId, const Date &orderDate, const Date &beginDate, const Date &endDate, float totalPrice,
-             const vector<string> &remarks, bool isReserved, Car *car, Customer *customer, Employee *employee)
-        : order_id(orderId), order_date(orderDate), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
-          remarks(remarks), is_reserved(isReserved), car(car), customer(customer), employee(employee) {}
-
-int Order::getOrderId() const {
-    return order_id;
+Order::Order(int _id, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate,
+             float totalPrice,
+             const vector<string> &remarks, bool isReserved, vector<Car> cars, Employee employee, Customer customer)
+        : Entity(_id), order_date(orderDate), stat(stat), begin_date(beginDate), end_date(endDate), total_price(totalPrice),
+          remarks(remarks), is_reserved(isReserved), car(cars), employee(employee), customer(customer) {
 }
 
-void Order::setOrderId(int orderId) {
-    order_id = orderId;
-}
 
 const Date &Order::getOrderDate() const {
     return order_date;
@@ -49,8 +44,8 @@ const vector<string> &Order::getRemarks() const {
     return remarks;
 }
 
-void Order::setRemarks(const vector<string> &remarks) {
-    Order::remarks = remarks;
+void Order::setRemarks(const vector<string> &Remarks) {
+    Order::remarks = Remarks;
 }
 
 bool Order::isReserved() const {
@@ -61,93 +56,190 @@ void Order::setIsReserved(bool isReserved) {
     is_reserved = isReserved;
 }
 
-Car *Order::getCar() const {
+vector<Car> Order::getCar() const {
     return car;
 }
 
-void Order::setCar(Car *car) {
-    Order::car = car;
+void Order::setCar(vector<Car> c) {
+    Order::car = c;
 }
 
-Customer *Order::getCustomer() const {
+Customer Order::getCustomer() const {
     return customer;
 }
 
-void Order::setCustomer(Customer *customer) {
-    Order::customer = customer;
+void Order::setCustomer(Customer Customer) {
+    Order::customer = Customer;
 }
 
-Employee *Order::getEmployee() const {
+Employee Order::getEmployee() const {
     return employee;
 }
 
-void Order::setEmployee(Employee *employee) {
-    Order::employee = employee;
+void Order::setEmployee(Employee Employee) {
+    Order::employee = Employee;
 }
 
-
-Date::Date(int day, int month, int year) {
-    this->day = day;
-    this->month = month;
-    this->year = year;
+Order::status Order::getStat() const {
+    return stat;
 }
 
-int Date::getDay() const {
-    return this->day;
+void Order::setStat(Order::status Stat) {
+    Order::stat = Stat;
 }
 
-int Date::getMonth() const {
-    return this->month;
+string Order::to_CSV() const {
+
+//    "Order ID,order Date,status,begin date,end date,total price,remarks,is reserved,car license plate,customer id,employee id,car license plate,customer id,employee id\n";
+
+
+    stringstream ss;
+    ss << get_id() << ","
+        << order_date.getDay() << "/" << order_date.getMonth() << "/" << order_date.getYear() << ","
+        << statusToString(stat) << ","
+        << begin_date.getDay() << "/" << begin_date.getMonth() << "/" << begin_date.getYear() << ","
+        << end_date.getDay() << "/" << end_date.getMonth() << "/" <<end_date.getYear() << ","
+        << fixed << setprecision(2) << total_price << ","
+        << vectorToString(remarks) << ","
+        << is_reserved << ","
+        << CarsToString() << ","
+        << customer.Customer_To_String() << ","
+        << employee.Employee_To_string() << "\n";
+
+   return ss.str();
 }
 
-int Date::getYear() const {
-    return this->year;
-}
-
-void Date::setDay(int day) {
-    this->day = day;
-}
-
-void Date::setMonth(int month) {
-    this->month = month;
-}
-
-void Date::setYear(int year) {
-    this->year = year;
-}
-
-bool Date::operator<(const Date &rhs) const {
-//    if (day < rhs.day)
-//        return true;
-//    if (rhs.day < day)
-//        return false;
-//    if (month < rhs.month)
-//        return true;
-//    if (rhs.month < month)
-//        return false;
-//    return year < rhs.year;
-
-    if(year < rhs.year) {
-        return true;
+string Order::statusToString(Order::status s) {
+    switch (s) {
+        case Reserved: return "Reserved";
+        case Ordered: return "Ordered";
+        case Completed: return "Completed";
+        case Canceled: return "Canceled";
+        default: return "Unknown";
     }
-    if(year == rhs.year && month < rhs.month) {
-        return true;
+}
+
+string Order::vectorToString(const vector<string> &vec) {
+    stringstream ss;
+    for (size_t i = 0; i < vec.size(); ++i) {
+        ss << vec[i];
+        if (i != vec.size() - 1) {
+            ss << ";"; // Use semicolon and space as separator for readability for vector
+        }
     }
-    if(year == rhs.year && month == rhs.month && day < rhs.day) {
-        return true;
+    return ss.str();
+}
+
+string Order::CarsToString() const {
+    stringstream ss;
+    for(int i = 0; i < car.size(); i++){
+        ss << car[i].getLicensePlate() << "!"
+           << car[i].getModel() << "!"
+           << car[i].getBrand() << "!"
+           << car[i].getYearOfFirstReg() << "!"
+           << car[i].getMileage() << "!"
+           << car[i].getPricePerDay() << "!"
+           << car[i].fuelTypeToString(car[i].getFuel()) << "!"
+           << car[i].transmissionToString(car[i].getTrans()) << "!"
+           << car[i].getColor() << "!"
+           << car[i].vectorToString(car[i].getRemarks());
+
+        if (i != car.size() - 1) {
+            ss << " | "; // Use vertical bar as separator for readability
+        }
     }
-    return false;
+
+    return ss.str();
+}
+
+Order Order::From_String_To_Object(const string &string_of_obj) {
+
+    stringstream ss(string_of_obj);
+    string id_string, ord_date, status, bg_date, e_date, tot_price,
+    rm_vec, reserve, cars_vec, emp_string, cus_string;
+
+    int id;
+    Date o_date, b_date, date_end;
+    vector<Car> cars;
+    Employee emp;
+    Customer cus;
+    Order::status sa;
+    bool res;
+    float t_price;
+
+    getline(ss, id_string, ',');
+    getline(ss, ord_date, ',');
+    getline(ss, status, ',');
+    getline(ss, bg_date, ',');
+    getline(ss, e_date, ',');
+    getline(ss, tot_price, ',');
+    getline(ss, rm_vec, ',');
+    getline(ss, reserve, ',');
+    getline(ss, cars_vec, ',');
+    getline(ss, cus_string, ',');
+    getline(ss, emp_string, ',');
+
+    res = (reserve == "1");
+    id = stoi(id_string);
+
+    stringstream DateStream(ord_date);
+    std::string part;
+    vector<std::string> Date_string;
+    while(getline(DateStream, part, '/')){
+        Date_string.push_back(part);
+    }
+    o_date = Date(Date_string);
+
+    Date_string = vector<std::string>();
+    part = "";
+    DateStream = stringstream(bg_date);
+    while(getline(DateStream, part, '/')){
+        Date_string.push_back(part);
+    }
+    b_date = Date(Date_string);
+
+    Date_string = vector<std::string>();
+    part = "";
+    DateStream = stringstream(e_date);
+    while(getline(DateStream, part, '/')){
+        Date_string.push_back(part);
+    }
+    date_end = Date(Date_string);
+
+    stringstream remarksStream(rm_vec);
+    string remark;
+    vector<string> remark_vector;
+    while(getline(remarksStream, remark, ';')){
+        remark_vector.push_back(remark);
+    }
+
+
+    stringstream CarStream(cars_vec);
+    std::string car_string;
+    while(getline(CarStream, car_string, '|')){
+        cars.push_back(Car().From_String_To_Object(car_string, '!'));
+    }
+
+    cus = Customer().From_String_To_Object(cus_string, '!');
+    emp = Employee().From_String_To_Object(emp_string, '!');
+    sa = stringToStatusEnum(status);
+    t_price = stof(tot_price);
+    return Order(id, o_date, sa, b_date, date_end, t_price, remark_vector, res, cars, emp, cus);
+}
+
+Order::Order() {
 
 }
 
-bool Date::operator>(const Date &rhs) const {
-    return rhs < *this;
+Order::status Order::stringToStatusEnum(string status_string) {
+    auto it = stringToStatus.find(status_string);
+    if (it != stringToStatus.end()) {
+        return it->second;
+    }
+    return Unknown;
 }
 
-bool Date::operator<=(const Date &rhs) const {
-    return !(rhs < *this);
+void Order::setStat(string st) {
+    stat = stringToStatusEnum(st);
 }
 
-bool Date::operator>=(const Date &rhs) const {
-    return !(*this < rhs);
-}

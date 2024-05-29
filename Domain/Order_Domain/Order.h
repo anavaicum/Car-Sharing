@@ -5,69 +5,45 @@
 #include "../Customer_Domain/Customer.h"
 #include <string>
 #include <vector>
+#include <unordered_map>
+
 using namespace std;
 
-class Date {
-private:
-
-    int day;
-    int month;
-    int year;
-
+class Order:public Entity {
 public:
 
-    Date(int day, int month, int year);
+    enum status { Reserved, Ordered, Completed, Canceled, Unknown};
 
-    int getDay() const;
-
-    int getMonth() const;
-
-    int getYear() const;
-
-    void setDay(int day);
-
-    void setMonth(int month);
-
-    void setYear(int year);
-
-    bool operator<(const Date &rhs) const;
-
-    bool operator>(const Date &rhs) const;
-
-    bool operator<=(const Date &rhs) const;
-
-    bool operator>=(const Date &rhs) const;
-
-
-};
-
-class Order {
 private:
 
-    int order_id;
     Date order_date;
-    enum status { Reserved, Ordered, Completed, Canceled};
+    status stat;
     Date begin_date;
     Date end_date;
     float total_price;
     vector <string> remarks;
     bool is_reserved;
-    Car* car;
-    Customer* customer;
-    Employee* employee;
+    vector<Car> car;
+    Customer customer;
+    Employee employee;
+
+    unordered_map<string, status> stringToStatus{
+            {"Reserved", Reserved},
+            {"Ordered", Ordered},
+            {"Completed", Completed},
+            {"Canceled", Canceled}
+    };
+
+    status stringToStatusEnum(string status_string);
 
 public:
 
-    Order(int orderId, const Date &orderDate, const Date &beginDate, const Date &endDate, float totalPrice,
-          const vector<string> &remarks, bool isReserved, Car *car, Customer *customer, Employee *employee);
+    Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate, float totalPrice,
+          const vector<string> &remarks, bool isReserved, vector<Car> cars, Employee employee, Customer customer);
 
-    Car *getCar() const;
+    vector<Car> getCar() const;
 
-    void setCar(Car *car);
-
-    int getOrderId() const;
-
-    void setOrderId(int orderId);
+    void setCar(vector<Car> new_cars);
 
     const Date &getOrderDate() const;
 
@@ -93,13 +69,31 @@ public:
 
     void setIsReserved(bool isReserved);
 
-    Customer *getCustomer() const;
+    Customer getCustomer() const;
 
-    void setCustomer(Customer *customer);
+    void setCustomer(Customer customer);
 
-    Employee *getEmployee() const;
+    Employee getEmployee() const;
 
-    void setEmployee(Employee *employee);
+    void setEmployee(Employee employee);
+
+    status getStat() const;
+
+    void setStat(status stat);
+
+    void setStat(string st);
+
+    string to_CSV() const;
+
+    static string statusToString(status s);
+
+    static string vectorToString(const vector<string>& vec);
+
+    string CarsToString() const;
+
+    Order From_String_To_Object(const string& string_of_obj);
+
+    Order();
 
 };
 
