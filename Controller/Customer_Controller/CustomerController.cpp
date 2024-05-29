@@ -189,3 +189,8 @@ Customer CustomerController::get_by_id(int customer_id) {
     return customerRepo->get_by_Id(customer_id);
 }
 
+bool CustomerController::GDPR_customer(int customer_id) {
+    Customer customer=customerRepo->get_by_Id(customer_id);
+    return customer.is_GDPRdeleted();
+}
+
