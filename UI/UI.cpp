@@ -136,7 +136,10 @@ void UI::signup_customer() {
     cout << "Enter your phone number: ";
     cin >> phone;
     cout << "Enter your address: ";
-    cin >> address;
+    //cin >> address;
+    // Clear the input buffer before using getline
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    getline(cin, address);
     cus_controller.create_customer(email, password, first_name, last_name, phone, address);
 }
 
@@ -155,7 +158,10 @@ void UI::signup_employee() {
     cout << "Enter your phone number: ";
     cin >> phone;
     cout << "Enter your address: ";
-    cin >> address;
+    //cin >> address;
+    // Clear the input buffer before using getline
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    getline(cin, address);
     cout << "Enter your position: ";
     cin >> position;
     // Validate day input

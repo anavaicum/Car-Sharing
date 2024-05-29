@@ -37,7 +37,7 @@ private:
 
         // Write data
         for (const auto &obj: entities) {
-            file << obj.to_CSV() << endl;
+            file << obj.to_CSV();
         }
 
         file.close();
