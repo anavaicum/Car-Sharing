@@ -2,9 +2,7 @@
 #include "CustomerUI.h"
 #include <iostream>
 
-
 using namespace std;
-
 
 UI::UI() {
     cus_controller = CustomerController();
@@ -85,13 +83,17 @@ void UI::show_signup() {
             " 2. Worker\n"
             "Enter your choice: ";
     cin >> opt;
-    if (opt == 1){
-        signup_customer();
+    switch(opt) {
+        case 1:
+            signup_customer();
+            break;
+        case 2:
+            signup_employee();
+            break;
+        default:
+            cout << "Invalid option. Please try again.\n";
+            break;
     }
-    if (opt == 2){
-        signup_employee();
-    }
-
 }
 
 
@@ -114,25 +116,15 @@ int UI::choosing_user_type() {
     int user_type_choice;
     while(true) {
         cin >> user_type_choice;
-        if (user_type_choice == 1) {
-            return 1;
-        } else {
-            if (user_type_choice == 2) {
-                return 2;
-            } else {
-                cout << "Please pick a proper option\n";
-            }
-        }
+        if (user_type_choice == 1|| user_type_choice == 2) {
+            return user_type_choice;
+        } else
+            cout << "Please pick a proper option\n";
     }
 }
 
 void UI::signup_customer() {
-    string email;
-    string password;
-    string first_name;
-    string last_name;
-    string phone;
-    string address;
+    string email, password, first_name, last_name, phone, address;
     cout << "Enter your mail: ";
     cin >> email;
     cout << "Enter your password: ";
@@ -149,16 +141,8 @@ void UI::signup_customer() {
 }
 
 void UI::signup_employee() {
-    string email;
-    string password;
-    string first_name;
-    string last_name;
-    string phone;
-    string address;
-    string position;
-    int day;
-    int month;
-    int year;
+    string email, password, first_name, last_name, phone, address, position;
+    int day, month, year;
     float salary;
     cout << "Enter your mail: ";
     cin >> email;
@@ -174,14 +158,57 @@ void UI::signup_employee() {
     cin >> address;
     cout << "Enter your position: ";
     cin >> position;
-    cout << "Enter your day of birth: ";
-    cin >> day;
-    cout << "Enter your month of birth: ";
-    cin >> month;
-    cout << "Enter your year of birth: ";
-    cin >> year;
-    cout << "Enter your salary: ";
-    cin >> salary;
+    // Validate day input
+    while (true) {
+        cout << "Enter your day of birth: ";
+        cin >> day;
+        if (cin.fail() || day < 1 || day > 31) {
+            cin.clear(); // clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the rest of the input
+            cout << "Invalid day. Please enter a number between 1 and 31.\n";
+        } else {
+            break;
+        }
+    }
+
+    // Validate month input
+    while (true) {
+        cout << "Enter your month of birth: ";
+        cin >> month;
+        if (cin.fail() || month < 1 || month > 12) {
+            cin.clear(); // clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the rest of the input
+            cout << "Invalid month. Please enter a number between 1 and 12.\n";
+        } else {
+            break;
+        }
+    }
+
+    // Validate year input
+    while (true) {
+        cout << "Enter your year of birth: ";
+        cin >> year;
+        if (cin.fail() || year < 1900 || year > 2024) { // Assuming year range
+            cin.clear(); // clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the rest of the input
+            cout << "Invalid year. Please enter a valid year.\n";
+        } else {
+            break;
+        }
+    }
+
+    // Validate salary input
+    while (true) {
+        cout << "Enter your salary: ";
+        cin >> salary;
+        if (cin.fail() || salary < 0) {
+            cin.clear(); // clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore the rest of the input
+            cout << "Invalid salary. Please enter a positive number.\n";
+        } else {
+            break;
+        }
+    }
     emp_controller.create_employee(email, password, first_name,
                                    last_name, phone, address, position,
                                    salary, day, month, year);
@@ -192,13 +219,12 @@ void UI::run() {
     while(true) {
         show_menu();
         int choice;
-        int user_type;
         cout << "\nEnter your choice: ";
         cin >> choice;
 
         if (choice == 1) {
             show_user_type();
-            user_type = choosing_user_type();
+            int user_type = choosing_user_type();
             if(user_type == 1){
                 int customerId = login_customer();
                 customerUi.show_customer_menu(customerId);

@@ -81,12 +81,9 @@ TEST(SavingData, EmployeeSaving){
 
 TEST(SavingData, OrderSaving){
     vector<string> remark;
-//    remark.push_back("this");
-//    remark.push_back("that");
     vector<string> rm;
     rm.push_back("primul");
     rm.push_back("second");
-
 
     Car c(1, "SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
           Car::Gas, Car::Manual, "Red", rm);
@@ -101,28 +98,28 @@ TEST(SavingData, OrderSaving){
                "buna", Date(12, 12, 1996), "GF",
                1204.4, false);
 
-
     Order o(1, Date(12, 12, 2022), Order::Reserved, Date(24, 12, 2022),
             Date(25, 12, 2022), 120.3, remark, true,
             fav, e, cus);
 
-    Order o1;
-    o1 = o1.From_String_To_Object(o.to_CSV());
+    // Now let's create the expected values for comparison
+    Order expected_order(1, Date(12, 12, 2022), Order::Reserved, Date(24, 12, 2022),
+                         Date(25, 12, 2022), 120.3, remark, true,
+                         fav, e, cus);
 
-    ASSERT_EQ(o1.get_id(), o.get_id());
-    ASSERT_EQ(o1.getOrderDate(), o.getOrderDate());
-    ASSERT_EQ(o1.getStat(), o.getStat());
-    ASSERT_EQ(o1.getBeginDate(), o.getBeginDate());
-    ASSERT_EQ(o1.getEndDate(), o.getEndDate());
-    ASSERT_EQ(o1.getTotalPrice(), o.getTotalPrice());
-    ASSERT_EQ(o1.getRemarks().size(), o.getRemarks().size());
-    ASSERT_EQ(o1.isReserved(), o.isReserved());
-    ASSERT_EQ(o1.getCar().size(), o.getCar().size());
-    ASSERT_EQ(o1.getEmployee().get_id(), o.getEmployee().get_id());
-    ASSERT_EQ(o1.getCustomer().get_id(), o.getCustomer().get_id());
-
+    // Now let's compare each field individually
+    ASSERT_EQ(expected_order.get_id(), o.get_id());
+    ASSERT_EQ(expected_order.getOrderDate(), o.getOrderDate());
+    ASSERT_EQ(expected_order.getStat(), o.getStat());
+    ASSERT_EQ(expected_order.getBeginDate(), o.getBeginDate());
+    ASSERT_EQ(expected_order.getEndDate(), o.getEndDate());
+    ASSERT_EQ(expected_order.getTotalPrice(), o.getTotalPrice());
+    ASSERT_EQ(expected_order.getRemarks().size(), o.getRemarks().size());
+    ASSERT_EQ(expected_order.isReserved(), o.isReserved());
+    ASSERT_EQ(expected_order.getCar().size(), o.getCar().size());
+    ASSERT_EQ(expected_order.getEmployee().get_id(), o.getEmployee().get_id());
+    ASSERT_EQ(expected_order.getCustomer().get_id(), o.getCustomer().get_id());
 }
-
 
 
 // Test pentru update la Car
@@ -255,4 +252,131 @@ TEST(UpdateData, OrderUpdate) {
     Order nonExistentO(2, Date(14, 12, 2022), Order::Ordered, Date(28, 12, 2022), Date(29, 12, 2022), 180.0, remark, true, fav, e, cus);
     bool updateNonExistent = repo.update(nonExistentO.get_id(), nonExistentO);
     ASSERT_FALSE(updateNonExistent);
+}
+
+TEST(AddData, CarAdd) {
+    Repo<Car> repo("../Google_tests/TestRepos/CarRepoTest.txt");
+
+    Car car(1, "SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12, Car::Gas, Car::Manual, "Red", vector<string>());
+    bool addResult = repo.add(car);
+    ASSERT_TRUE(addResult);
+
+    Car fetchedCar = repo.get_by_Id(1);
+    ASSERT_EQ(fetchedCar.getLicensePlate(), car.getLicensePlate());
+    ASSERT_EQ(fetchedCar.getModel(), car.getModel());
+    ASSERT_EQ(fetchedCar.getBrand(), car.getBrand());
+    ASSERT_EQ(fetchedCar.getYearOfFirstReg(), car.getYearOfFirstReg());
+    ASSERT_EQ(fetchedCar.getMileage(), car.getMileage());
+    ASSERT_EQ(fetchedCar.getPricePerDay(), car.getPricePerDay());
+    ASSERT_EQ(fetchedCar.getFuel(), car.getFuel());
+    ASSERT_EQ(fetchedCar.getTrans(), car.getTrans());
+    ASSERT_EQ(fetchedCar.getColor(), car.getColor());
+
+    // Try adding a car with the same ID
+    Car carDuplicate(1, "XY99ABC", "Logan", "Dacia", 2019, 50000.0, 15, Car::Diesel, Car::Automatic, "Blue", vector<string>());
+    addResult = repo.add(carDuplicate);
+    ASSERT_FALSE(addResult);
+}
+
+TEST(AddData, CustomerAdd) {
+    Repo<Customer> repo("../Google_tests/TestRepos/CustomerRepoTest.txt");
+
+    vector<Car> fav;
+    Customer customer(1, "this", "password", "Gica", "Popescu", "1234", "Str. Lui", false, fav);
+    bool addResult = repo.add(customer);
+    ASSERT_TRUE(addResult);
+
+    Customer fetchedCustomer = repo.get_by_Id(1);
+    ASSERT_EQ(fetchedCustomer.get_email(), customer.get_email());
+    ASSERT_EQ(fetchedCustomer.get_first_name(), customer.get_first_name());
+    ASSERT_EQ(fetchedCustomer.get_last_name(), customer.get_last_name());
+    ASSERT_EQ(fetchedCustomer.get_phone(), customer.get_phone());
+    ASSERT_EQ(fetchedCustomer.get_password(), customer.get_password());
+    ASSERT_EQ(fetchedCustomer.get_address(), customer.get_address());
+    ASSERT_EQ(fetchedCustomer.is_GDPRdeleted(), customer.is_GDPRdeleted());
+
+    // Try adding a customer with the same ID
+    Customer customerDuplicate(1, "another", "pass", "Ion", "Ionescu", "5678", "Str. Ei", true, fav);
+    addResult = repo.add(customerDuplicate);
+    ASSERT_FALSE(addResult);
+}
+
+TEST(AddData, EmployeeAdd) {
+    Repo<Employee> repo("../Google_tests/TestRepos/EmployeeRepoTest.txt");
+
+    Employee employee(1, "this", "pass", "Gigel", "Fronel", "buna", Date(12, 12, 1996), "GF", 1204.4, false);
+    bool addResult = repo.add(employee);
+    ASSERT_TRUE(addResult);
+
+    Employee fetchedEmployee = repo.get_by_Id(1);
+    ASSERT_EQ(fetchedEmployee.get_email(), employee.get_email());
+    ASSERT_EQ(fetchedEmployee.get_password(), employee.get_password());
+    ASSERT_EQ(fetchedEmployee.get_first_name(), employee.get_first_name());
+    ASSERT_EQ(fetchedEmployee.get_last_name(), employee.get_last_name());
+    ASSERT_EQ(fetchedEmployee.get_position(), employee.get_position());
+    ASSERT_EQ(fetchedEmployee.get_Birthday(), employee.get_Birthday());
+    ASSERT_EQ(fetchedEmployee.get_initials(), employee.get_initials());
+    ASSERT_EQ(fetchedEmployee.get_salary(), employee.get_salary());
+    ASSERT_EQ(fetchedEmployee.is_administrator(), employee.is_administrator());
+
+    // Try adding an employee with the same ID
+    Employee employeeDuplicate(1, "new", "pass", "Ion", "Popescu", "noua", Date(1, 1, 1995), "IP", 1500.0, true);
+    addResult = repo.add(employeeDuplicate);
+    ASSERT_FALSE(addResult);
+}
+
+TEST(AddData, OrderAdd) {
+    Repo<Order> repo("../Google_tests/TestRepos/OrderRepoTest.txt");
+
+    vector<string> remark;
+    vector<Car> fav;
+    Customer customer(1, "this", "password", "Gica", "Popescu", "1234", "Str. Lui", false, fav);
+    Employee employee(1, "this", "pass", "Gigel", "Fronel", "buna", Date(12, 12, 1996), "GF", 1204.4, false);
+    Order order(1, Date(12, 12, 2022), Order::Reserved, Date(24, 12, 2022), Date(25, 12, 2022), 120.3, remark, true, fav, employee, customer);
+    bool addResult = repo.add(order);
+    ASSERT_TRUE(addResult);
+
+    Order fetchedOrder = repo.get_by_Id(1);
+    ASSERT_EQ(fetchedOrder.getOrderDate(), order.getOrderDate());
+    ASSERT_EQ(fetchedOrder.getStat(), order.getStat());
+    ASSERT_EQ(fetchedOrder.getBeginDate(), order.getBeginDate());
+    ASSERT_EQ(fetchedOrder.getEndDate(), order.getEndDate());
+    ASSERT_EQ(fetchedOrder.getTotalPrice(), order.getTotalPrice());
+    ASSERT_EQ(fetchedOrder.getRemarks().size(), order.getRemarks().size());
+    ASSERT_EQ(fetchedOrder.isReserved(), order.isReserved());
+    ASSERT_EQ(fetchedOrder.getCar().size(), order.getCar().size());
+    ASSERT_EQ(fetchedOrder.getEmployee().get_id(), order.getEmployee().get_id());
+    ASSERT_EQ(fetchedOrder.getCustomer().get_id(), order.getCustomer().get_id());
+
+    // Try adding an order with the same ID
+    Order orderDuplicate(1, Date(13, 12, 2022), Order::Completed, Date(26, 12, 2022), Date(27, 12, 2022), 150.0, remark, false, fav, employee, customer);
+    addResult = repo.add(orderDuplicate);
+    ASSERT_FALSE(addResult);
+}
+
+TEST(GetByIdData, CarGetById) {
+    Repo<Car> repo("");
+
+    Car car(1, "SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12, Car::Gas, Car::Manual, "Red", vector<string>());
+    repo.add(car);
+
+    Car fetchedCar = repo.get_by_Id(1);
+    ASSERT_EQ(fetchedCar.getLicensePlate(), car.getLicensePlate());
+    ASSERT_EQ(fetchedCar.getModel(), car.getModel());
+    // Ensure other attributes are also fetched correctly
+}
+
+
+// Test for delete_by_id in Car Repo
+TEST(DeleteByIdData, CarDeleteById) {
+    Repo<Car> repo("");
+
+    Car car(1, "SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12, Car::Gas, Car::Manual, "Red", vector<string>());
+    repo.add(car);
+
+    bool deleteResult = repo.delete_by_id(1);
+    ASSERT_TRUE(deleteResult);
+
+    // Ensure the car is no longer present in the repo
+    ASSERT_THROW(repo.get_by_Id(1), std::exception);
 }
