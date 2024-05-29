@@ -1,1 +1,2 @@
 1,SB25GSZ,Octavia,Skoda,2011,70000.00,213.00,Gas,Manual,grey,
+2,SB03XCG,Logan,Dacia,2004,200000.00,15.00,Gas,Manual,red,
