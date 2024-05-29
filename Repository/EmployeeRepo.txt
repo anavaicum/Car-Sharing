@@ -1,2 +1,10 @@
 1,MunciTorul@gmail.com,muncesc,Munci,Torul,muncitor,2/12/1997,MT,100000.00,0
 2,eu,tu,eu,tu,eu,2/3/2006,et,3000.00,0
+3,MirceaCelBatran@voievod.ro,voievod,Mircea,CelBatran,Manager,1/2/1996,MC,3500.00,0
+4,IonCreanga@junimea.ro,amintiri,Ion,Creanga,HR,1/3/1937,IC,4300.00,0
+5,Mihaita@luceafar.ro,albastru,Mihai,Emi,CEO,15/1/1950,ME,10000.00,0
+6,StefanCelMare@voievod.ro,Turc,Stefan,Mare,Voievod,2/5/1957,SM,5420.00,0
+7,this@example.com,that,This,That,Programmer,2/2/2002,TT,2222.00,0
+8,the,other,the,other,Manager,17/12/2006,to,2000.00,0
+9,Marcel@br.com,el,Marcel,Marcel,Programmer,2/9/1976,MM,4360.00,0
+10,ultimul@last.com,last,Ult,Imul,Tester,31/12/2012,UI,121212.00,0
