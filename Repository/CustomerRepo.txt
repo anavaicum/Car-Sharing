@@ -1,2 +1,10 @@
-1,this,that,fa,la,d123,ds,0,
-
+1,first@example.com,mypass,Gigi,Becali,07823562,Str. Plopilor 23,0,
+2,myexample@gmail.com,spate,My,Example,908327,077362783,0,
+3,ATreia@noroc.ro,noroc,A,Treia,0763754678,Str. Norocului,0,
+4,This,Is,T,I,0754789543,Str. Bun,0,
+5,this@example.ro,example,Gigel,Fronel,06547893653,Str. 123,0,
+6,AngelaMerkel@gmail.de,Germania,Angela,Merkel,21336754890,Str. Weimar,0,
+7,mihaimihai@yahoo.ro,mihai,Mihai,Mihai,077638293,Str. Mihai,0,
+8,raduradulescu@gmail.com,radulescu,Radu,Radulescu,077654378,Str. Radauti,0,
+9,MingZou@example.ch,chinez,Ming,Zou,082378312098,Str. Chinezeasca,0,
+10,giovanniG@gmail.ita,pizza,Giovanni,Giorgio,123683232,Str. Tiramisu,0,
