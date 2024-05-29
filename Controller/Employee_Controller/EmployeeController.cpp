@@ -107,6 +107,22 @@ std::vector<Employee> EmployeeController::search_between_dates(const Date& start
     return result;
 }
 
+std::vector<Employee> EmployeeController::search_by_birth_date(const Date &birth) const {
+    std::vector<Employee> result;
+    try {
+        auto employees = employee_repo->get_all();
+        for (const auto& employee : employees) {
+            Date birthdate = employee.get_Birthday();
+            if (birthdate == birth) {
+                result.push_back(employee);
+            }
+        }
+    } catch (const std::exception& e) {
+        // std::cerr << "Failed to search between dates: " << e.what() << std::endl;
+    }
+    return result;
+}
+
 vector<Employee> EmployeeController::get_all_employees() {
     return employee_repo->get_all();
 }
@@ -140,4 +156,21 @@ string EmployeeController::make_initials(string f_name, string l_name) {
 
     return string(1, f_name[0]) + string(1, l_name[0]);
 }
+
+bool EmployeeController::change_employee_password(int employee_id, string new_password) {
+    for(auto employee : employee_repo->get_all()){
+        if(employee.get_id() == employee_id){
+            employee.set_password(new_password);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool EmployeeController::create_employee(Employee emp) {
+    employee_repo->add(emp);
+    return true;
+}
+
+
 

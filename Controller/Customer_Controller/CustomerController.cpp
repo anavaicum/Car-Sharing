@@ -132,34 +132,41 @@ vector<Customer> CustomerController::get_all_customers_sorted() {
     return customers;
 }
 
-Customer CustomerController::search_by_email(string email) {
+vector<Customer> CustomerController::search_by_email(string email) {
     vector<Customer> customers=customerRepo->get_all();
-
+    vector<Customer> result;
     for(const auto &customer:customers)
     {
         if(customer.get_email()==email)
-            return customer;
+            result.push_back(customer);
     }
+    return result;
 }
 
-Customer CustomerController::search_by_phone(string phone) {
+vector<Customer> CustomerController::search_by_phone(string phone) {
     vector<Customer> customers=customerRepo->get_all();
-
+    vector<Customer> result;
     for(const auto &customer:customers)
     {
         if(customer.get_phone()==phone)
-            return customer;
+        {
+            result.push_back(customer);
+        }
     }
+    return result;
 }
 
-Customer CustomerController::search_by_name(string first_name, string last_name) {
+vector<Customer> CustomerController::search_by_name(string first_name, string last_name) {
     vector<Customer> customers=customerRepo->get_all();
-
+    vector<Customer> result;
     for(const auto &customer:customers)
     {
         if(customer.get_first_name()==first_name && customer.get_last_name()==last_name)
-            return customer;
+        {
+            result.push_back(customer);
+        }
     }
+    return result;
 }
 
 bool CustomerController::create_customer(string mail, string pass, string f_name, string l_name,
@@ -183,6 +190,32 @@ int CustomerController::find_next_id() {
         }
     }
     return max + 1;
+}
+
+bool CustomerController::update_customer(int customer_id, string mail, string pass, string f_name,
+                                         string l_name, string ph,string addr) {
+
+    for(auto customer : customerRepo->get_all()){
+        if(customer.get_id() == customer_id){
+            Customer cus = Customer(customer_id, mail, pass, f_name,
+                                    l_name, ph, addr, customer.is_GDPRdeleted(), customer.get_favorites());
+            customerRepo->update(customer_id, cus);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool CustomerController::update_customer(int customer_id, bool gdpr) {
+    for(auto c : customerRepo->get_all()){
+        if(c.get_id() == customer_id){
+            Customer cus(customer_id, c.get_email(), c.get_password(), c.get_first_name(), c.get_last_name(),
+                         c.get_phone(), c.get_address(), gdpr, c.get_favorites());
+            customerRepo->update(customer_id, cus);
+            return true;
+        }
+    }
+    return false;
 }
 
 

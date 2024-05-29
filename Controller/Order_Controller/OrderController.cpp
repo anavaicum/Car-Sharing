@@ -3,8 +3,10 @@
 #include "OrderController.h"
 
 Order_Controller::Order_Controller() {
-    order_repo = make_shared<Repo<Order>>("../../Repository/OrderRepo.txt");
-    customer_repo = make_shared<Repo<Customer>>("../../Repository/OrderRepo.txt");
+    order_repo = make_shared<Repo<Order>>("../Repository/OrderRepo.txt");
+    customer_repo = make_shared<Repo<Customer>>("../Repository/CustomerRepo.txt");
+    car_repo = make_shared<Repo<Car>>("../Repository/CarRepo.txt");
+    employee_repo = make_shared<Repo<Employee>>("../Repository/EmployeeRepo.txt");
 }
 
 bool Order_Controller::create_order(const Order& order) {
@@ -31,10 +33,10 @@ bool Order_Controller::update_order(const Order& existing_order, const Order& ne
 }
 
 // Function to mark an order as completed
-bool Order_Controller::complete_order(Order& order) {
+bool Order_Controller::complete_order(int id) {
     vector<Order> orders = order_repo->get_all();
     for (auto& o : orders) {
-        if (o.get_id() == order.get_id()) {
+        if (o.get_id() == id) {
             o.setStat("Completed");
             return true; // Return true if order is marked as completed successfully
         }
@@ -174,5 +176,83 @@ bool Order_Controller::make_reservation(int orderId, int customerId) {
         //std::cerr << "Failed to make reservation: " << e.what() << std::endl;
         return false;
     }
+}
+
+vector<Customer> Order_Controller::get_customers_by_ordered_car(int car_id) {
+    vector<Customer> result;
+    for(auto order : order_repo->get_all()){
+        for(auto c : order.getCar()){
+            if(c.get_id() == car_id){
+                result.push_back(order.getCustomer());
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+bool Order_Controller::create_reservation(Date o_date, Date b_date, Date e_date, int car_id, int emp_id,
+                                          int cus_id) {
+    vector<Car> cars;
+    for(auto car : car_repo->get_all()){
+        if(car.get_id() == car_id){
+            cars.push_back(car);
+        }
+    }
+    Employee emp;
+    for(auto employee : employee_repo->get_all()){
+        if(emp_id == employee.get_id()){
+            emp = employee;
+        }
+    }
+
+    Customer cus;
+    for(auto customer : customer_repo->get_all()){
+        if(cus_id == customer.get_id()){
+            cus = customer;
+        }
+    }
+    Order o = Order(find_next_id(), o_date, "Reserved", b_date, e_date,true, cars, emp, cus);
+    order_repo->add(o);
+    return true;
+}
+
+int Order_Controller::find_next_id() {
+    int max = 0;
+    for(auto o : order_repo->get_all()){
+        if(o.get_id() > max){
+            max = o.get_id();
+        }
+    }
+    return max + 1;
+}
+
+bool
+Order_Controller::create_order(Date o_date, string stat, Date b_date, Date e_date, float tot_price, int car_id,
+                               int emp_id, int cus_id) {
+
+    vector<Car> cars;
+    for(auto car : car_repo->get_all()){
+        if(car.get_id() == car_id){
+            cars.push_back(car);
+        }
+    }
+    Employee emp;
+    for(auto employee : employee_repo->get_all()){
+        if(emp_id == employee.get_id()){
+            emp = employee;
+        }
+    }
+
+    Customer cus;
+    for(auto customer : customer_repo->get_all()){
+        if(cus_id == customer.get_id()){
+            cus = customer;
+        }
+    }
+
+    Order o = Order(find_next_id(), o_date, stat, b_date, e_date,false, cars, emp, cus);
+    order_repo->add(o);
+    return false;
 }
 

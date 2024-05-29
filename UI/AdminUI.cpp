@@ -12,7 +12,6 @@ void AdminUI::create_worker() {
     string first_name, last_name, email, password, position, initials;
     float salary;
     int day, month, year;
-    Date birthday (day, month, year);
     bool is_Admin;
 
     cout <<"Worker's id: ";
@@ -35,11 +34,12 @@ void AdminUI::create_worker() {
     cin >> day;
     cin >> month;
     cin >> year;
-    //birthday(day, month, year);
+    Date birthday (day, month, year);
     cout <<"Is Worker Admin?: ";
     cin >> is_Admin;
     Employee newWorker(id, email, password, first_name, last_name, position, birthday, initials, salary, is_Admin);
     workers.push_back(newWorker);
+    employeeController.create_employee(newWorker);
 }
 
 void AdminUI::update_worker() {
@@ -60,8 +60,9 @@ void AdminUI::update_worker() {
             cin >> new_is_admin;
             worker.set_position(new_position);
             worker.set_salary(new_salary);
-            worker.set_is_administrator(new_is_admin);
+            worker.set_admin(new_is_admin);
             cout << "Worker updated!" << endl;
+
             break;
         } else {
             cout << "Worker with given id not found!" << endl;
@@ -70,35 +71,35 @@ void AdminUI::update_worker() {
 }
 
 void AdminUI::activate_worker() {
-    int id;
-    cout << "Worker's id to activate: ";
-    cin >> id;
-
-    for (auto& worker: workers) {
-        if (worker.get_id() == id){
-            worker.activate(true);
-            cout << "Worker activated!" << endl;
-            break;
-        } else {
-            cout << "Worker with given id not found!" << endl;
-        }
-    }
+//    int id;
+//    cout << "Worker's id to activate: ";
+//    cin >> id;
+//
+//    for (auto& worker: workers) {
+//        if (worker.get_id() == id){
+//            worker.activate(true);
+//            cout << "Worker activated!" << endl;
+//            break;
+//        } else {
+//            cout << "Worker with given id not found!" << endl;
+//        }
+//    }
 }
 
 void AdminUI::deactivate_worker() {
-    int id;
-    cout << "Worker's id to deactivate: ";
-    cin >> id;
-
-    for (auto& worker: workers) {
-        if (worker.get_id() == id){
-            worker.deactivate(false);
-            cout << "Worker deactivated!" << endl;
-            break;
-        } else {
-            cout << "Worker with given id not found!" << endl;
-        }
-    }
+//    int id;
+//    cout << "Worker's id to deactivate: ";
+//    cin >> id;
+//
+//    for (auto& worker: workers) {
+//        if (worker.get_id() == id){
+//            worker.deactivate(false);
+//            cout << "Worker deactivated!" << endl;
+//            break;
+//        } else {
+//            cout << "Worker with given id not found!" << endl;
+//        }
+//    }
 }
 
 void AdminUI::delete_worker() {

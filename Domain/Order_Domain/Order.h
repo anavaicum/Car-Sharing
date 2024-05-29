@@ -41,6 +41,8 @@ public:
     Order(int orderId, const Date &orderDate, status stat, const Date &beginDate, const Date &endDate, float totalPrice,
           const vector<string> &remarks, bool isReserved, vector<Car> cars, Employee employee, Customer customer);
 
+    Order(int id, Date o_date, string st, Date b_date, Date e_date,bool reserved, vector<Car> cars, Employee  emp, Customer cus);
+
     vector<Car> getCar() const;
 
     void setCar(vector<Car> new_cars);

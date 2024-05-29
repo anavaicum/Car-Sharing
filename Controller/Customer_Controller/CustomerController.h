@@ -38,13 +38,17 @@ public:
                          string f_name, string l_name, string ph, string address);
     vector<Car> get_favorites(int customer_id);
     bool update_customer(int customer_id, Customer customer);
+    bool update_customer(int customer_id, string mail, string pass,
+                         string f_name, string l_name, string ph, string addr);
+    bool update_customer(int customer_id, bool gdpr);
     bool delete_customer(int customer_id);
     bool GDPR_customer(int customer_id);
     Customer get_by_id(int customer_id);
     vector<Customer> get_all_customers_sorted();
-    Customer search_by_email(string email);
-    Customer search_by_phone(string phone);
-    Customer search_by_name(string first_name,string last_name);
+    vector<Customer> search_by_email(string email);
+    vector<Customer> search_by_phone(string phone);
+    vector<Customer> search_by_name(string first_name,string last_name);
+
 
 };
 

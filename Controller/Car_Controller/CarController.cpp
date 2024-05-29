@@ -43,5 +43,50 @@ void Car_Controller::load_cars() {
     car_repo->get_all();
 }
 
+bool
+Car_Controller::create_car(string lic_plate, string mod, string br, string f_type, string trans, string col, int year,
+                           float mil, float ppd) {
+
+    Car c = Car(find_next_id(), lic_plate, mod, br,
+                year,mil, ppd, f_type, trans, col);
+    try {
+        car_repo->add(c);
+        return true;
+    }
+    catch (...){
+        return false;
+    }
+}
+
+int Car_Controller::find_next_id() {
+    int max = 0;
+    for(auto car : car_repo->get_all()){
+        if(max < car.get_id()){
+            max = car.get_id();
+        }
+    }
+    return max + 1;
+}
+
+bool
+Car_Controller::update_car(string lic_plate, string mod, string br, string f_type, string trans, string col, int year,
+                           float mil, float ppd) {
+
+    for(auto c : car_repo->get_all()){
+        if(lic_plate == c.getLicensePlate()){
+            Car car = Car(c.get_id(), c.getLicensePlate(), mod, br, year,
+                          mil, ppd, f_type, trans, col, c.getRemarks());
+            car_repo->update(c.get_id(), car);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Car_Controller::delete_car(int id) {
+    car_repo->delete_by_id(id);
+    return true;
+}
+
 
 

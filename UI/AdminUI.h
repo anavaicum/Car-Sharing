@@ -2,10 +2,10 @@
 #define PROIECT_COLECTIV_ADMINUI_H
 
 
-#include "EmployeeUI.h"
+#include "UI_employee.h"
 #include <vector>
 
-class AdminUI : public EmployeeUI {
+class AdminUI : public UI_employee {
 private:
     std::vector<Employee> workers;
 public:

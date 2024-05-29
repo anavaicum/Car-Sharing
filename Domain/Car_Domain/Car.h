@@ -49,7 +49,9 @@ public:
 
     Car(int _id, string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
         float pricePerDay, fuel_type fuel, transmission trans, string color, const vector<string> &remarks);
-
+    Car(int _id, string licensePlate, string model, string brand, int yearOfFirstReg, float mileage,
+        float pricePerDay, string fuel, string trans, string color, const vector<string> &remarks);
+    Car(int id, string lic_plate, string mod, string br, int year, float mil, float ppd, string f_type, string tr, string col);
     Car();
 
     const string &getLicensePlate() const;
