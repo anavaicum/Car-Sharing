@@ -1,1 +1,10 @@
-1,10/2/2024,Reserved,10/2/2024,17/6/2024,0.00,,0,CV10ABC!Passerati!Volkswagen!1999!520000!20!Diesel!Manual!blue!,5!this@example.ro!example!Gigel!Fronel!06547893653!Str. 123!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+1,10/2/2022,Reserved,10/2/2022,15/5/2025,0.00,,0,1!SB25GSZ!Octavia!Skoda!2011!70000!213!Gas!Manual!grey!,1!first@example.com!mypass!Gigi!Becali!07823562!Str. Plopilor 23!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+2,15/6/2024,Ordered,15/6/2024,16/6/2024,0.00,,0,7!TR01ACM!1300!Dacia!1977!540000!12!Gas!Manual!red!,9!MingZou@example.ch!chinez!Ming!Zou!082378312098!Str. Chinezeasca!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+3,15/5/2025,Ordered,15/5/2025,17/5/2027,0.00,,0,5!SB10XGF!Clio!Renault!2007!150000!35!Gas!Manual!black!,7!mihaimihai@yahoo.ro!mihai!Mihai!Mihai!077638293!Str. Mihai!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+4,22/2/2024,Reserved,22/2/2024,29/8/2024,0.00,,0,3!CV10ABC!Passerati!Volkswagen!1999!520000!20!Diesel!Manual!blue!,3!ATreia@noroc.ro!noroc!A!Treia!0763754678!Str. Norocului!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+5,10/2/2022,Ordered,10/2/2022,14/7/2025,0.00,,0,9!BV05KMS!308!Peugeot!2012!25000!20!Gas!Automatic!white!,6!AngelaMerkel@gmail.de!Germania!Angela!Merkel!21336754890!Str. Weimar!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+6,27/5/2023,Reserved,27/5/2023,29/6/2025,0.00,,0,4!CJ08CFR!Astra!Opel!2003!150000!30!Gas!Manual!grey!,6!AngelaMerkel@gmail.de!Germania!Angela!Merkel!21336754890!Str. Weimar!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+7,22/2/2024,Ordered,22/2/2024,17/5/2025,0.00,,0,5!SB10XGF!Clio!Renault!2007!150000!35!Gas!Manual!black!,5!this@example.ro!example!Gigel!Fronel!06547893653!Str. 123!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+8,15/5/2023,Reserved,15/5/2023,18/9/2024,0.00,,0,8!IS05XTV!Mondeo!Ford!2017!35000!40!Gas!Automatic!black!,3!ATreia@noroc.ro!noroc!A!Treia!0763754678!Str. Norocului!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+9,15/5/2023,Ordered,15/5/2023,17/2/2025,0.00,,0,7!TR01ACM!1300!Dacia!1977!540000!12!Gas!Manual!red!,3!ATreia@noroc.ro!noroc!A!Treia!0763754678!Str. Norocului!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
+10,10/2/2024,Reserved,10/2/2024,10/7/2024,0.00,,0,4!CJ08CFR!Astra!Opel!2003!150000!30!Gas!Manual!grey!,4!This!Is!T!I!0754789543!Str. Bun!0!,2!eu!tu!eu!tu!eu!2/3/2006!et!3000!0
