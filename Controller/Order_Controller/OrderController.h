@@ -10,18 +10,25 @@
 
 class Order_Controller {
 private:
+    shared_ptr<IRepo<Car>> car_repo;
     shared_ptr<IRepo<Order>> order_repo;
     shared_ptr<IRepo<Customer>> customer_repo;
+    shared_ptr<IRepo<Employee>> employee_repo;
     std::string type; // Field to store type of controller
-
+    int find_next_id();
 public:
     Order_Controller();
 
     bool create_order(const Order& order);
 
+    bool create_order(Date o_date, string stat, Date b_date, Date e_date,
+                      float tot_price, int car_id, int emp_id, int cus_id);
+
+    bool create_reservation(Date o_date, Date b_date, Date e_date,int car_id , int emp_id, int cus_id);
+
     bool update_order(const Order& existing_order, const Order& new_order);
 
-    bool complete_order(Order& order);
+    bool complete_order(int id);
 
     bool take_over_order(Order& order, int employee_id);
 
@@ -42,7 +49,7 @@ public:
 
     bool make_reservation(int orderId, int customerId);
 
-
+    vector<Customer> get_customers_by_ordered_car(int car_id);
 
 
 };

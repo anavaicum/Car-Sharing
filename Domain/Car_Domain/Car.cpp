@@ -13,6 +13,22 @@ Car::Car(int _id,string licensePlate, string model, string brand, int yearOfFirs
                                                                                                                price_per_day(pricePerDay), fuel(fuel), trans(trans),
                                                                                                                color(std::move(color)), remarks(remarks) {}
 
+
+
+Car::Car(int _id, string licensePlate, string model, string brand, int yearOfFirstReg, float mileage, float pricePerDay,
+         string fuel, string trans, string color, const vector<string> &remarks) : Entity(_id) {
+    this->license_plate = licensePlate;
+    this->model = model;
+    this->brand = brand;
+    this->year_of_first_reg = yearOfFirstReg;
+    this->mileage = mileage;
+    this->price_per_day = pricePerDay;
+    this->fuel = stringToFuelTypeEnum(fuel);
+    this->trans = stringToTransmissionEnum(trans);
+    this->color = color;
+    this->remarks = remarks;
+}
+
 const string &Car::getLicensePlate() const {
     return license_plate;
 }
@@ -201,3 +217,18 @@ Car::transmission Car::stringToTransmissionEnum(string transStr) {
 Car::Car() {
 
 }
+
+Car::Car(int id, string lic_plate, string mod, string br, int year, float mil, float ppd, string f_type, string tr,
+         string col) : Entity(id) {
+    license_plate = lic_plate;
+    model = mod;
+    brand = br;
+    year_of_first_reg = year;
+    mileage = mil;
+    price_per_day = ppd;
+    fuel = stringToFuelTypeEnum(f_type);
+    trans = stringToTransmissionEnum(tr);
+    color = col;
+    remarks = vector<string>();
+}
+

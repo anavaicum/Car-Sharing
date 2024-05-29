@@ -42,7 +42,7 @@ int UI::login_customer() {
     }
 }
 
-void UI::login_employee() {
+int UI::login_employee() {
     string email;
     string password;
 
@@ -51,8 +51,8 @@ void UI::login_employee() {
         cin >> email;
         cout << "\nEnter your password: ";
         cin >> password;
-        if(validate_login_employee(email, password)){
-            return;
+        if(validate_login_employee(email, password) != -1){
+            return validate_login_employee(email, password);
         }
         cout << "\nIncorrect Information\n";
     }
@@ -69,14 +69,14 @@ int UI::validate_login_customer(string email, string password) {
     return -1;
 }
 
-bool UI::validate_login_employee(string email, string password) {
+int UI::validate_login_employee(string email, string password) {
 
     for(auto employee: employees){
         if(employee.get_email() == email && employee.get_password() == password){
-            return true;
+            return employee.get_id();
         }
     }
-    return false;
+    return -1;
 }
 
 void UI::show_signup() {
@@ -100,9 +100,9 @@ void UI::show_customer_menu(int customerId) {
     customer.show_customer_menu(customerId);
 }
 
-
-void UI::show_employee_menu() {
-
+void UI::show_employee_menu(int employeeID) {
+    UI_employee employee;
+    employee.show_menu_employee(employeeID);
 }
 
 void UI::show_admin_menu() {
@@ -204,8 +204,8 @@ void UI::run() {
                 customerUi.show_customer_menu(customerId);
             }
             else{
-                login_employee();
-                //Needs employee UI
+                int employee_id = login_employee();
+                employeeUi.show_menu_employee(employee_id);
             }
 
         } else if (choice == 2) {

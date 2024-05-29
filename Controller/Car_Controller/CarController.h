@@ -13,11 +13,22 @@ private:
     //std::shared_ptr<IRepo<Car>> carRepo;
     shared_ptr<IRepo<Car>> car_repo;
     string type; // Field to store type of controller
+    int find_next_id();
 
 public:
     Car_Controller();
 
     Car search_by_license_plate(const std::string &license_plate) const;
+
+    bool create_car(string lic_plate, string mod
+                    , string br, string f_type, string trans,
+                    string col, int year, float mil, float ppd);
+
+    bool update_car(string lic_plate, string mod
+            , string br, string f_type, string trans,
+                    string col, int year, float mil, float ppd);
+
+    bool delete_car(int id);
 
     Car get_by_id(int carId);
 

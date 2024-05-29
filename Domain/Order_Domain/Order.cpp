@@ -7,6 +7,18 @@ Order::Order(int _id, const Date &orderDate, status stat, const Date &beginDate,
           remarks(remarks), is_reserved(isReserved), car(cars), employee(employee), customer(customer) {
 }
 
+Order::Order(int id, Date o_date, string st, Date b_date, Date e_date, bool reserved,vector<Car> cars, Employee emp, Customer cus) : Entity(id){
+    order_date = o_date;
+    begin_date = b_date;
+    end_date = e_date;
+    stat = stringToStatusEnum(st);
+    car = cars;
+    employee = emp;
+    customer = cus;
+    remarks = vector<string>();
+    is_reserved = reserved;
+}
+
 
 const Date &Order::getOrderDate() const {
     return order_date;
@@ -242,4 +254,6 @@ Order::status Order::stringToStatusEnum(string status_string) {
 void Order::setStat(string st) {
     stat = stringToStatusEnum(st);
 }
+
+
 

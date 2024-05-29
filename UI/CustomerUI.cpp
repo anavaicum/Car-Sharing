@@ -208,15 +208,21 @@ void CustomerUI::show_customer_menu(int id) {
                 switch (choice2) {
                     case 1:
                         show_make_reservation();
+                        break;
                     case 2:
                         show_delete_reservation();
+                        break;
                     case 3:
                         show_update_reservation();
+                        break;
                     case 4:
                         show_all_orders_sorted_by_price();
+                        break;
                     case 5:
                         show_search_by_order_id();
+                        break;
                 }
+                break;
             case 2:
                 cout << "1. See cars" << endl;
                 cout << "2. See cars between two dates" << endl;
@@ -229,22 +235,30 @@ void CustomerUI::show_customer_menu(int id) {
                 switch (choice2) {
                     case 1:
                         show_cars();
+                        break;
                     case 2:
                         show_cars_between_dates();
+                        break;
                     case 3:
                         search_car_by_license_plate();
+                        break;
                     case 4:
                         show_favorites(customerId);
+                        break;
                     case 5:
                         show_add_car_to_favorites(customerId);
+                        break;
                     case 6:
                         show_delete_car_from_favorites(customerId);
+                        break;
                 }
+                break;
             case 3:
                 show_change_password(customerId);
+                break;
             case 4:
                 show_change_remarks();
-
+                break;
         }
     } while (choice != 0);
 }
