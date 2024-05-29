@@ -62,14 +62,6 @@ bool CustomerController::remove_car_from_favorites(int customer_id, const Car &c
 }
 
 
-bool GDPR_customer(int customerID) {
-//    CustomerRepository customerRepo;
-//    Customer* customer = customerRepo.getCustomerByID(customerID);
-//    if (customer == nullptr) {  // Customer not found
-//        return false;
-//    }
-//    return customer->is_GDPRdeleted();
-}
 
 std::vector<Customer> get_all_customers_sorted() {
 //    CustomerRepository customerRepo;
@@ -79,6 +71,19 @@ std::vector<Customer> get_all_customers_sorted() {
 //    });
 //
 //    return customers;
+}
+vector<Car> CustomerController::get_favorites(int customer_id)
+{
+    vector<Car> favorites;
+    Customer customer = customerRepo->get_by_Id(customer_id);
+    favorites = customer.get_favorites();
+    return favorites;
+}
+
+
+
+bool CustomerController::update_customer(int customer_id, Customer customer) {
+    return customerRepo->update(customer_id,customer);
 }
 
 
