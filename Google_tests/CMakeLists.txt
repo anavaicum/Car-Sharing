@@ -17,10 +17,5 @@ add_executable(Google_Tests_run Tests.cpp ../Domain/Car_Domain/Car.cpp
         ../Controller/Car_Controller/CarController.cpp
         ../Controller/Customer_Controller/CustomerController.cpp
         ../Controller/Employee_Controller/EmployeeController.cpp
-        ../Controller/Order_Controller/OrderController.cpp
-        CarControllerTests.cpp
-        CustomerControllerTests.cpp
-        EmployeeControllerTests.cpp
-        OrderControllerTests.cpp
-)
+        ../Controller/Order_Controller/OrderController.cpp)
 target_link_libraries(Google_Tests_run gtest gtest_main)
