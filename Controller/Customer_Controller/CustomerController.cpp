@@ -63,22 +63,22 @@ bool CustomerController::remove_car_from_favorites(int customer_id, const Car &c
 
 
 bool GDPR_customer(int customerID) {
-    CustomerRepository customerRepo;
-    Customer* customer = customerRepo.getCustomerByID(customerID);
-    if (customer == nullptr) {  // Customer not found
-        return false;
-    }
-    return customer->is_GDPRdeleted();
+//    CustomerRepository customerRepo;
+//    Customer* customer = customerRepo.getCustomerByID(customerID);
+//    if (customer == nullptr) {  // Customer not found
+//        return false;
+//    }
+//    return customer->is_GDPRdeleted();
 }
 
 std::vector<Customer> get_all_customers_sorted() {
-    CustomerRepository customerRepo;
-    std::vector<Customer> customers = customerRepo.getAllCustomers();
-    std::sort(customers.begin(), customers.end(), [](const Customer& a, const Customer& b) {    //by last name
-        return a.get_last_name() < b.get_last_name();
-    });
-
-    return customers;
+//    CustomerRepository customerRepo;
+//    std::vector<Customer> customers = customerRepo.getAllCustomers();
+//    std::sort(customers.begin(), customers.end(), [](const Customer& a, const Customer& b) {    //by last name
+//        return a.get_last_name() < b.get_last_name();
+//    });
+//
+//    return customers;
 }
 
 

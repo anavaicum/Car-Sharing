@@ -152,7 +152,7 @@ int EmployeeController::find_next_id() {
 
 }
 
-bool EmployeeController::reset_coworker_password(int employee_id, const string& password) {
+bool EmployeeController::reset_coworker_password(int employee_id,string password) {
     try {
         Employee employee = employee_repo->get_by_Id(employee_id);
         employee.set_password(password);
@@ -164,11 +164,11 @@ bool EmployeeController::reset_coworker_password(int employee_id, const string& 
 }
 
 vector<Employee> EmployeeController::get_sorted_coworkers() {
-    vector<Employee> employees = employee_repo->get_all();
-    sort(employees.begin(), employees.end(), [](const Employee& a, const Employee& b) {
-        return a.get_last_name() < b.get_last_name();
-    });
-    return employees;
+//    vector<Employee> employees = employee_repo->get_all();
+//    sort(employees.begin(), employees.end(), [](const Employee& a, const Employee& b) {
+//        return a.get_last_name() < b.get_last_name();
+//    });
+//    return employees;
 }
 
 Employee EmployeeController::search_by_initials(const string& initials) {

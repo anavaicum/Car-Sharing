@@ -14,10 +14,6 @@ public:
     Entity();
     int get_id() const;
     void set_id(int _id);
-
-    void set_password(const string& new_password);
-    const string& get_first_name() const;
-    const string& get_last_name() const;
 };
 
 
