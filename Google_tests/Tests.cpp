@@ -12,7 +12,7 @@ TEST(TestGtest, FirstTest) {
 }
 
 TEST(SavingData, CarSaving){
-    Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
+    Car c(1,"SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
           Car::Gas, Car::Manual, "Red", vector<string>());
     Car c2;
     c2 = c2.From_String_To_Object(c.to_CSV());
@@ -35,7 +35,7 @@ TEST(SavingData, CustomerSaving) {
     rm.push_back("primul");
     rm.push_back("second");
     //sa adaugi la obiectul tau "c" id ca nu are
-    Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
+    Car c(1, "SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
           Car::Gas, Car::Manual, "Red", rm);
     vector<Car> fav;
 //    fav.push_back(c);
@@ -88,7 +88,7 @@ TEST(SavingData, OrderSaving){
     rm.push_back("second");
 
 
-    Car c("SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
+    Car c(1, "SB12OGV", "Sandero", "Dacia", 2017, 100000.5, 12,
           Car::Gas, Car::Manual, "Red", rm);
 
     vector<Car> fav;
@@ -109,7 +109,7 @@ TEST(SavingData, OrderSaving){
     Order o1;
     o1 = o1.From_String_To_Object(o.to_CSV());
 
-    ASSERT_EQ(o1.getOrderId(), o.getOrderId());
+    ASSERT_EQ(o1.get_id(), o.get_id());
     ASSERT_EQ(o1.getOrderDate(), o.getOrderDate());
     ASSERT_EQ(o1.getStat(), o.getStat());
     ASSERT_EQ(o1.getBeginDate(), o.getBeginDate());
