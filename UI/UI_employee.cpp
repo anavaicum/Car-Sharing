@@ -306,6 +306,10 @@ void UI_employee::car_modifications() {
         cin >> price_per_day;
         cout << "Enter color: ";
         cin >> color;
+        cout << "Enter Transmission: ";
+        cin >> transmission;
+        cout << "Enter Fuel Type: ";
+        cin >> fuel_type;
         carController.create_car(license_plate, model, brand, fuel_type,
                                  transmission, color, year, mileage, price_per_day);
     }
