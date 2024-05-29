@@ -59,18 +59,19 @@ bool CustomerController::remove_car_from_favorites(int customer_id, const Car &c
     } catch (const std::exception &e) {
         return false;
     }
+
 }
 
 
 
-std::vector<Customer> get_all_customers_sorted() {
-//    CustomerRepository customerRepo;
-//    std::vector<Customer> customers = customerRepo.getAllCustomers();
-//    std::sort(customers.begin(), customers.end(), [](const Customer& a, const Customer& b) {    //by last name
-//        return a.get_last_name() < b.get_last_name();
-//    });
-//
-//    return customers;
+std::vector<Customer> CustomerController::get_all_customers_sorted() {
+
+    std::vector<Customer> customers = customerRepo->get_all();
+    std::sort(customers.begin(), customers.end(), [](const Customer& a, const Customer& b) {
+      return a.get_last_name() < b.get_last_name();
+    });
+
+    return customers;
 }
 vector<Car> CustomerController::get_favorites(int customer_id)
 {
@@ -206,11 +207,14 @@ bool CustomerController::delete_customer(int customer_id) {
     return false;
 }
 
-vector<Customer> CustomerController::get_all_customers_sorted() {
-    return vector<Customer>();
-}
+
 
 Customer CustomerController::get_by_id(int customer_id) {
     return customerRepo->get_by_Id(customer_id);
+}
+
+bool CustomerController::GDPR_customer(int customer_id) {
+    Customer customer=customerRepo->get_by_Id(customer_id);
+    return customer.is_GDPRdeleted();
 }
 
