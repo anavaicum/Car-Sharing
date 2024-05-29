@@ -136,11 +136,6 @@ int EmployeeController::find_next_id() {
 
 }
 
-string EmployeeController::make_initials(string f_name, string l_name) {
-
-    return string(1, f_name[0]) + string(1, l_name[0]);
-}
-
 bool EmployeeController::reset_coworker_password(int employee_id, const string& password) {
     try {
         Employee employee = employee_repo->get_by_Id(employee_id);
@@ -169,3 +164,10 @@ Employee EmployeeController::search_by_initials(const string& initials) {
     }
     throw std::runtime_error("Employee not found");
 }
+
+string EmployeeController::make_initials(string f_name, string l_name) {
+
+    return string(1, f_name[0]) + string(1, l_name[0]);
+}
+
+
