@@ -104,6 +104,9 @@ public:
 
         string line;
         while(getline(readFile, line)){
+            if(line == ""){
+                break;
+            }
             T object;
             object = object.From_String_To_Object(line); //sends line with all the attributes
             data.push_back(object);
