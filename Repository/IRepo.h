@@ -3,6 +3,10 @@
 
 #include <vector>
 
+/**
+ * @brief Interface for a generic repository.
+ * @tparam T The type of entities being managed.
+ */
 template <class T>
 class IRepo{
 public:
