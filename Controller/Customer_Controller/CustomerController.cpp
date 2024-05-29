@@ -168,3 +168,20 @@ bool CustomerController::update_customer(int customer_id, bool gdpr) {
     return false;
 }
 
+vector<Customer> CustomerController::get_all_customers() {
+    return customerRepo->get_all();
+}
+
+bool CustomerController::delete_customer(int customer_id) {
+    customerRepo->delete_by_id(customer_id);
+    return false;
+}
+
+vector<Customer> CustomerController::get_all_customers_sorted() {
+    return vector<Customer>();
+}
+
+Customer CustomerController::get_by_id(int customer_id) {
+    return customerRepo->get_by_Id(customer_id);
+}
+

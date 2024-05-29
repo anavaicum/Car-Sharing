@@ -213,6 +213,7 @@ void CustomerUI::show_customer_menu(int id) {
                         show_delete_reservation();
                         break;
                     case 3:
+                        //Needs implementation
                         show_update_reservation();
                         break;
                     case 4:
@@ -261,4 +262,8 @@ void CustomerUI::show_customer_menu(int id) {
                 break;
         }
     } while (choice != 0);
+}
+
+void CustomerUI::show_update_reservation() {
+
 }

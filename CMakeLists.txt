@@ -17,5 +17,7 @@ add_executable(Proiect_Colectiv main.cpp
         Controller/Order_Controller/OrderController.cpp
         Controller/Employee_Controller/EmployeeController.cpp
         Controller/Controller.cpp
-        UI/UI_employee.cpp)
+        UI/UI_employee.cpp
+        UI/CustomerUI.cpp
+        UI/AdminUI.cpp)
 add_subdirectory(Google_tests)

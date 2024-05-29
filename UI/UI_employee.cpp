@@ -523,6 +523,8 @@ void UI_employee::anonymise_GDPR() {
 }
 
 void UI_employee::show_all_customers_sorted_by_name() {
+
+    //Needs implementation of get_all_customers_sorted()
     for(auto customer : customerController.get_all_customers_sorted()){
         cout << customer.get_id() << ' '
             << customer.get_first_name() << ' '
