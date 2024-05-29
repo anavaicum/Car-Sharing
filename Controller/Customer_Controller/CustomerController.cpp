@@ -111,6 +111,30 @@ vector<Customer> CustomerController::search_by_phone(string phone) {
     return result;
 }
 
+std::vector<Customer> CustomerController::search_by_car(const Car& car) const {
+    auto customers = customerRepo->get_all();
+    std::vector<Customer> result;
+
+    for (const auto& customer : customers) {
+        const auto& favorites = customer.get_favorites();
+        if (std::any_of(favorites.begin(), favorites.end(), [&car](const Car& favoriteCar) {
+            return favoriteCar.getLicensePlate() == car.getLicensePlate() &&
+                   favoriteCar.getModel() == car.getModel() &&
+                   favoriteCar.getBrand() == car.getBrand() &&
+                   favoriteCar.getYearOfFirstReg() == car.getYearOfFirstReg() &&
+                   favoriteCar.getMileage() == car.getMileage() &&
+                   favoriteCar.getPricePerDay() == car.getPricePerDay() &&
+                   favoriteCar.getFuel() == car.getFuel() &&
+                   favoriteCar.getTrans() == car.getTrans() &&
+                   favoriteCar.getColor() == car.getColor();
+        })) {
+            result.push_back(customer);
+        }
+    }
+
+    return result;
+}
+
 vector<Customer> CustomerController::search_by_name(string first_name, string last_name) {
     vector<Customer> customers=customerRepo->get_all();
     vector<Customer> result;
