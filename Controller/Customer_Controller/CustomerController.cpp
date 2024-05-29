@@ -203,8 +203,7 @@ vector<Customer> CustomerController::get_all_customers() {
 }
 
 bool CustomerController::delete_customer(int customer_id) {
-    customerRepo->delete_by_id(customer_id);
-    return false;
+    return customerRepo->delete_by_id(customer_id);
 }
 
 
