@@ -1,7 +1,3 @@
-//
-// Created by Cosmin on 5/14/2024.
-//
-
 #ifndef OOPCOLECTIV_USER_H
 #define OOPCOLECTIV_USER_H
 using namespace std;
@@ -12,6 +8,9 @@ using namespace std;
 #include <filesystem>
 #include "../Entity.h"
 
+/**
+ * @brief Represents a User entity.
+ */
 class User: public Entity {
 private:
     string email;
@@ -21,8 +20,14 @@ private:
     vector<string> remarks;
 
 public:
+    /**
+     * @brief Constructs a User object.
+     */
     User(int _id, const string& _email, const string& _password, const string& _first_name, const string& _last_name);
 
+    /**
+     * @brief Constructs a User object.
+     */
     User();
 
     const string& get_email() const;

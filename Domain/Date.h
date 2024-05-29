@@ -1,7 +1,3 @@
-//
-// Created by Cosmin on 5/16/2024.
-//
-
 #ifndef PROIECT_COLECTIV_DATA_H
 #define PROIECT_COLECTIV_DATA_H
 #include <string>
@@ -9,6 +5,9 @@
 
 using namespace std;
 
+/**
+ * @brief Represents a date.
+ */
 class Date {
 private:
 
