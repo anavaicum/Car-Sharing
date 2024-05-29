@@ -3,7 +3,7 @@
 
 // Constructor
 Car_Controller::Car_Controller() {
-    this->car_repo = make_shared<Repo<Car>>("../../Repository/CarRepo.txt");
+    this->car_repo = make_shared<Repo<Car>>("../Repository/CarRepo.txt");
 }
 
 Car Car_Controller::search_by_license_plate(const std::string &license_plate) const {
