@@ -31,8 +31,22 @@ public:
     bool add_car_to_favorites(int customer_id, const Car &car);
     bool remove_car_from_favorites(int customer_id, const Car &car);
 
-
+    /**
+     * @param car
+     * @return a vector of Customers that have a car in favorites
+     */
     std::vector<Customer> search_by_car(const Car& car) const;
+
+    /**
+     * Creates a customer with following params
+     * @param mail
+     * @param pass
+     * @param f_name
+     * @param l_name
+     * @param ph
+     * @param address
+     * @return true, if adding is successful, false, if adding failed
+     */
     bool create_customer(string mail, string pass,
                          string f_name, string l_name, string ph, string address);
     vector<Car> get_favorites(int customer_id);
