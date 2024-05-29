@@ -1,11 +1,9 @@
-//
-// Created by Cosmin on 5/21/2024.
-//
-
 #ifndef PROIECT_COLECTIV_ENTITY_H
 #define PROIECT_COLECTIV_ENTITY_H
 
-
+/**
+ * @brief Represents a generic entity with an ID.
+ */
 class Entity {
 private:
     int id;
