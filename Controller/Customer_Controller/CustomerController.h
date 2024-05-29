@@ -49,10 +49,41 @@ public:
      */
     bool create_customer(string mail, string pass,
                          string f_name, string l_name, string ph, string address);
+    /**
+     *
+     * @param customer_id
+     * @return the favorites of the customer with the customer id
+     */
     vector<Car> get_favorites(int customer_id);
+
+    /**
+     * Updates the costumer with a new instance of the object
+     * @param customer_id
+     * @param customer
+     * @return true, if successful
+     */
     bool update_customer(int customer_id, Customer customer);
+
+    /**
+     * Updates customer with the following params
+     * @param customer_id
+     * @param mail
+     * @param pass
+     * @param f_name
+     * @param l_name
+     * @param ph
+     * @param addr
+     * @return
+     */
     bool update_customer(int customer_id, string mail, string pass,
                          string f_name, string l_name, string ph, string addr);
+
+    /**
+     * Updates customer with the customer id but only changed GDPR
+     * @param customer_id
+     * @param gdpr
+     * @return
+     */
     bool update_customer(int customer_id, bool gdpr);
     bool delete_customer(int customer_id);
     bool GDPR_customer(int customer_id);

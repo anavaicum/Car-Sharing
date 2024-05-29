@@ -20,8 +20,13 @@ private:
 
 public:
     CustomerUI();
-
+    /**
+     * Shows all the cars
+     */
     void show_cars();
+    /**
+     * Shows all the cars between the dates
+     */
     void show_cars_between_dates();
     void search_car_by_license_plate();
     void show_ordered_cars_sorted();
